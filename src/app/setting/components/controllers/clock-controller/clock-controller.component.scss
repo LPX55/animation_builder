@@ -1,0 +1,18 @@
+:host{
+    svg{
+        width: 13px;
+        height: 13px;
+        padding-right:6px;
+        cursor: pointer;
+        .chronometerSvg , .chronometerSvg-handle {
+            fill: #707070;
+        }
+        &.isOn{
+            .chronometerSvg , .chronometerSvg-handle {
+                fill: #FFFFFF;
+            }
+        }
+        path { transition: fill .05s ease; }
+    }
+    
+}

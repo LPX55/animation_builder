@@ -1,0 +1,115 @@
+@import '~app/variables';
+@import '~app/mixin';
+:host {
+    overflow:visible;
+    font-family: $font-family-regular;
+    width:188px;
+    height: 160px;
+    cursor:-webkit-grab;
+    &.small{
+        .animation-item-wrap{
+            .item-background{
+                mf-animation-item-preview{
+                    transform: scale(0.5);
+                }
+            }
+        }
+    }
+    &.preview{
+        .animation-item-wrap{
+            .item-footer{
+                display: none;
+            }
+        }
+    }
+
+    .animation-item-wrap{
+        width:188px;
+        height: 160px;
+        background-color: #262626;
+        margin-right: 6px;
+        position: relative;
+        overflow: visible;
+        border:1px solid transparent;
+        transition: all 0.1s ease-in;
+        font-display: flex;
+        flex-direction: column;
+
+        .item-footer{
+            font-size: 9px;
+            text-align: center;
+            text-transform: capitalize;
+            display: flex;
+            flex-direction: column;
+            width:100%;
+            height:35px;
+            justify-content: flex-end;
+            
+            .row-1,.row-2{
+                display: flex;
+                flex-direction: row;
+                width: 173px;
+                height:15px;
+                margin-left: auto;
+                margin-right:auto;
+                justify-content: space-between;
+            }
+            .row-1{
+                .name{
+                    font-size: $font-size-medium;
+                    color: #ffffff;
+                }
+                .direction-selector{
+                    &:hover {
+                        text-align: left;
+                        color: #fff;
+                        $font-size-tiny: 9px;
+                    }
+                    img{
+                        height: 7px;
+                        width: 8px;
+                        margin-left: 7px;
+                        vertical-align: baseline;
+                        &.up{
+                            vertical-align: sub;
+                            transform: rotate(180deg);
+                        }
+                        
+                    }   
+                }
+                mf-drop-down{
+                    left:131px;
+                    width:54px;
+                    top:145px;
+                    ::ng-deep ul{
+                        li{ padding: 0;
+                            height: 23px;
+                            span{
+                                margin:auto;
+                                font-size: $font-size-small !important;
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .row-2{
+                .category{
+                    font-size: $font-size-small;
+                    color:rgba(#ffffff,0.6)
+                }
+            }
+            
+        }
+        &:hover{
+            border:1px solid #1E5BFF;
+        }
+        .item-background {
+            mf-animation-item-preview {
+                width:188px;
+                height: 124px;
+                display: block;
+            }
+        }
+    }
+}

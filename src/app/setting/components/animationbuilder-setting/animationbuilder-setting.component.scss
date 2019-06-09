@@ -1,0 +1,24 @@
+@import '~app/variables';
+:host{
+    div.header{
+        height: 50px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        span{
+            svg{ margin-right: 9px;
+                width: 9px;
+                .cls-1 {
+                    fill: none;
+                    stroke: #fff;
+                    stroke-linecap: round;
+                    stroke-width: 2px;
+                  }
+            }
+            cursor: pointer;
+            color: #ffffff;
+            font-size: $font-size-medium;
+            font-family: $font-family-regular;
+        }
+    }
+}

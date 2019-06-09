@@ -1,0 +1,121 @@
+@import '~app/variables';
+@import '~app/mixin';
+:host {
+    height: 44px;
+    background-color: $header-background;
+    width: 100%;
+    @include flex-position('', 'center');
+    padding: 0 10px;
+    box-sizing: border-box;
+    .cls-1 {
+        fill: #333;
+    }
+    .cls-2 {
+        fill: #a5a5a5;
+    }
+    .sign-out-drop-down {
+        width: 155px;
+        top: 38px;
+        right: 6px;
+        ::ng-deep ul {
+            li:first-child {
+                //important use for over write in drop down component
+                cursor: default !important;
+                &:hover{
+                    background-color: transparent !important;
+                    
+                }
+            }
+        }
+    }
+}
+
+.logo-container {
+    @include flex-position('', 'center');
+    .logo-svg {
+        height: 15px;
+        cursor: pointer;
+        rect {
+            fill: #191919;
+        }
+        path {
+            fill: #3E72FF;
+        }
+    }
+    .logo-text {
+        padding-left: 9px;
+        font-size: $font-size-large;
+        font-family: $font-family-semibold;
+        @media screen and (max-width: $min-screen-size) {
+            display: none;
+        }
+    }
+}
+
+nav {
+    margin-left: 45px;
+    height: 100%;
+    @include flex-position('', 'center');
+    ul {
+        @include flex-position('', 'center');
+        height: inherit;
+        justify-content: center;
+        flex-wrap: wrap;
+        list-style-type: none;
+        padding: 0;
+        li {
+            @include flex-position('', 'center');
+            height: inherit;
+            cursor: pointer;
+            z-index: 2;
+            &:focus {
+                outline: 0;
+            }
+            &:not(:last-child) {
+                margin-right: 18px;
+            }
+            a {
+                font-size: $font-size-large;
+                font-family: $font-family-semibold;
+                color: rgba(255, 255, 255, 0.3);
+                display: block;
+                text-decoration: none;
+                transition: all .3s ease-in-out;
+            }
+            &.active {
+                a {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+.header-menu-underline {
+    position: absolute;
+    border-bottom: 3px solid #3E72FF;
+    z-index: 0;
+    transform: translateX(-60px);
+    transition: all .35s ease-in-out;
+    &.hideMe{
+        opacity:0;
+    }
+}
+
+.icon-container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    svg {
+        height: 24px;
+        margin-left: 10px;
+        cursor: pointer;
+        &:hover path {
+            fill: $nav-selected;
+        }
+    }
+    path {
+        fill: #a5a5a5;
+        transition: fill 0.2s;
+    }
+}

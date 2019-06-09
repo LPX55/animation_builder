@@ -1,0 +1,21 @@
+<div class="drop-down-holder" [@slideUp]="animationHandler" [@slideDown]="animationHandler" (@slideDown.done)="destroyDropDown('down')"
+  [style.max-height]="maxHeight" (@slideUp.done)="destroyDropDown('up')">
+  <ul #mainMenu [style.max-height]="maxHeight ? maxHeight : '70vh'">
+    <li *ngFor="let menu of menus" (click)="clickedOnMenu(menu.id , menu.hasOwnProperty('subMenu'))" [class.slide-left]="showSubMenu"
+      [class.no-thumbnail]="menu.thumbnail === ''" [class.disable]="menu.disable === 'disable'">
+      <img class="thumbnail-image" [src]="menu.thumbnail" *ngIf="menu.thumbnail !== ''">
+      <span>{{ menu.title }}</span>
+      <img class="submenu-arrow" *ngIf="menu.hasOwnProperty('subMenu')" src="./assets/back-arrow.svg">
+      <ul class="submenu" *ngIf="menu.hasOwnProperty('subMenu')">
+        <li class="back-to-menu" (click)="backToMainMenu($event)">
+          <img class="thumbnail-image" src="./assets/back-arrow.svg">
+          <span>Back</span>
+        </li>
+        <li *ngFor="let submenu of menu.subMenu" (click)="clickedOnSubMenu(menu.id, submenu.id)">
+          <img class="thumbnail-image" [src]="submenu.thumbnail" *ngIf="submenu.thumbnail !== ''">
+          <span>{{ submenu.title }}</span>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

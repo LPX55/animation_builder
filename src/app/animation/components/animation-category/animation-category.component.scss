@@ -1,0 +1,47 @@
+@import '~app/variables';
+:host{
+    font-family: $font-family-regular;
+    font-size: $font-size-medium;
+    color: #FFFFFF;
+    span.category-name{
+        text-align: center; 
+        color: #FFFFFF;
+        padding: 10px 20px;
+        border-radius: 15px;
+        padding: 4px 7px;
+        background-color: rgba( #FFFFFF, 0.1)
+    }
+    .container{
+        .main-category{
+            margin-left: 8px;
+            margin-top: 16px;
+            .main-category-details{
+                opacity: 0.6;
+                &.active{
+                    opacity: 1 !important;
+                }
+                cursor: pointer;
+                span{
+                    margin-right: 6px;
+                }
+                img{
+                    height: 4px;
+                    &.up{
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+            .inner-category{
+                div{
+                    opacity: 0.6;
+                    cursor: pointer;
+                    margin-top: 8px;
+                    margin-left:8px;
+                    &.active{
+                        opacity: 1 !important;
+                    }
+                }
+            }
+        }
+    }
+}

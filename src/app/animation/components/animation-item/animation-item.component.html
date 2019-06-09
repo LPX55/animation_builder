@@ -1,0 +1,19 @@
+<div class="animation-item-wrap">
+    <div class="item-background">
+        <mf-animation-item-preview [previewImageSrc]="previewImage"></mf-animation-item-preview>
+    </div>
+    <div class="item-footer">
+        <div class="row-1">
+            <span class="name">{{item.name}}</span>
+            <span class="direction-selector" (click)="toggleDropDown($event)"> {{activeDirection?
+                activeDirection.directionName: ''}}
+                <img src="assets/arrow-down.svg" [class.up]="showDropDown"/>
+            </span>
+            <mf-drop-down *ngIf="showDropDown" [menus]="dropDownContent" [animation]="'down'" (doOnClick)="onClickOnItem($event)"
+                (doOnClose)="onClosedDropDown()"></mf-drop-down>
+        </div>
+        <div class="row-2">
+            <span class="category">{{item.category}}</span>
+        </div>
+    </div>
+</div>

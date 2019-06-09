@@ -1,0 +1,3 @@
+<span #toolTip class="mf-tooltip" [ngClass]="calculateArrowPosition(message.length)" [class.show]="this._show" [class.userDelay]="isDelaySet()"
+  [style.transitionDelay]="setTransitionDelay()" [style.fontSize]="fontSize + 'px'" [style.maxWidth]="maxWidth + 'px'"
+  [style.width]="calculateMinWidth(message.length)" [class.haveTopArrow]="haveTopArrow">{{message}}</span>

@@ -1,0 +1,64 @@
+@import '~app/variables';
+@import '~app/mixin';
+
+:host{
+    color: #FFFFFF;
+    .animation-header-wrap {
+        width: 100%;
+        height: 149px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        .animation-header-background{
+            position: absolute;
+            top: 0;
+            left:0;
+            z-index: 0;
+            background-image: url(../../../../assets/media/animation-bg.jpg);
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 150px;
+            background-repeat: no-repeat;
+            .container{
+                position: absolute;
+                top: 27px;
+                left: 9%;
+                margin: 0;
+                padding: 0;
+                .haeder-text {
+                    font-size: 24px;
+                    font-family: $font-family-semibold;
+
+                }
+                .sub-header-text{
+                    margin-top: 5px;
+                    font-size: $font-size-medium;
+                    font-family: $font-family-regular;
+                }
+                .header-buttons{
+                    margin-top: 11px;
+                    div{
+                        display: flex;
+                        flex-wrap: wrap;
+                        a{
+                            padding: 5px 15px;
+                            text-decoration: none;
+                            border-radius: 14px;
+                            transition-duration: .3s;
+                            font-family: $font-family-semibold;
+                            font-size: 10px;
+                            cursor: pointer;
+                            &.main{
+                                background-color: #FFFFFF;
+                                color:#1E5BFF;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+

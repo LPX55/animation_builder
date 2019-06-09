@@ -1,0 +1,91 @@
+<div [class.container-group]="isMain">
+    <div class="header">
+        <div class="left-menu" (click)="toggleContent()" [class.normal-group]="!isMain" [style.paddingLeft]="groupPadding">
+            <div class="header-icon">
+                <img src="assets/arrow-down.svg" [class.close]="!showContent" *ngIf="checkEmptyGroup(groupIndex)" />
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" *ngIf="hasFx" (click)="handleFXClick($event)">
+                <g id="Group_3913" data-name="Group 3913" transform="translate(-33 -102)">
+                    <rect id="Rectangle_5205" data-name="Rectangle 5205" class="cls-1" width="18" height="18" rx="5"
+                        transform="translate(33 102)" />
+                    <text id="FX" class="cls-2" transform="translate(36 114)">
+                        <tspan x="0" y="0" *ngIf="fx">FX</tspan>
+                    </text>
+                </g>
+            </svg>
+
+            <span>{{name}}</span>
+        </div>
+        <div class='description'>
+            <span>{{description}}</span>
+        </div>
+        <div class="right-menu">
+            <span class="fx-options" *ngIf="hasRTL">
+                <div class="rtl" (click)="changeRTLStatus()">
+                    <span [class.active]="rtl">RTL</span>
+                </div>
+            </span>
+            <span class="fx-options" *ngIf="isMain">
+                <div class="remove" (click)="removeFx()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.158 10.019">
+                        <defs>
+                            <style>
+                                .cls-1 {
+                                    fill: #adadad;
+                                }
+                            </style>
+                        </defs>
+                        <g id="Group_4794" data-name="Group 4794" transform="translate(-476.847 -141.001)">
+                            <rect id="Rectangle_5556" data-name="Rectangle 5556" class="cls-1" width="8.158" height="1.165"
+                                rx="0.583" transform="translate(476.847 142.843)" />
+                            <rect id="Rectangle_5558" data-name="Rectangle 5558" class="cls-1" width="3.827" height="1.165"
+                                rx="0.583" transform="translate(479.013 141.001)" />
+                            <path id="Subtraction_4" data-name="Subtraction 4" class="cls-1" d="M5.48,7.593H1.107a.714.714,0,0,1-.656-.76L0,0H6.556l-.42,6.834A.714.714,0,0,1,5.48,7.593ZM4.443,1.172a.583.583,0,0,0-.582.583V5.462a.582.582,0,1,0,1.165,0V1.755A.583.583,0,0,0,4.443,1.172Zm-2.331,0a.583.583,0,0,0-.582.583V5.462a.583.583,0,0,0,1.166,0V1.755A.584.584,0,0,0,2.112,1.172Z"
+                                transform="translate(477.648 143.426)" />
+                        </g>
+                    </svg>
+
+                </div>
+            </span>
+        </div>
+
+    </div>
+    <div class="content" [style.display]="showContent? 'block' : 'none'">
+        <div *ngIf="recursive">
+            <div *ngFor="let controller of getGroupInnerControllers(groupIndex)">
+                <div [ngSwitch]="controller.type">
+                    <mf-slider-controller *ngSwitchCase="ControllerType.slider" [padding]="controllersPadding(controller.hasKey)"
+                        [name]="controller.name" [min]="controller.min" [max]="controller.max" [index]="controller.index"
+                        [value]="controller.value" (valueChange)="handleChange($event, controller)" [hasKey]="controller.hasKey"
+                        [key]="controller.key"></mf-slider-controller>
+                    <mf-text-controller *ngSwitchCase="ControllerType.text" [padding]="controllersPadding(controller.hasKey)"
+                        [name]="controller.name" [value]="controller.value" [index]="controller.index" (valueChange)="handleChange($event, controller)"
+                        [key]="controller.key" [hasKey]="controller.hasKey"></mf-text-controller>
+                    <mf-degree-controller *ngSwitchCase="ControllerType.degree" [padding]="controllersPadding(controller.hasKey)"
+                        [name]="controller.name" [index]="controller.index" [value]="controller.value" (valueChange)="handleChange($event, controller)"
+                        [key]="controller.key" [hasKey]="controller.hasKey"></mf-degree-controller>
+                    <mf-multi-slider *ngSwitchCase="ControllerType.point" [padding]="controllersPadding(controller.hasKey)"
+                        [name]="controller.name" [index]="controller.index" [values]="controller.value" (valueChange)="handleChange($event, controller)"
+                        [innerNames]="getObjectKeys(controller.value)" [key]="controller.key" [hasKey]="controller.hasKey"></mf-multi-slider>
+                    <mf-checkbox-controller *ngSwitchCase="ControllerType.checkBox" [padding]="controllersPadding(controller.hasKey)"
+                        [name]="controller.name" [value]="controller.value" [index]="controller.index" (valueChange)="handleChange($event, controller)"
+                        [key]="controller.key" [hasKey]="controller.hasKey"></mf-checkbox-controller>
+                    <mf-multiline-text-controller *ngSwitchCase="ControllerType.multilineText" [padding]="controllersPadding(controller.hasKey)"
+                        [name]="controller.name" [value]="controller.value" [index]="controller.index" (valueChange)="handleChange($event, controller)"
+                        [key]="controller.key" [hasKey]="controller.hasKey"></mf-multiline-text-controller>
+                    <mf-drop-down-controller *ngSwitchCase="ControllerType.layer" [padding]="controllersPadding(controller.hasKey)"
+                        [name]="controller.name" [index]="controller.index" (valueChange)="handleChange($event, controller)"
+                        [key]="controller.key" [hasKey]="false" [valueOptions]="[controller.valueOptions]" [values]="[controller.value]"></mf-drop-down-controller>
+                    <mf-group-controller *ngSwitchCase="ControllerType.group" (valueChange)="handleGroupChange($event)"
+                        [name]="controller.name" [hasFx]="false" [groupIndex]="controller.index" [recursive]="recursive"
+                        [showContent]="false" [padding]="hasFx? padding+50: padding+22" [description]="controller.description"
+                        [isMain]="false">
+                        <mf-color-controller *ngIf="getGroupedColorControllers(getGroupInnerControllers(controller.index)).length > 0"
+                            [name]="'Color'" [padding]="padding+95+'px'" [controllers]="getGroupedColorControllers(getGroupInnerControllers(controller.index))"></mf-color-controller>
+                    </mf-group-controller>
+                </div>
+            </div>
+        </div>
+        <ng-content></ng-content>
+    </div>
+</div>

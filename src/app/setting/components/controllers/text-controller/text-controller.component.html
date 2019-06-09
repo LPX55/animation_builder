@@ -1,0 +1,10 @@
+<div class="left-side">
+  <div class="left-side-content" [style.paddingLeft]="padding">
+    <mf-clock-controller *ngIf="hasKey" [clockStatus]="key" (valueChange)="handleClockValueChange($event)"></mf-clock-controller>
+    <div class="name" [title]="name">{{name}}</div>
+  </div>
+
+</div>
+<div class="right-bar">
+  <input type="text" (input)="handleInput()" (keyup.enter)="$event.target.blur()" [(ngModel)]="innerValue">
+</div>

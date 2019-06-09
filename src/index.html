@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" oncontextmenu="return false">
+
+<head>
+  <meta charset="utf-8">
+  <title>MfPremiere</title>
+  <base href="./">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    global.extensionPath = __dirname;
+    /**
+     * Get node env from environment to manage IPC behavior
+     */
+    global.env = (-1 === extensionPath.indexOf('com.pixflow.motionfactory')) ? 'dev' : 'prod';
+    if ('prod' === env) {
+      require(`${extensionPath}/dist/node.bundle.js`);
+    } else {
+      require(`${extensionPath}/dist/node.bin.js`);
+    }
+  </script>
+</head>
+
+<body>
+  <mf-root></mf-root>
+</body>
+
+</html>

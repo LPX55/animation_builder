@@ -1,0 +1,72 @@
+@import '~app/variables';
+:host {
+    width: 100%;
+    height: 87px;
+    background-color: #383838;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+    animation: expand .1s ease-in-out;
+
+    .container{
+        width:77%;
+        height: 87px;
+        margin: auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .item{
+            background-color: #343434;
+            height: 59px;
+            width: 131px;
+            min-width: 80px;
+            border: 1px dashed #5D5D5D;
+            cursor: copy;
+            &:hover{
+                border: 1px solid #1E5BFF;
+                background-color: #2F2F2F;
+            }
+            div{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: 100%;
+                justify-content: center;
+                svg{
+                        height: 17px;
+                        .a {
+                            fill: #555;
+                          }
+                          .b,
+                          .c {
+                            fill: #9b9b9b;
+                            stroke: #9b9b9b;
+                            stroke-linecap: round;
+                          }
+                          
+                          .b {
+                            stroke-linejoin: round;
+                          }
+                }
+                
+                span{
+                    font-family: $font-family-regular;
+                    font-size: $font-size-small;
+                }
+            }
+           
+        }
+        .apply{
+            width: 100% !important;
+            color: #8E8E8E;
+        }
+    }
+}
+@keyframes expand {
+    from {
+      transform: scale(0.8);
+      bottom: -90px;
+      opacity: 0.7;
+    }
+  }

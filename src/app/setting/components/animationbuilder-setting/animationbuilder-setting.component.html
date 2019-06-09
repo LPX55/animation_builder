@@ -1,0 +1,22 @@
+<div class="header">
+  <span (click)="showContent=!showContent">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 11">
+      <g id="Group_4774" data-name="Group 4774" transform="translate(-48.5 -88)">
+        <line id="Line_223" data-name="Line 223" class="cls-1" x2="9" transform="translate(49.5 93.5)" />
+        <line id="Line_225" data-name="Line 225" class="cls-1" x2="9" transform="translate(54 98) rotate(-90)" *ngIf="!showContent"/>
+      </g>
+    </svg>
+    <span>Typography Setting</span>
+  </span>
+</div>
+<div [hidden]="!showContent">
+  <div *ngFor="let mainGroup of mainGroups">
+    <mf-group-controller [name]="mainGroup.name" [description]="mainGroup.description" (valueChange)="handleChange($event)"
+      [groupIndex]="mainGroup.index" [hasFx]="mainGroup.hasFx" [fx]="mainGroup.fx" [hasRTL]="mainGroup.isABProperty" [rtl]="mainGroup.rtlStatus" [recursive]="true" [showContent]="true"
+      [isMain]="true">
+      <mf-color-controller *ngIf="getGroupedColorControllers(getGroupInnerControllers(mainGroup.index)).length > 0"
+        [name]="'Color'" [controllers]="getGroupedColorControllers(getGroupInnerControllers(mainGroup.index))"
+        [padding]="'46px'"></mf-color-controller>
+    </mf-group-controller>
+  </div>
+</div>

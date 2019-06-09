@@ -1,0 +1,15 @@
+@import '~app/variables';
+@import '~app/mixin';
+:host {
+    .animation-sidebar-wrap{
+        float: left;
+        width: 160px;
+        height:calc( 100vh - 214px);
+        transition:all 0.3s ease-in;
+        padding-right:11px; 
+        overflow: auto;
+        
+        
+    }
+
+}

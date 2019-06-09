@@ -1,0 +1,17 @@
+<div class="header">
+  <div class="back" (click)="handleBackClick()">
+    <img src="assets/setting-back-button.svg">
+    <span>Back</span>
+  </div>
+  <span class="item-name">
+    {{ settingHeaderName }}
+  </span>
+</div>
+<div class="container">
+  <div class="container-content">
+    <div class="inner-container">
+      <mf-animationbuilder-setting [controllers]="controllers" (change)="handleChange($event)"></mf-animationbuilder-setting>
+      <mf-layer-setting [controllers]="controllers" (change)="handleChange($event)"></mf-layer-setting>
+    </div>
+  </div>
+</div>

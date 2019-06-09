@@ -1,0 +1,64 @@
+@import '../../../../variables';
+:host {
+  font-family: $font-family-regular;
+  font-size: $font-size-medium;
+  display: flex;
+  margin-bottom:3px;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+  div.left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    .left-side-content{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      box-sizing: border-box;
+    }
+    div.name {
+      width: 100%;
+      color: #878787;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-right: 10px;
+      margin-bottom: 2px;
+    }
+  }
+  .right-bar {
+    max-width: 230px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+
+
+    svg {
+      width: 20px;
+      height: 20px;
+      .cls-1 {
+        fill: #303030;
+        stroke: #393939;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+    }
+    svg:hover {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<span class="category-name">{{categoryName}}</span>
+<div class="container">
+  <div class="main-category" *ngFor="let item of categoryItems">
+    <div class="main-category-details" (click)="handleCategoryClick(item)" [class.active]="item.id===activeCategoryId">
+      <span>{{item.title}}</span>
+      <img src="assets/arrow-down-lane.svg" [class.up]="false" *ngIf="item.type" [class.up]="item.opened">
+    </div>
+    <div class="inner-category" *ngIf="item.type && item.opened">
+      <div *ngFor="let innerItem of item.innerCategories" (click)="handleCategoryClick(innerItem)" [class.active]="innerItem.id===activeCategoryId">{{innerItem.title}}</div>
+    </div>
+  </div>
+</div>

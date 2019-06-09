@@ -1,0 +1,6 @@
+<div class="general-button" (mouseover)="mouseOverEffect($event)" (mouseout)="mouseOutEffect($event)" [ngClass]="type" (click)="clickEvent()"
+  [style.padding]="padding ? padding : 'none'" [style.pointer-events]="disabled ? 'none' : 'auto'" [style.fontSize]=" fontSize
+  ? fontSize : 'none' " [style.borderColor]="borderColor ? borderColor : 'none' " [style.boxShadow]="boxShadow ? boxShadow : 'none' ">
+  <div class="button-background " [style.backgroundColor]="disabled ? '#3e3e3e' : backgroundColor"></div>
+  <div class="button-text " [style.color]="disabled ? '#666666' : '' ">{{text}}</div>
+</div>

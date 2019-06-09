@@ -1,0 +1,82 @@
+@import '../../../../variables';
+@import '../../../../mixin';
+:host {
+    font-family: $font-family-regular;
+    font-size: $font-size-medium;
+    display: flex;
+    margin-bottom: 8px;
+    margin-top: 3px;
+    align-items: center;
+    justify-content: space-between;
+    * {
+        ::-webkit-scrollbar-track {
+            margin: 7px;
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background: rgba(84, 84, 84, 0.6);
+        }
+    }
+    textarea {
+        width: 100%;
+        line-height: 20px;
+        resize: none;
+        font-family: $font-family-regular;
+        font-size: $font-size-medium;
+        background-color: $setting-controllers-background-color;
+        border: $setting-controllers-border;
+        border-radius: $setting-controllers-border-radius;
+        color: #fff;
+        outline: none;
+        padding: 5px 1em;
+    }
+    textarea:hover {
+        cursor: text;
+    }
+    div.left-side {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: row;
+        .left-side-content{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+          }
+        div.name {
+            font-size: 11px;
+            font-weight: 600;
+            width: 100%;
+            color: #878787;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-right: 10px;
+            margin-bottom: 2px;
+        }
+    }
+    .right-bar {
+        @include flex-position('right', 'center');
+        width: 100%;
+        max-width: 230px;
+        background-color: #303030;
+        border-radius: $setting-controllers-border-radius;
+        border: $setting-controllers-border;
+        textarea {
+            width: 100%;
+            line-height: 15px;
+            resize: none;
+            font-family: $font-family-regular;
+            font-size: $font-size-medium;
+            background-color: $setting-controllers-background-color;
+            color: #fff;
+            outline: none;
+            padding: 2px 1em 4px 1em;
+            border-radius: $setting-controllers-border-radius;
+            border: none;
+        }
+        textarea:hover {
+            cursor: text;
+        }
+    }
+}

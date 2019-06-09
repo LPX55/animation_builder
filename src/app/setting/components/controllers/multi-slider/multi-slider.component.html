@@ -1,0 +1,14 @@
+<div class="left-side">
+  <div class="left-side-content" [style.paddingLeft]="padding">
+    <mf-clock-controller *ngIf="this.hasKey" [clockStatus]="key" (valueChange)="handleClockValueChange($event)"></mf-clock-controller>
+    <div class="name" [title]="name">{{name}}</div>
+  </div>
+
+</div>
+<div class="slider-bar">
+  <div class="slider-bar-content" #sliderContent *ngFor="let value of values;  let i = index">
+    <span>{{innerNames[i]}}</span>
+    <mf-slider-controller [value]="value" [index]="index" [min]="-32767" [max]="32767" [hideSlider]="true"
+      (inputSelect)="addBorderInSelect(i)" (inputDeselect)="removeBorderInSelect(i)" (valueChange)="handleChange($event,i);"></mf-slider-controller>
+  </div>
+</div>

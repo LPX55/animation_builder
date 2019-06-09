@@ -1,0 +1,12 @@
+<div class="messagebox-modal" id="mf-messagebox-modal" [class.showMessage]="isShowing" (click)="closeMessageBox()" >
+    <div class="messagbeox-container" id="mf-messagebox-container">
+        <div class="messagebox-title">{{messageTitle}}</div>
+        <div class="messagebox-icon"></div>
+        <div class="messagebox-text">{{messageText}}</div>
+        <div class="messageBox-buttons">
+            <div  *ngFor="let button of buttonList" >
+                <button [ngClass]=[button.class] (click)=[runCallback(button)] >{{ button.title }}</button>
+            </div>
+        </div>
+    </div> 
+</div>

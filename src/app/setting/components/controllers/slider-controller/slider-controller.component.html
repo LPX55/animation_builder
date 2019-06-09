@@ -1,0 +1,19 @@
+<div class="left-side" *ngIf="!hideSlider">
+  <div class="left-side-content" [style.paddingLeft]="padding">
+    <mf-clock-controller *ngIf="this.hasKey" [clockStatus]="key" (valueChange)="handleClockValueChange($event)"></mf-clock-controller>
+    <div class="name" [title]="name">{{name}}</div>
+  </div>
+
+</div>
+<div class="slider-bar">
+  <div class="input-value" [class.input-selected]="inputSelected" (mouseup)="handleInputNumberMouseup()" (mousedown)="handleInputNumberMousedown()">
+    <input type="range" [value]="(max+min)/2" [style.left]="hiddenSliderLeft" [style.width]="hiddenSliderWidth" class="hidden-range"
+      [min]="0" [max]="max * 10" (mouseup)="hideAndShowInput($event);" (input)="handleHidedSliderInput($event)" [step]="(max==1 || min==0)?(max-min)/100:''">
+    <input type="number" #numberInput  onkeypress="inputWidth()" [(ngModel)]="value" (input)="handleChange()"
+      (keyup.enter)="$event.target.blur()" (blur)="handleBlur($event)" [readonly]="!textSelected" class="slider-value"
+      [class.selected]="textSelected" (mouseup)="handleMouseup($event)" [min]="min" [max]="max" (mousedown)="handleMousedown($event)" [step]="(max==1 || min==0)?(max-min)/100:''">
+  </div>
+  <input [(ngModel)]="value" *ngIf="!hideSlider" class="main-slider" (mouseup)="handleMainMouseup()" (mousedown)="handleMainMousedown()"
+  
+    [class.changing-value]="sliding" type="range" [min]="min" [max]="max" #mainSlider (input)="handleChange()" [step]="(max==1 || min==0)?(max-min)/100:''">
+</div>

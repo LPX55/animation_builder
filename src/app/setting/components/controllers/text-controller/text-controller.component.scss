@@ -1,0 +1,54 @@
+@import '../../../../variables';
+@import '../../../../mixin';
+:host {
+  font-family: $font-family-regular;
+  font-size: $font-size-medium;
+  display: flex;
+  margin-bottom:3px;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+  div.left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: row;
+    .left-side-content{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      box-sizing: border-box;
+    }
+    div.name {
+      width: 100%;
+      color: #878787;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-right: 10px;
+      margin-bottom: 2px;
+    }
+  }
+  .right-bar {
+    @include flex-position('right', 'center');
+    width:100%;
+    max-width: 230px;
+    input {
+      width: 100%;
+      height: 17px;
+      line-height: 19px;
+      resize: none;
+      background-color:  $setting-controllers-background-color;
+      border:  $setting-controllers-border;
+      border-radius: $setting-controllers-border-radius;
+      color: #ffffff;
+      outline: none;
+      padding: 0 1em;
+      font-size: $font-size-medium;
+      font-family: $font-family-regular;
+    }
+    input:hover {
+      cursor: text;
+    }
+  }
+}

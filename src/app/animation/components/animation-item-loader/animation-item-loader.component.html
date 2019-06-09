@@ -1,0 +1,9 @@
+<div class="animation-item-loader-wrap" cdkDropList>
+    <div>
+        <mf-animation-item *ngFor="let item of items;trackBy:indexTrackFn" class="animation-item" [filter]="filter"
+            [item]="item" cdkDrag>
+        </mf-animation-item>
+        <!-- to prevent bug in last item -->
+        <div style="display:none" cdkDrag></div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ExtensionManifest Version="6.0" ExtensionBundleId="com.pixflow.motionfactory"  ExtensionBundleVersion="3.0.0" ExtensionBundleName="com.pixflow.motionfactory" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Author><![CDATA[Pixflow]]></Author>
+    <ExtensionList>
+        <Extension Id="com.pixflow.motionfactory" Version="3.0.0" />
+    </ExtensionList>
+    <ExecutionEnvironment>
+        <HostList>
+            <Host Name="PPRO" Version="[11.0,99.9]" />
+            <Host Name="AEFT" Version="[13.0,99.0]" />
+            <Host Version="[0.0,99.9]" Name="PHXS"/>
+            <Host Version="[0.0,99.9]" Name="PHSP"/>   
+            <Host Version="[0.0,99.9]" Name="ILST"/>       
+        </HostList>
+        <LocaleList>
+            <Locale Code="All" />
+        </LocaleList>
+        <RequiredRuntimeList>
+            <RequiredRuntime Name="CSXS" Version="6.0" />
+        </RequiredRuntimeList>
+    </ExecutionEnvironment>
+
+    <DispatchInfoList>
+        <Extension Id="com.pixflow.motionfactory">
+        <DispatchInfo>
+            <Resources>
+                <MainPath>./dist/index.html</MainPath>
+                <CEFCommandLine>
+                    <Parameter>--enable-nodejs</Parameter>
+                    <Parameter>--mixed-context</Parameter>
+                    <Parameter>--proxy-auto-detect</Parameter>
+                    <Parameter>--allow-file-access-from-files</Parameter>
+					<Parameter>--allow-file-access</Parameter>
+                </CEFCommandLine>
+            </Resources>
+            <Lifecycle>
+                <AutoVisible>true</AutoVisible>
+            </Lifecycle>
+            <UI>
+                <Type>Panel</Type>
+                <Geometry>
+                    <Size>
+                        <Height>455</Height>
+                        <Width>600</Width>
+                    </Size>
+                    <MaxSize>
+                        <Height>1600</Height>
+                        <Width>1400</Width>
+                    </MaxSize>
+                    <MinSize>
+                        <Height>60</Height>
+                        <Width>50</Width>
+                    </MinSize>
+                </Geometry>
+                <Menu>Motion Factory</Menu>
+            </UI>
+        </DispatchInfo>
+        </Extension>
+    </DispatchInfoList>
+</ExtensionManifest>

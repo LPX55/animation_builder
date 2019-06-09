@@ -1,0 +1,8 @@
+:host{
+    display: flex;
+    background: red;
+    flex-grow: 100;
+    .animation-content-wrap{
+        float:left;
+    }
+}

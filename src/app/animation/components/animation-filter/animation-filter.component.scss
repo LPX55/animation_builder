@@ -1,0 +1,35 @@
+@import '~app/variables';
+:host {
+    font-family: $font-family-regular;
+    font-size: $font-size-small;
+    color: #ffffff;
+    position: relative;
+    cursor: pointer;
+    div{
+        margin-right:5px;
+        span{
+            margin-right:5px;
+        }
+        img{
+            height: 4px;
+            &.up{
+                transform: rotate(180deg);
+            }
+        }
+    }
+    mf-drop-down{
+        width: 55px;
+        right: 5px;
+        top: 15px;
+        ::ng-deep ul{
+            li{ padding: 0  !important;
+                height: 23px !important;
+                span{
+                    margin:auto !important;
+                    font-size: $font-size-small !important;
+                }
+            }
+        }
+    }
+
+}

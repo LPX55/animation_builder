@@ -1,0 +1,15 @@
+@import '~app/variables';
+:host{
+    div.header{
+        height: 36px;
+        border-top: 1px solid rgba(#707070,0.3);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        span{
+            color: #ffffff;
+            font-size: $font-size-medium;
+            font-family: $font-family-regular;
+        }
+    }
+}

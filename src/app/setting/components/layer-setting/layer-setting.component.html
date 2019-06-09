@@ -1,0 +1,11 @@
+<div class="header" *ngIf="mainGroups.length!=0">
+  <span>Layers Setting</span>
+</div>
+<div *ngFor="let mainGroup of mainGroups">
+  <mf-group-controller [name]="mainGroup.name" [description]="mainGroup.description" (valueChange)="handleChange($event)"
+    [groupIndex]="mainGroup.index" [hasFx]="mainGroup.hasFx" [fx]="mainGroup.fx" [recursive]="true" [showContent]="true"
+    [isMain]="true">
+    <mf-color-controller *ngIf="getGroupedColorControllers(getGroupInnerControllers(mainGroup.index)).length > 0"
+      [name]="'Color'" [controllers]="getGroupedColorControllers(getGroupInnerControllers(mainGroup.index))" [padding]="mainGroup.hasFx? '68px':'46px'"></mf-color-controller>
+  </mf-group-controller>
+</div>

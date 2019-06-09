@@ -1,0 +1,63 @@
+<div class="header">
+  <div class="back" (click)="handleBackClick()">
+    <img src="assets/setting-back-button.svg">
+    <span>Back</span>
+  </div>
+  <span class="item-name">
+    {{ settingHeaderName }}
+  </span>
+</div>
+
+<div class="container">
+  <div class="container-content">
+      <div class="inner-container">
+          <div *ngFor="let controller of nonGroupedControllers">
+            <div [ngSwitch]="controller.type">
+              <mf-slider-controller *ngSwitchCase="ControllerType.slider" [name]="controller.name" [min]="controller.min" [max]="controller.max"
+                [index]="controller.index" [value]="controller.clipValue" (valueChange)="handleChange($event, controller)"></mf-slider-controller>
+              <mf-text-controller *ngSwitchCase="ControllerType.text" [name]="controller.name" [value]="controller.clipValue" [index]="controller.index"
+                (valueChange)="handleChange($event, controller)"></mf-text-controller>
+              <mf-checkbox-controller *ngSwitchCase="ControllerType.checkBox" [name]="controller.name" [value]="controller.clipValue" [index]="controller.index"
+                (valueChange)="handleChange($event, controller)"></mf-checkbox-controller>
+              <mf-multi-slider *ngSwitchCase="ControllerType.point" [name]="controller.name" [index]="controller.index" [values]="controller.clipValue"
+                (valueChange)="handleChange($event, controller)" [innerNames]="getObjectKeys(controller.value)"></mf-multi-slider>
+              <mf-multi-slider *ngSwitchCase="ControllerType.pointPercent" [name]="controller.name" [index]="controller.index" [values]="controller.clipValue"
+                (valueChange)="handleChange($event, controller)" [innerNames]="getObjectKeys(controller.value)"></mf-multi-slider>
+              <mf-degree-controller *ngSwitchCase="ControllerType.degree" [name]="controller.name" [index]="controller.index" [value]="controller.clipValue"
+                (valueChange)="handleChange($event, controller)"></mf-degree-controller>
+                <mf-drop-down-controller *ngSwitchCase="ControllerType.dropDownController"  [name]="controller.name"
+                [index]="controller.index" (valueChange)="handleChange($event, controller)" [key]="controller.key" [hasKey]="controller.hasKey"></mf-drop-down-controller>
+              <mf-multiline-text-controller *ngSwitchCase="ControllerType.multilineText" [name]="controller.name" [value]="controller.clipValue"
+                [index]="controller.index" (valueChange)="handleChange($event)"></mf-multiline-text-controller>
+            </div>
+          </div>
+          <mf-color-controller *ngIf="getGroupedColorControllers(nonGroupedControllers).length > 0" [name]="'Color'" [controllers]="getGroupedColorControllers(nonGroupedControllers)"></mf-color-controller>
+          <div *ngFor="let group of groupedControllers">
+            <mf-group-controller [name]="group.value.strDB[0].str || group.name" *ngIf="group.controllers.length" [showContent]="true">
+              <div *ngFor="let controller of group.controllers">
+                <div [ngSwitch]="controller.type">
+                  <mf-slider-controller [padding]="'20px'" *ngSwitchCase="ControllerType.slider" [name]="controller.name" [min]="controller.min" [max]="controller.max"
+                    [index]="controller.index" [value]="controller.clipValue" (valueChange)="handleChange($event, controller)"></mf-slider-controller>
+                  <mf-text-controller [padding]="'20px'" *ngSwitchCase="ControllerType.text" [name]="controller.name" [value]="controller.clipValue" [index]="controller.index"
+                    (valueChange)="handleChange($event, controller)"></mf-text-controller>
+                  <mf-checkbox-controller [padding]="'20px'" *ngSwitchCase="ControllerType.checkBox" [name]="controller.name" [value]="controller.clipValue" [index]="controller.index"
+                    (valueChange)="handleChange($event, controller)"></mf-checkbox-controller>
+                  <mf-multi-slider [padding]="'20px'" *ngSwitchCase="ControllerType.point" [name]="controller.name" [index]="controller.index" [values]="controller.clipValue"
+                    (valueChange)="handleChange($event, controller)" [innerNames]="getObjectKeys(controller.value)"></mf-multi-slider>
+                  <mf-multi-slider [padding]="'20px'" *ngSwitchCase="ControllerType.pointPercent" [name]="controller.name" [index]="controller.index" [values]="controller.clipValue"
+                    (valueChange)="handleChange($event, controller)" [innerNames]="getObjectKeys(controller.value)"></mf-multi-slider>
+                  <mf-degree-controller [padding]="'20px'" *ngSwitchCase="ControllerType.degree" [name]="controller.name" [index]="controller.index" [value]="controller.clipValue"
+                    (valueChange)="handleChange($event, controller)"></mf-degree-controller>
+                    <mf-drop-down-controller [padding]="'20px'" *ngSwitchCase="ControllerType.dropDownController" [name]="controller.name"  [index]="controller.index"
+                    (valueChange)="handleChange($event, controller)"></mf-drop-down-controller>
+                  <mf-multiline-text-controller [padding]="'20px'" *ngSwitchCase="ControllerType.multilineText" [name]="controller.name" [value]="controller.clipValue"
+                    [index]="controller.index" (valueChange)="handleChange($event)"></mf-multiline-text-controller>
+                </div>
+              </div>
+              <mf-color-controller [padding]="'20px'" *ngIf="getGroupedColorControllers(group.controllers).length > 0" [name]="'Color'" [controllers]="getGroupedColorControllers(group.controllers)"></mf-color-controller>
+            </mf-group-controller>
+          </div>
+        </div>
+  </div>
+
+</div>

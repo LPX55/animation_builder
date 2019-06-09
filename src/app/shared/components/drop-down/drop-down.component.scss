@@ -1,0 +1,99 @@
+@import '~app/mixin';
+@import '~app/variables';
+:host {
+    position: absolute;
+    z-index: 999;
+    .drop-down-holder {
+        box-shadow: none;
+        width: 100%;
+        border-radius: 6px;
+        z-index: 999;
+        max-height: 70vh;
+        overflow: hidden;
+        ul {
+            list-style: none;
+            border-radius: 6px;
+            background-color: #343434;
+            width: 100%;
+            transition: height 350ms;
+            overflow-y: auto;
+            overflow-x: hidden;
+            li {
+                &:first-child {
+                    border-radius: 6px 6px 0 0;
+                }
+                &:last-child {
+                    border-radius: 0 0 6px 6px;
+                }
+                &.no-thumbnail {
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+                &.disable {
+                    cursor: not-allowed;
+                    img {
+                        opacity: 0.3;
+                    }
+                    div {
+                        opacity: 0.3;
+                    }
+                    &:hover {
+                        background-color: transparent;
+                    }
+                }
+                @include flexbox($align-item:center);
+                height: 44px;
+                cursor: pointer;
+                background-color: #343434;
+                transition: background-color .2s,
+                opacity .1s,
+                transform .2s;
+                &.slide-left {
+                    transform: translateX(-100%)
+                }
+                .thumbnail-image {
+                    @include size(13px, 14px);
+                    margin: 0 18px 0 15px;
+                    vertical-align: middle;
+                }
+                .submenu-arrow {
+                    transform: rotate(180deg);
+                    height: 8px;
+                    margin-left: auto;
+                    margin-right: 15px;
+                }
+                .submenu {
+                    position: absolute;
+                    top: 0;
+                    left: 100%;
+                    overflow-y: hidden;
+                    .back-to-menu {
+                        border-bottom: 1px solid #404040;
+                        .thumbnail-image {
+                            height: 8px;
+                        }
+                    }
+                }
+                span {
+                    font-family: $font-family-regular;
+                    display: inline-block;
+                    vertical-align: middle;
+                    text-overflow: ellipsis;
+                    max-width: 100%;
+                    font-size: $font-size-large;
+                }
+                &:hover {
+                    background-color: #1E5BFF;
+                }
+            }
+        }
+    }
+    @media (max-height: 326px) {
+        div.drop-down-holder {
+            max-height: 55vh;
+            ul {
+                max-height: 55vh;
+            }
+        }
+    }
+}

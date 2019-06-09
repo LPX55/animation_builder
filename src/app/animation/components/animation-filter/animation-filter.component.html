@@ -1,0 +1,6 @@
+<div (click)="toggleShowDropDown($event)">
+    <span>{{activeMenu.title}}</span>
+    <img src="assets/arrow-down-lane.svg" [class.up]="showDropDown">
+</div>
+<mf-drop-down *ngIf="showDropDown" [menus]="dropDownContent" (doOnClick)="onClickOnItem($event)" (doOnClose)="onClosedDropDown()"
+    [animation]="'down'"></mf-drop-down>

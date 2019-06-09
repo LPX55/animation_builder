@@ -1,0 +1,91 @@
+
+/**
+ * Element Size
+ * @param {Number} $width - set Element width
+ * @param {Number} $height - set Element height
+ * @output size of box
+ */
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+/**
+ * Element position
+ * @param {string} $horizontal - set horizontal position
+ * @param {string} $vertical - set vertical position
+ * @output align item with flex
+ */
+@mixin flex-position ( $horizontal, $vertical ){
+
+    display: flex;
+    @if ( 'center' == $horizontal ){
+
+        justify-content: center;
+
+    }
+    @if( 'left' == $horizontal ){
+
+        justify-content: flex-start;
+
+    }
+    @if( 'right' == $horizontal ){
+
+        justify-content: flex-end;
+
+    }
+    @if( 'space-between' == $horizontal ){
+
+        justify-content: space-between;
+
+    }
+    @if( 'flex-start' == $horizontal ){
+
+        justify-content: flex-start;
+
+    }
+
+    @if ( 'center' == $vertical ){
+
+        align-items: center;
+
+    }
+    @if( 'left' == $vertical ){
+
+        align-items: flex-start;
+
+    }
+    @if( 'right' == $vertical ){
+
+        align-items: flex-end;
+
+    }
+
+}
+/**
+ * Element Direction mixin
+ * @param {Number} $top - set Element Direction top
+ * @param {Number} $right - set Element Direction right
+ * @param {Number} $bottom - set Element Direction bottom
+ * @param {Number} $left - set Element Direction left
+ * @output all side margin
+ */
+
+@mixin element_direction($top:auto, $right:auto, $bottom:auto, $left:auto) {
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+/**
+ * flexbox
+ * @refine
+ * @author: ermia
+ * @output with display flex and  center element
+ */
+@mixin flexbox( $text-align:inherit, $align-item:inherit, $justify-content:inherit ) {
+    display: flex;
+    text-align: $text-align;
+    align-items: $align-item;
+    justify-content: $justify-content;
+}

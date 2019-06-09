@@ -1,0 +1,26 @@
+<div class="left-side">
+  <div class="left-side-content" [style.paddingLeft]="padding">
+    <mf-clock-controller *ngIf="hasKey" [clockStatus]="key" (valueChange)="handleClockValueChange($event)"></mf-clock-controller>
+    <div class="name" [title]="name">{{name}}</div>
+  </div>
+
+</div>
+<div class="right-bar">
+  <div *ngFor="let value of valueOptions">
+    <ul class="menu">
+      <li class="drop-down-content" [class.show-controller-drop-down]="isVisible">
+        <a (click)="toggleDropDown($event)">{{ CurrentValue.name }}
+          <img src="assets/arrow-down.svg" />
+        </a>
+
+        <ul>
+          <div>
+            <li *ngFor="let item of value;" (click)="changeCurrentValue(item , $event)">
+              <a [class.active]="item.index == CurrentValue.index"> {{ item.name }} </a>
+            </li>
+          </div>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

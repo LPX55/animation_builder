@@ -1,0 +1,23 @@
+<div class="left-side">
+  <div class="left-side-content" [style.paddingLeft]="padding">
+    <mf-clock-controller *ngIf="hasKey" [clockStatus]="key" (valueChange)="handleClockValueChange($event)"></mf-clock-controller>
+    <div class="name" [title]="name">{{name}}</div>
+  </div>
+
+</div>
+<div class="slider-bar">
+  <div class="input-value">
+    <input type="range" value="0" [style.left]="hiddenSliderLeft" [style.width]="hiddenSliderWidth" class="hidden-range"
+      min="0" max="500" (mouseup)="hideAndShowInput($event);" (input)="handleHidedSliderInput($event)">
+
+    <input type="text" [value]="innerValue" #input (change)="handleMainSliderChange($event)" (keyup.enter)="changeInputToDiv($event)"
+      (blur)="handleBlur($event)" class="slider-value" autofocus>
+
+    <div class="degree-value" [innerHTML]="innerDivValue" (change)="handleMainSliderChange($event)" (keyup.enter)="$event.target.blur()"
+      [class.selected]="textSelected" (mouseup)="handleMouseup($event)" (mousedown)="handleMousedown($event)"></div>
+
+  </div>
+  <div class="degree" >
+    <img src="assets/degree.svg" [style.transform]="imageTransform" [class.hover]="mouseIsDown" (mousedown)="handleDegreeMouseDown($event)" (mouseup)="handleDegreeMouseUp($event)" #degreeImg>
+  </div>
+</div>

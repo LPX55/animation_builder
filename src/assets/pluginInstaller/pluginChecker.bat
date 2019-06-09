@@ -1,0 +1,1 @@
+"C:/Program Files (x86)/Common Files/Adobe/Creative Cloud Libraries/libs/node.exe" "C:\Users\pixflow\AppData\Roaming\Adobe\CEP\extensions\MfPremiere\src\ipc\events/../../ipc/lib/pluginInstaller.js"

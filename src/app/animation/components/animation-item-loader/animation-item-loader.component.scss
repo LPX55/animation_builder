@@ -1,0 +1,70 @@
+.animation-item-loader-wrap {
+    overflow: auto;
+      .animation-item{
+        margin-bottom:10px;
+        margin-right: 6px;
+      }
+        height: calc( 100vh - 250px);
+        width:calc( 100vw - 192px);
+        div{
+          display: flex;
+          flex-wrap: wrap;
+        }
+}
+  
+  @keyframes lightSpeedIn {
+    from {
+      opacity: 0;
+    }
+  
+    60% {
+ 
+      opacity: .45;
+    }
+  
+  
+    to {
+        opacity: 1;
+    }
+  }
+  
+  .lightSpeedIn {
+    -webkit-animation-name: lightSpeedIn;
+    animation-name: lightSpeedIn;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out
+  }
+  
+  .animated {
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+  }
+  .cdk-drag-placeholder{
+    opacity: 1 !important;
+  }
+  .cdk-drop-list-dragging{
+    transform: none !important;
+    *{
+      transform: none !important;
+    }
+  }
+  .cdk-drag-animating {
+    transition: transform 50ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  .cdk-drag-preview{
+    opacity: 0.85 !important;
+    cursor: -webkit-grabbing;
+    ::ng-deep .animation-item-wrap{
+      height: 0px !important;
+      border:none !important;
+  }
+    ::ng-deep .item-footer{
+          display: none !important;
+      }
+      ::ng-deep  .item-background{
+        transform: scale(0.8);
+    }
+  }
+
+  

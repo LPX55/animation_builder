@@ -1,0 +1,10 @@
+<mf-animation-header></mf-animation-header>
+<div class="filter">
+  <mf-animation-filter [hidden]="animationFilter==3"></mf-animation-filter>
+</div>
+<div class="animation-home-wrap">
+  <mf-animation-sidebar></mf-animation-sidebar>
+  <mf-animation-item-loader [filter]="animationFilter"></mf-animation-item-loader>
+  <mf-drop-area *ngIf="showDropArea"></mf-drop-area>
+
+</div>

@@ -1,0 +1,71 @@
+// fonts
+$font-size-tiny: 9px;
+$font-size-small: 10px;
+$font-size-medium: 11px;
+$font-size-large: 12px;
+$font-size-giant: 15px;
+$font-family-regular: 'Open Sans-regular',
+sans-serif;
+$font-family-semibold: 'Open Sans-semibold',
+sans-serif;
+// colors
+$background-color: #262626;
+$header-background: #202020;
+$nav-selected: #3965FF;
+$button-color:#204BE6;
+$forms-text-color: #878787;
+$modern-view-folder-background : #191919;
+// responsive breakpoints
+$min-screen-size: 460px;
+$setting-controllers-border-radius: 12px;
+$setting-controllers-background-color: #303030;
+$setting-controllers-border: 1px solid #393939;
+
+.slide-parent {
+    position: relative;
+    overflow: hidden;
+}
+
+// assign this class to the element that will slide in or out
+.slide-ready {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// assign this class to the element that will slide in
+.slide-in {
+    animation: slide-in 290ms cubic-bezier(.64, .41, .32, .65);
+}
+
+@keyframes slide-in {
+    0% {
+        opacity: 0;
+        transform: translate(100%, -50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+// assign this class to the element that will slide out
+.slide-out {
+    animation: slide-out forwards 290ms ease-in;
+}
+
+@keyframes slide-out {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        opacity: 0;
+        transform: translate(-100%, -50%);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-1000%, -50%);
+    }
+}

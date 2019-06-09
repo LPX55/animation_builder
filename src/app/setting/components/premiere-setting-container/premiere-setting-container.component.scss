@@ -1,0 +1,54 @@
+@import '../../../variables';
+.header {
+    height: 42px;
+    border-bottom: 2px #141414 solid;
+    width: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    color: #FFFFFF;
+    .back {
+        position: absolute;
+        left: 21px;
+        cursor: pointer;
+        img {
+            width: 5px;
+            height: 8.5px;
+        }
+        span {
+            font-size: $font-size-medium;
+            font-family: $font-family-semibold;
+            margin-left: 3px;
+        }
+    }
+    .item-name {
+        margin: auto;
+        font-size: $font-size-medium;
+        font-family: $font-family-semibold;
+    }
+}
+
+.container {
+    height: calc(100vh - 44px - 57px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: calc(100vw - 23px);
+    display: block;
+    .container-content{
+        width: calc( 100vw - 22px );
+        .inner-container {
+            max-width: 435px;
+            min-width: 325px;
+            margin: auto;
+            margin-top: 15px;
+            ::ng-deep {
+                .left-side {
+                    min-width: 172px;
+                }
+            }
+        }
+    }
+
+}

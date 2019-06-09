@@ -1,0 +1,147 @@
+@import '../../../../variables';
+@import '../../../../mixin';
+:host {
+    font-family: $font-family-regular;
+    font-size: $font-size-medium;
+    display: flex;
+    margin-bottom: 3px;
+    align-items: center;
+    justify-content: space-between;
+    height: 28px;
+    margin-bottom: 30px;
+    div.left-side {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: row;
+        .left-side-content {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            box-sizing: border-box;
+        }
+        div.name {
+            width: 100%;
+            color: #878787;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-right: 10px;
+            margin-bottom: 2px;
+        }
+    }
+    .right-bar {
+        @include flex-position('right', 'center');
+        width: 100%;
+        max-width: 230px;
+        >div {
+            width: 100%;
+        }
+        .menu {
+            display: block;
+            margin: 0 auto;
+            position: relative;
+            >li {
+                >a {
+                    background: #303030;
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                    text-decoration: none;
+                    box-shadow: 0 0 0 1px #393939;
+                    border-radius: 12px;
+                    height: 19px;
+                    padding-left: 14px;
+                    text-align: left;
+                    transition: border-radius .16s ease-in, box-shadow .16s ease-in;
+                    cursor: pointer;
+                    line-height: 22px;
+                    img {
+                        height: 9px;
+                        width: 10px;
+                        position: absolute;
+                        right: 9px;
+                        top: 3px;
+                    }
+                }
+            }
+            ul {
+                background: #303030;
+                max-height: 0;
+                transition: max-height .15s ease-out ,  box-shadow .16s ease-in;
+                left: 0;
+                overflow: hidden;
+                position: absolute;
+                text-align: center;
+                border-radius: 0 0 11px 11px;
+                z-index: 9;
+                width: 100%;
+                box-sizing: border-box;
+                box-shadow: 1px 1px 0px 0px rgba(57, 57, 57, 0), -1px 0px 0 0 rgba(57, 57, 57, 0);
+                overflow: hidden;
+                backface-visibility: hidden;
+                pointer-events: none;
+                div{
+                    display: block;
+                    max-height: 100px;
+                    overflow-y: scroll;
+                }
+                a {
+                    color: #707070;
+                    display: block;
+                    padding: 2px 14px;
+                    text-align: left;
+                    text-decoration: none;
+                    position: relative;
+                    cursor: pointer;
+                    &:hover {
+                        color: #fff;
+                    }
+                    &.active{
+                        color: #fff;
+                        &:before{
+                            content: "";
+                            background-color: white;
+                            width: 4px;
+                            height: 4px;
+                            border-radius: 50%;
+                            display: inline-block;
+                            position: absolute;
+                            top: 9px;
+                            left: 5px;
+                        
+                        }
+                    }
+                }
+            }
+            >li {
+                list-style-type: none;
+                &.show-controller-drop-down {
+                    >a {
+                        border-radius: 12px 12px 0 0;
+                        transition: border-radius 0s;
+                        cursor: pointer;
+                    }
+                    ul {
+                        transition: max-height .15s ease-out;
+                        max-height: 105px;
+                        box-shadow: 1px 1px 0px 0px rgb(57, 57, 57), -1px 0px 0 0 rgb(57, 57, 57);
+                        transform: translateY(0);
+                        border-top: none;
+                        z-index: 10;
+                        width: 100%;
+                        box-sizing: border-box;
+                        overflow: hidden;
+                        backface-visibility: hidden;
+                        pointer-events: visible;
+                        div{
+                            max-height: 100px;
+                            overflow-y: scroll;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
