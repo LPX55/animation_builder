@@ -191,7 +191,7 @@ AnimationBuilder.prototype.checkIfeffectWithTypeExistOnLayer = function (typeNam
     var count = 0;
     for (var i = 1; i <= effects.numProperties; i++) {
         var eff = effects.property(i)
-        if (MFAfterEffectsObject.isAnimationBuilderProperty(eff)) {
+        if (textAnimatorAfterEffectsObject.isAnimationBuilderProperty(eff)) {
             var effectProps = this.getPropsFromString(eff.name);
             if (effectProps.typeName === typeName) {
                 count++;
@@ -235,7 +235,7 @@ $._AnimationBuilder = {
     applyIn: function (presetPath) {
         var layer = app.project.activeItem.selectedLayers[0];
         animationBuilderObject.addMarker(layer, animationBuilderObject.markersName.In, layer.inPoint, 2.5, false);
-        MFAfterEffectsObject.applyPreset(presetPath);
+        textAnimatorAfterEffectsObject.applyPreset(presetPath);
         animationBuilderObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
         layer.selected = true;
@@ -244,7 +244,7 @@ $._AnimationBuilder = {
     applyOut: function (presetPath) {
         var layer = app.project.activeItem.selectedLayers[0];
         animationBuilderObject.addMarker(layer, animationBuilderObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
-        MFAfterEffectsObject.applyPreset(presetPath);
+        textAnimatorAfterEffectsObject.applyPreset(presetPath);
         animationBuilderObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
         layer.selected = true;
@@ -260,7 +260,7 @@ $._AnimationBuilder = {
     applyEffect: function (presetPath) {
         var layer = app.project.activeItem.selectedLayers[0];
         //animationBuilderObject.addMarker(layer, animationBuilderObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
-        MFAfterEffectsObject.applyPreset(presetPath);
+        textAnimatorAfterEffectsObject.applyPreset(presetPath);
         animationBuilderObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
         layer.selected = true;
