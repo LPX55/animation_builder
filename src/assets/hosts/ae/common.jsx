@@ -510,6 +510,7 @@ $._textAnimatorAfterEffects = {
     },
     openColorPicker: function (red, green, blue, alpha) {
         textAnimatorAfterEffectsObject.colorPickerValues = [red, blue, green, alpha];
-        app.executeCommand(app.findMenuCommandId("MFColorPicker"));
+        var a = new ExternalObject('lib:C:\\Program Files\\Adobe\\Common\\Plug-ins\\7.0\\MediaCore\\pixflow\\AEGP\\Motion Factory.aex');
+        a.openColorPicker();
     }
 }
