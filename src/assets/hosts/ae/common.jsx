@@ -438,7 +438,29 @@ textAnimatorAfterEffects.prototype.addImportedCompsAsLayer = function (rootFolde
         }
     }
 }
-
+textAnimatorAfterEffects.prototype.rgbToHex = function(red,green,blue) {
+    
+    function componentToHex(c) {
+        c = parseInt(c);
+        var hex = c.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+      }
+   return  "0x" + componentToHex(red) + componentToHex(green) + componentToHex(blue);
+  }
+textAnimatorAfterEffects.prototype.hexToRgb = function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+textAnimatorAfterEffects.prototype.numberToRgb = function (number){
+    var red = Math.floor(number / (256 * 256)),
+    green = Math.floor(number / 256) % 256,
+    blue = number % 256;
+    return [red, green,blue];
+}
 var textAnimatorAfterEffectsObject = new textAnimatorAfterEffects();
 $._textAnimatorAfterEffects = {
     importItem: function (path, data, asSequence) {
@@ -494,9 +516,6 @@ $._textAnimatorAfterEffects = {
     openAEPProject: function (path) {
         textAnimatorAfterEffectsObject.openAEPProject(path);
     },
-    showPluginMessage: function () {
-        textAnimatorAfterEffectsObject.fireEvent('showPluginMessage', JSON.stringify({}));
-    },
     onMFColorPickerSelected: function (red, blue, green, alpha) {
         if (red >= 0 && green >= 0 && blue >= 0 && alpha >= 0) {
             textAnimatorAfterEffectsObject.colorPickerValues = [red, green, blue, alpha];
@@ -510,7 +529,13 @@ $._textAnimatorAfterEffects = {
     },
     openColorPicker: function (red, green, blue, alpha) {
         textAnimatorAfterEffectsObject.colorPickerValues = [red, blue, green, alpha];
-        var a = new ExternalObject('lib:C:\\Program Files\\Adobe\\Common\\Plug-ins\\7.0\\MediaCore\\pixflow\\AEGP\\Motion Factory.aex');
-        a.openColorPicker();
+        try{
+            var a = new ExternalObject('lib:C:\\Program Files\\Adobe\\Common\\Plug-ins\\7.0\\MediaCore\\pixflow\\AEGP\\Motion Factory.aex');
+            a.openColorPicker();
+        } catch(err){
+           var color =  $.colorPicker(textAnimatorAfterEffectsObject.rgbToHex(red,green,blue));
+           var rgb = textAnimatorAfterEffectsObject.numberToRgb(color);
+           this.onMFColorPickerSelected(rgb[0], rgb[2], rgb[1],255);
+        }
     }
 }
