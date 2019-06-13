@@ -1,6 +1,6 @@
 const { AutoUpdater } = require("./../src/ipc/events/updater");
 const {
-  getMotionFactoryAppDataFolder,
+  gettextanimatorAppDataFolder,
   getNewVersionOfExtensionPath,
   currentPlatform,
   getOSUserInfo
@@ -90,7 +90,7 @@ describe("Auto Updater Tests", function () {
   });
 
   it("APP data folder should be exists and create on non exits", done => {
-    const appFolder = getMotionFactoryAppDataFolder();
+    const appFolder = gettextanimatorAppDataFolder();
     const Updater = new AutoUpdater("0.0.0");
     fs.removeSync(appFolder);
     Updater.createLocalFolder();
@@ -130,11 +130,11 @@ describe("Auto Updater Tests", function () {
 
   it("BackUp should work perfectly", done => {
     const Updater = new AutoUpdater("0.0.0");
-    const updateFolderPath = `${getNewVersionOfExtensionPath()}com.pixflow.motionfactory`;
+    const updateFolderPath = `${getNewVersionOfExtensionPath()}com.pixflow.textanimator`;
     fs.ensureDirSync(updateFolderPath);
     Updater.backupOldVersion().then(() => {
       fs.access(
-        `${Updater.rootUpdatePath}com.pixflow.motionfactory.backup`,
+        `${Updater.rootUpdatePath}com.pixflow.textanimator.backup`,
         fs.constants.F_OK,
         err => {
           if (err) {
@@ -221,7 +221,7 @@ describe("Auto Updater Tests", function () {
       const Updater = new AutoUpdater("0.0.0");
       Updater.processesUnpackFile().then(() => {
         assert.equal(
-          fs.existsSync(`${Updater.newVersionPath}com.pixflow.motionfactory`),
+          fs.existsSync(`${Updater.newVersionPath}com.pixflow.textanimator`),
           true
         );
         done();

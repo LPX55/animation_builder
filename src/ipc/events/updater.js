@@ -1,7 +1,7 @@
 const request = require("request");
 const {
   getNewVersionOfExtensionPath,
-  getMotionFactoryAppDataFolder,
+  gettextanimatorAppDataFolder,
   currentPlatform,
   getOSUserInfo
 } = require("./../helpers/os-info");
@@ -32,7 +32,7 @@ class AutoUpdater {
       "http://pixflow.co/motion-factory/update/update.php";
     this.username = getOSUserInfo("username");
     this.newVersionPath = getNewVersionOfExtensionPath();
-    this.rootUpdatePath = getMotionFactoryAppDataFolder();
+    this.rootUpdatePath = gettextanimatorAppDataFolder();
     this.updatePath = `${this.rootUpdatePath}/updatePack.zip`;
     this.runPluginChecker = runPluginChecker;
   }
@@ -136,7 +136,7 @@ class AutoUpdater {
   }
 
   /**
-   * Check if MotionFactory folder exists and create the folder if not available
+   * Check if textanimator folder exists and create the folder if not available
    * @return {void}
    */
   createLocalFolder() {
@@ -235,7 +235,7 @@ class AutoUpdater {
    */
   isBackupExists() {
     try {
-      fs.accessSync(`${this.rootUpdatePath}com.pixflow.motionfactory.backup`);
+      fs.accessSync(`${this.rootUpdatePath}com.pixflow.textanimator.backup`);
       return true;
     } catch (e) {
       return false;
@@ -249,7 +249,7 @@ class AutoUpdater {
    */
   isExtensionPackExists() {
     try {
-      fs.accessSync(`${this.newVersionPath}com.pixflow.motionfactory`);
+      fs.accessSync(`${this.newVersionPath}com.pixflow.textanimator`);
       return true;
     } catch (e) {
       return false;
@@ -276,12 +276,12 @@ class AutoUpdater {
     if (this.isBackupExists()) {
       if (this.isExtensionPackExists()) {
         this.deleteFolderRecursive(
-          `${this.newVersionPath}com.pixflow.motionfactory`
+          `${this.newVersionPath}com.pixflow.textanimator`
         );
       } else {
         fs.rename(
-          `${this.rootUpdatePath}com.pixflow.motionfactory.backup`,
-          `${this.newVersionPath}com.pixflow.motionfactory`,
+          `${this.rootUpdatePath}com.pixflow.textanimator.backup`,
+          `${this.newVersionPath}com.pixflow.textanimator`,
           err => {
             if (err) {
               this.rollBack();
@@ -304,12 +304,12 @@ class AutoUpdater {
         true === this.isExtensionPackExists()
       ) {
         this.deleteFolderRecursive(
-          `${this.rootUpdatePath}com.pixflow.motionfactory.backup`
+          `${this.rootUpdatePath}com.pixflow.textanimator.backup`
         );
 
         fs.rename(
-          `${this.newVersionPath}com.pixflow.motionfactory`,
-          `${this.rootUpdatePath}com.pixflow.motionfactory.backup`,
+          `${this.newVersionPath}com.pixflow.textanimator`,
+          `${this.rootUpdatePath}com.pixflow.textanimator.backup`,
           err => {
             if (err) {
               this.rollBack();
@@ -410,7 +410,7 @@ class AutoUpdater {
    */
   pluginChecker(extensionPath) {
     require("../lib/pluginInstaller")(
-      extensionPath + "com.pixflow.motionfactory"
+      extensionPath + "com.pixflow.textanimator"
     );
   }
 

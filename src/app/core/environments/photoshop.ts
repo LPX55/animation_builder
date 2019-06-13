@@ -9,7 +9,7 @@ export default class Photoshop extends General implements HostImage {
     public hostName = 'photoshop';
     public scriptPath = 'hosts/ps/common.jsx';
     allowedExtensions = [];
-    public ipcPort = isDevMode ? 45032 : 45034;
+    public ipcPort = isDevMode ? 45012 : 45014;
 
     constructor(
         private _jsxInjectorService: JsxInjectorService,

@@ -94,7 +94,7 @@ export class IpcHandlerService {
 
   getIPCPath(): string {
     let ipcPath = path.join(
-      this._osInfoService.getMotionFactoryAppDataFolder(),
+      this._osInfoService.gettextanimatorAppDataFolder(),
       `ipc${this._appGlobals.APPVersion}`
     );
     if (this._osInfoService.currentPlatform === "WIN") {
@@ -104,10 +104,10 @@ export class IpcHandlerService {
   }
 
   getBatFileContent(): string {
-    let ipcPath = `~/Library/Application Support/MotionFactory/ipc${this._appGlobals.APPVersion}`;
+    let ipcPath = `~/Library/Application Support/textanimator/ipc${this._appGlobals.APPVersion}`;
 
     if (this._osInfoService.currentPlatform === "WIN") {
-      ipcPath = `%APPDATA%/MotionFactory/ipc${this._appGlobals.APPVersion}.exe`;
+      ipcPath = `%APPDATA%/textanimator/ipc${this._appGlobals.APPVersion}.exe`;
     }
     return ipcPath;
   }
@@ -148,14 +148,14 @@ export class IpcHandlerService {
       if (error.toString().indexOf("ECONNREFUSED") >= -1) {
         if (this._osInfoService.currentPlatform === "WIN") {
           fs.writeFileSync(
-            `${this._osInfoService.getMotionFactoryAppDataFolder()}/ipcStarter.bat`,
+            `${this._osInfoService.gettextanimatorAppDataFolder()}/ipcStarter.bat`,
             `"${this.getBatFileContent()}" ${this.ipcPort}`,
             {
               mode: "777"
             }
           );
           child.execFile(
-            `${this._osInfoService.getMotionFactoryAppDataFolder()}/ipcStarter.bat`
+            `${this._osInfoService.gettextanimatorAppDataFolder()}/ipcStarter.bat`
           );
         } else {
           child.execFile(this.getIPCPath(), [this.ipcPort]);
@@ -170,7 +170,7 @@ export class IpcHandlerService {
       let ipcPath = "";
       let maxVersion = 0;
       let versionString = "";
-      const basePath = this._osInfoService.getMotionFactoryAppDataFolder();
+      const basePath = this._osInfoService.gettextanimatorAppDataFolder();
       fs.readdir(basePath, (err, files) => {
         files.map(file => {
           if (file.indexOf("ipc") > -1) {

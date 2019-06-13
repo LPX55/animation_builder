@@ -1,2 +1,2 @@
-cd ~/Library/Application\ Support/MotionFactory
-cp MotionFactory*.plugin /Library/Application\ Support/Adobe/Common/Plug-ins/7.0/MediaCore
+cd ~/Library/Application\ Support/textanimator
+cp textanimator*.plugin /Library/Application\ Support/Adobe/Common/Plug-ins/7.0/MediaCore

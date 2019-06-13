@@ -4,7 +4,7 @@
  */
 "use strict";
 
-const loadMotionFactory = require("./tasks/development");
+const loadtextanimator = require("./tasks/development");
 const preCommit = require("./tasks/pre-commit");
 const checkRepoStatus = require("./tasks/git");
 const buildIPC = require("./tasks/build-ipc");
@@ -50,7 +50,7 @@ module.exports = function (grunt) {
         preCommit(this, done, grunt);
         break;
       case "development":
-        loadMotionFactory(this, done, grunt);
+        loadtextanimator(this, done, grunt);
         break;
       default:
         grunt.log.error("Task dose not found");

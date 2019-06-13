@@ -969,7 +969,7 @@ export class TemplateItemComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isHover = false;
     this.draged = true;
     let imageAddress =
-      this._userManagerService.motionFactoryUserFileDirection() +
+      this._userManagerService.textanimatorUserFileDirection() +
       '/spreedsheets/DragThumb.png';
     document.addEventListener('mouseup', this.documentMouseUpHandler);
     this.createImageofItem().then(imgSrc => {
@@ -1013,7 +1013,7 @@ export class TemplateItemComponent implements OnInit, AfterViewInit, OnDestroy {
         .toString()
         .slice(-4)}.png`;
       /*tslint:disable-next-line:max-line-length*/
-      dragData = `${this._userManagerService.motionFactoryUserFileDirection()}/spreedsheets/${
+      dragData = `${this._userManagerService.textanimatorUserFileDirection()}/spreedsheets/${
         this._holderName
       }`;
       const tempImage = document.createElement('canvas');
@@ -1037,7 +1037,7 @@ export class TemplateItemComponent implements OnInit, AfterViewInit, OnDestroy {
         .getMilliseconds()
         .toString()
         .slice(-4)}.png`;
-      dragData = `${this._userManagerService.motionFactoryUserFileDirection()}/spreedsheets/${
+      dragData = `${this._userManagerService.textanimatorUserFileDirection()}/spreedsheets/${
         this._holderName
       }`;
       const tempImage = document.createElement('canvas');

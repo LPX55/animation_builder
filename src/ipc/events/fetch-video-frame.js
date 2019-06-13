@@ -3,7 +3,7 @@ const {
 } = require('child_process');
 const http = require('http');
 const thumbnailDimensions = require('../helpers/file-info').thumbnailDimensions;
-const getMotionFactoryAppDataFolder = require('../helpers/os-info').getMotionFactoryAppDataFolder;
+const gettextanimatorAppDataFolder = require('../helpers/os-info').gettextanimatorAppDataFolder;
 Promise = require("bluebird");
 const AdmZip = require('adm-zip');
 
@@ -15,7 +15,7 @@ exports.fetchVideoFrame = (data, emiter, currentUserID, response, request, ipc) 
   if (videoURL.split('.').pop().toLowerCase() === 'mogrt') {
     getVideoContentOfURL(videoURL).then((videoContent) => {
       if (videoContent) {
-        videoURL = `${getMotionFactoryAppDataFolder()}/video-holder.mp4`;
+        videoURL = `${gettextanimatorAppDataFolder()}/video-holder.mp4`;
         captureVideoFrame(videoURL, second, [videoWidth, videoHeight], ipc.ffmpegPath).then((responseData) => {
           sendResponse(responseData, response);
         });
@@ -100,7 +100,7 @@ const getVideoContentOfURL = (videoURL) => {
         resolve(false);
         return;
       }
-      fs.writeFileSync(`${getMotionFactoryAppDataFolder()}/video-holder.mp4`, videoBlob);
+      fs.writeFileSync(`${gettextanimatorAppDataFolder()}/video-holder.mp4`, videoBlob);
       resolve(true);
     });
   });

@@ -26,10 +26,10 @@ module.exports = (that, done, grunt) => {
     grunt.log.write('Create update file...').ok();
     const ZXPPath = glob.sync('./archive/*.zxp');
     const zip = new AdmZip(ZXPPath[0]);
-    rimraf.ensureDirSync('./update/pack/com.pixflow.motionfactory');
-    zip.extractAllTo('./update/pack/com.pixflow.motionfactory', true);
+    rimraf.ensureDirSync('./update/pack/com.pixflow.textanimator');
+    zip.extractAllTo('./update/pack/com.pixflow.textanimator', true);
     zipFolder('./update/pack', './update/newVersion.zxp');
-    rimraf.removeSync('./update/pack/com.pixflow.motionfactory');
+    rimraf.removeSync('./update/pack/com.pixflow.textanimator');
     rimraf.ensureDirSync('./update/pack/updatePack');
     fs.renameSync(
       './update/newVersion.zxp',

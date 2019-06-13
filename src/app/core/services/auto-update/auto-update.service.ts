@@ -28,7 +28,7 @@ export class AutoUpdateService {
             if (response.result) {
               alert(
                 // tslint:disable-next-line:max-line-length
-                'Motion Factory has been updated to the latest version. Please close Adobe Premiere Pro and open it again to use the latest version.'
+                'Text Animator has been updated to the latest version. Please close Adobe Premiere Pro and open it again to use the latest version.'
               );
               this._ipcHandlerService.exitIPC().then(() => {
                 this._ipcHandlerService.startIPC();

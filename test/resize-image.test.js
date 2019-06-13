@@ -9,10 +9,10 @@ let ffmpegPath = '';
 const getFFMPEGPath = () => {
     let jsonFileDirectory = '';
     if ('darwin' === os.platform()) {
-        jsonFileDirectory = `/Users/${os.userInfo()['username']}/Library/Application Support/MotionFactory`;
+        jsonFileDirectory = `/Users/${os.userInfo()['username']}/Library/Application Support/textanimator`;
     } else {
         const appDataPath = process.env['APPDATA'];
-        jsonFileDirectory = `${appDataPath}/MotionFactory`;
+        jsonFileDirectory = `${appDataPath}/textanimator`;
     }
     let lastVersion = '';
     fs.readdirSync(jsonFileDirectory).map((file) => {

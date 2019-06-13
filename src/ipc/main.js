@@ -5,7 +5,7 @@ process.on('uncaughtException', function (err) {
 const Raven = require('raven');
 const config = require('./config.js');
 let envMode = 'dev';
-if ((-1 !== __dirname.indexOf('com.pixflow.motionfactory'))) {
+if ((-1 !== __dirname.indexOf('com.pixflow.textanimator'))) {
     Raven.config(config.ravenAPI).install();
     envMode = 'prod';
 }
@@ -22,7 +22,7 @@ const resizeImage = require('./events/resize-image').resizeImage;
 const processFile = require('./events/process-file').processFile;
 const { initExtract } = require('./events/extract-mogrt');
 
-const ipc = new IpcHandler(config.serverIP, ('dev' !== envMode) ? parseInt(process.argv[3]) : 45032);
+const ipc = new IpcHandler(config.serverIP, ('dev' !== envMode) ? parseInt(process.argv[3]) : 45012);
 ipc.serve();
 
 ipc.listenForEvent('fileCount', fileCount);

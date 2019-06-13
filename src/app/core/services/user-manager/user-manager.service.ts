@@ -207,8 +207,8 @@ export class UserManagerService {
    * Return the path of user database
    * @return { string }
    */
-  getMotionFactoryUserDatabasePath(): string {
-    return `${this._osInfoService.getMotionFactoryAppDataFolder()}/${
+  gettextanimatorUserDatabasePath(): string {
+    return `${this._osInfoService.gettextanimatorAppDataFolder()}/${
       this.userID
     }/database.json`;
   }
@@ -217,8 +217,8 @@ export class UserManagerService {
    * Return the path of user file
    * @return { string }
    */
-  motionFactoryUserFileDirection(): string {
-    return `${this._osInfoService.getMotionFactoryAppDataFolder()}/${
+  textanimatorUserFileDirection(): string {
+    return `${this._osInfoService.gettextanimatorAppDataFolder()}/${
       this.userID
     }`;
   }
@@ -239,11 +239,11 @@ export class UserManagerService {
    * @return { void }
    */
   createUserDB(): void {
-    if (!fs.existsSync(this.motionFactoryUserFileDirection())) {
-      fs.ensureDirSync(this.motionFactoryUserFileDirection());
-      fs.createWriteStream(this.getMotionFactoryUserDatabasePath());
+    if (!fs.existsSync(this.textanimatorUserFileDirection())) {
+      fs.ensureDirSync(this.textanimatorUserFileDirection());
+      fs.createWriteStream(this.gettextanimatorUserDatabasePath());
     }
-    const userAdapter = new fileSync(this.getMotionFactoryUserDatabasePath());
+    const userAdapter = new fileSync(this.gettextanimatorUserDatabasePath());
     this._appGlobals.userDBConnection = low(userAdapter);
     this._appGlobals.userDBConnection._.mixin(lodashId);
     this._appGlobals.userDBConnection

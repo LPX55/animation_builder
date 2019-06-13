@@ -35,7 +35,7 @@ export class AnimationCoreService {
   }
 
   get textBuilderSourceFolder(): string {
-    return this._osInfoService.getMotionFactoryAppDataFolder() + '/Animation Builder/Text Builder';
+    return this._osInfoService.gettextanimatorAppDataFolder() + '/Animation Builder/Text Builder';
   }
 
   getCategoryItems(categoryPath, categoryType = 0): AnimationBuilderItem[] {

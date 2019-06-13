@@ -61,7 +61,7 @@ export class CoreModule {
    */
   initializeDatabase(): void {
     const adapter = new fileSync(
-      this._osInfoService.getMotionFactoryDatabasePath()
+      this._osInfoService.gettextanimatorDatabasePath()
     );
     this._appGlobals.DBConnection = low(adapter);
     this._appGlobals.DBConnection._.mixin(lodashId);

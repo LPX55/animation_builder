@@ -5,8 +5,8 @@ const path = require('path');
 const fs = require('fs');
 Promise = require('bluebird');
 captureVideoFrame = require('./fetch-video-frame').captureVideoFrame;
-const getMotionFactoryAppDataFolder = require('../helpers/os-info')
-  .getMotionFactoryAppDataFolder;
+const gettextanimatorAppDataFolder = require('../helpers/os-info')
+  .gettextanimatorAppDataFolder;
 
 exports.fetchMogrtThumb = (
   data,
@@ -132,12 +132,12 @@ const fetchVideoFrameOfMogrt = (zip, ffmpegPath) => {
   return new Promise(resolve => {
     zip.readFileAsync('thumb.mp4', (videoBlob, errorZip) => {
       fs.writeFileSync(
-        `${getMotionFactoryAppDataFolder()}/video-holder.mp4`,
+        `${gettextanimatorAppDataFolder()}/video-holder.mp4`,
         videoBlob
       );
 
       captureVideoFrame(
-        `${getMotionFactoryAppDataFolder()}/video-holder.mp4`,
+        `${gettextanimatorAppDataFolder()}/video-holder.mp4`,
         undefined,
         [0, 0],
         ffmpegPath

@@ -923,7 +923,7 @@ export class FileDataService {
     if (spreedSheets) {
       const spreedFileNames = spreedSheets.map(spreedSheet => {
         return (
-          this._userManagerService.motionFactoryUserFileDirection() +
+          this._userManagerService.textanimatorUserFileDirection() +
           "/spreedsheets/" +
           spreedSheet.id +
           ".png"
@@ -1210,7 +1210,7 @@ export class FileDataService {
     if (spreedSheets) {
       const spreedFileNames = spreedSheets.map(spreedSheet => {
         return (
-          this._userManagerService.motionFactoryUserFileDirection() +
+          this._userManagerService.textanimatorUserFileDirection() +
           "/spreedsheets/" +
           spreedSheet.id +
           ".png"

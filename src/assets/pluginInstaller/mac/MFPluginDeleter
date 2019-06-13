@@ -1,4 +1,4 @@
-cd ~/Library/Application\ Support/MotionFactory
-rm MotionFactory*.plugin
+cd ~/Library/Application\ Support/textanimator
+rm textanimator*.plugin
 while read p; do rm -r "$p"; done <versionsToDelete.txt
 rm versionsToDelete.txt

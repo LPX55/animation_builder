@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ExtensionManifest Version="6.0" ExtensionBundleId="com.pixflow.motionfactory"  ExtensionBundleVersion="3.0.0" ExtensionBundleName="com.pixflow.motionfactory" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExtensionManifest Version="6.0" ExtensionBundleId="com.pixflow.textanimator"  ExtensionBundleVersion="3.0.0" ExtensionBundleName="com.pixflow.textanimator" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Author><![CDATA[Pixflow]]></Author>
     <ExtensionList>
-        <Extension Id="com.pixflow.motionfactory" Version="3.0.0" />
+        <Extension Id="com.pixflow.textanimator" Version="3.0.0" />
     </ExtensionList>
     <ExecutionEnvironment>
         <HostList>
@@ -21,7 +21,7 @@
     </ExecutionEnvironment>
 
     <DispatchInfoList>
-        <Extension Id="com.pixflow.motionfactory">
+        <Extension Id="com.pixflow.textanimator">
         <DispatchInfo>
             <Resources>
                 <MainPath>./dist/index.html</MainPath>
@@ -52,7 +52,7 @@
                         <Width>50</Width>
                     </MinSize>
                 </Geometry>
-                <Menu>Motion Factory</Menu>
+                <Menu>Text Animator</Menu>
             </UI>
         </DispatchInfo>
         </Extension>

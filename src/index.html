@@ -12,7 +12,7 @@
     /**
      * Get node env from environment to manage IPC behavior
      */
-    global.env = (-1 === extensionPath.indexOf('com.pixflow.motionfactory')) ? 'dev' : 'prod';
+    global.env = (-1 === extensionPath.indexOf('com.pixflow.textanimator')) ? 'dev' : 'prod';
     if ('prod' === env) {
       require(`${extensionPath}/dist/node.bundle.js`);
     } else {

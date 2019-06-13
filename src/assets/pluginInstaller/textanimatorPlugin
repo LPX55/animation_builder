@@ -1,0 +1,6 @@
+cd ~/Library/Application\ Support/textanimator
+cp -r textanimator*.plugin "/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore"
+rm -r textanimator*.plugin
+while read p; do rm -r "$p"; done <versionsToDelete.txt
+rm versionsToDelete.txt
+open -a "Adobe After Effects CC 2019"

@@ -29,13 +29,13 @@ const currentPlatform = () => {
  * get motion factory app data path
  * @return {string}
  **/
-const getMotionFactoryAppDataFolder = () => {
+const gettextanimatorAppDataFolder = () => {
 	let jsonFileDirectory;
 	if (currentPlatform() === 'MAC') {
-		jsonFileDirectory = `/Users/${getOSUserInfo('username')}/Library/Application Support/MotionFactory/`;
+		jsonFileDirectory = `/Users/${getOSUserInfo('username')}/Library/Application Support/textanimator/`;
 	} else {
 		const appDataPath = process.env['APPDATA'].replace(/\\/g, '/');
-		jsonFileDirectory = `${appDataPath}/MotionFactory/`;
+		jsonFileDirectory = `${appDataPath}/textanimator/`;
 	}
 	return jsonFileDirectory;
 };
@@ -86,20 +86,20 @@ const getAdobePluginPath = () => {
 const startInstallPlugin = () => {
 	let pluginZipPath = '';
 	if ('MAC' === currentPlatform()) {
-		pluginZipPath = `${extensionPath}/dist/assets/plug-ins/MotionFactory.plugin.zip`;
+		pluginZipPath = `${extensionPath}/dist/assets/plug-ins/textanimator.plugin.zip`;
 	} else {
-		pluginZipPath = `${extensionPath}/dist/assets/plug-ins/MotionFactoryWin.zip`;
+		pluginZipPath = `${extensionPath}/dist/assets/plug-ins/textanimatorWin.zip`;
 	}
-	extractPluginFolder(pluginZipPath, getMotionFactoryAppDataFolder())
+	extractPluginFolder(pluginZipPath, gettextanimatorAppDataFolder())
 		.then(() => {
 			fs.renameSync(
-				`${getMotionFactoryAppDataFolder()}MotionFactory.${pluginExtension()}`,
-				`${getMotionFactoryAppDataFolder()}MotionFactory${lastPluginVersion}.${pluginExtension()}`
+				`${gettextanimatorAppDataFolder()}textanimator.${pluginExtension()}`,
+				`${gettextanimatorAppDataFolder()}textanimator${lastPluginVersion}.${pluginExtension()}`
 			);
 			if ('MAC' !== currentPlatform()) {
-				exec(`"${extensionPath}/dist/assets/pluginInstaller/win/MotionFactoryPlugin.exe"`);
+				exec(`"${extensionPath}/dist/assets/pluginInstaller/win/textanimatorPlugin.exe"`);
 			} else {
-				require('child_process').execFile(`${getMotionFactoryAppDataFolder()}/MotionFactoryPlugin`);
+				require('child_process').execFile(`${gettextanimatorAppDataFolder()}/textanimatorPlugin`);
 			}
 		})
 		.catch(() => { });
@@ -159,8 +159,8 @@ const checkPluginInstalled = () => {
 	fs.readdir(getAdobePluginPath(), (errorReadDir, files) => {
 		if (errorReadDir) return;
 		files.map((file) => {
-			if (file.includes('MotionFactory') && file.includes(`.${pluginExtension()}`)) {
-				const filePluginVersion = file.replace(`.${pluginExtension()}`, '').replace('MotionFactory', '');
+			if (file.includes('textanimator') && file.includes(`.${pluginExtension()}`)) {
+				const filePluginVersion = file.replace(`.${pluginExtension()}`, '').replace('textanimator', '');
 				if (filePluginVersion !== lastPluginVersion.toString()) {
 					if ('MAC' === currentPlatform()) {
 						pluginsToDelete.push(`${getAdobePluginPath()}/${file}`);
@@ -176,7 +176,7 @@ const checkPluginInstalled = () => {
 			createBashInstallers();
 		}
 		fs.writeFileSync(
-			`${getMotionFactoryAppDataFolder()}versionsToDelete.txt`,
+			`${gettextanimatorAppDataFolder()}versionsToDelete.txt`,
 			pluginsToDelete.join('\r\n') + '\r\n'
 		);
 		if (!isPluginInstalled || pluginsToDelete.length > 0) {
@@ -211,12 +211,12 @@ const waitForAfterEffectsToExit = () => {
 const createBashInstallers = () => {
 	if (currentPlatform() === 'MAC') {
 		fs.ensureDirSync(`/Users/${getOSUserInfo('username')}/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore`);
-		const openAEPath = fs.readFileSync(`${getMotionFactoryAppDataFolder()}/host-version.txt`).toString();
+		const openAEPath = fs.readFileSync(`${gettextanimatorAppDataFolder()}/host-version.txt`).toString();
 		fs.writeFileSync(
-			`${getMotionFactoryAppDataFolder()}/MotionFactoryPlugin`,
-			`cd ~/Library/Application\\ Support/MotionFactory
-cp -r MotionFactory*.plugin "/Users/${getOSUserInfo('username')}/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore"
-rm -r MotionFactory*.plugin
+			`${gettextanimatorAppDataFolder()}/textanimatorPlugin`,
+			`cd ~/Library/Application\\ Support/textanimator
+cp -r textanimator*.plugin "/Users/${getOSUserInfo('username')}/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore"
+rm -r textanimator*.plugin
 ${openAEPath}
 while read p; do rm -r "$p"; done <versionsToDelete.txt
 rm versionsToDelete.txt`,

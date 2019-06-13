@@ -11,7 +11,7 @@ export default class Aftereffects extends General implements Host {
     public scriptPath = 'hosts/ae/common.jsx';
     public hostVersion = this._jsxInjectorService.hostEnvironment.appVersion;
     allowedExtensions = ['aep', 'ffx', 'mogrt'];
-    public ipcPort =  45032;
+    public ipcPort =  45012;
     constructor(
         private _jsxInjectorService: JsxInjectorService,
         private _ipcHandlerService: IpcHandlerService

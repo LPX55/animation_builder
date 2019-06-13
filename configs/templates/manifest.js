@@ -1,6 +1,6 @@
 module.exports = function ({
-  bundleName = 'Motion Factory',
-  bundleId = 'com.pixflow.motionfactory',
+  bundleName = 'Text Animator',
+  bundleId = 'com.pixflow.textanimator',
   version = '1.0.0',
   hosts,
   bundleVersion = '1.0.0',
@@ -51,7 +51,7 @@ module.exports = function ({
           </Lifecycle>
           <UI>
             <Type>Panel</Type>
-            <Menu>Motion Factory</Menu>
+            <Menu>Text Animator</Menu>
             <Geometry>
               <Size>
                 <Height>${height}</Height>

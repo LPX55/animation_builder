@@ -11,7 +11,7 @@ export default class Premiere extends General implements Host {
     public scriptPath = 'hosts/pr/common.jsx';
     public hostVersion = this._jsxInjectorService.hostEnvironment.appVersion;
     allowedExtensions = ['mogrt', 'prproj', 'aep'];
-    public ipcPort = isDevMode ? 45032 : 45033;
+    public ipcPort = isDevMode ? 45012 : 45013;
 
     constructor(private _jsxInjectorService: JsxInjectorService) {
         super();

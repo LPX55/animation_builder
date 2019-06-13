@@ -175,7 +175,7 @@ export class JsxInjectorService {
    */
   formatReferralLink(link: string, subId3: string): string {
     // tslint:disable-next-line:max-line-length
-    return `https://1.envato.market/c/1248194/275988/4415?subId1=MotionFactory&subId2=premiere-app&subId3=${subId3}&u=${encodeURIComponent(
+    return `https://1.envato.market/c/1248194/275988/4415?subId1=textanimator&subId2=premiere-app&subId3=${subId3}&u=${encodeURIComponent(
       link
     )}`;
   }
@@ -195,7 +195,7 @@ export class JsxInjectorService {
    */
   dispatchVulcanMessage(eventName, message): void {
     const payload = new VulcanMessage(
-      VulcanMessage.TYPE_PREFIX + "com.pixflow.motionfactory.events"
+      VulcanMessage.TYPE_PREFIX + "com.pixflow.textanimator.events"
     );
     payload.setPayload(
       JSON.stringify({
@@ -215,7 +215,7 @@ export class JsxInjectorService {
    */
   listenForVulcanEvents(): void {
     VulcanInterface.addMessageListener(
-      VulcanMessage.TYPE_PREFIX + "com.pixflow.motionfactory.events",
+      VulcanMessage.TYPE_PREFIX + "com.pixflow.textanimator.events",
       payload => {
         const eventPayload = JSON.parse(VulcanInterface.getPayload(payload));
         const payloadEventName = eventPayload.eventName;

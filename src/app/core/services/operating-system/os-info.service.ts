@@ -46,20 +46,20 @@ export class OsInfoService {
    * Return the directory path of folder
    * @return { string }
    */
-  getMotionFactoryAppDataFolder(): string {
+  gettextanimatorAppDataFolder(): string {
     let jsonFileDirectory;
     if ('MAC' === this.currentPlatform) {
       jsonFileDirectory = `/Users/${this.getOSUserInfo(
         'username'
-      )}/Library/Application Support/MotionFactory`;
+      )}/Library/Application Support/textanimator`;
     } else {
       const homeDir = this.getOSUserInfo('homedir').toString();
       jsonFileDirectory = `${homeDir.replace(
         /\\/g,
         '/'
-      )}/AppData/Roaming/MotionFactory`;
+      )}/AppData/Roaming/textanimator`;
     }
-    this.createMotionFactoryAppDataFolder(jsonFileDirectory);
+    this.createtextanimatorAppDataFolder(jsonFileDirectory);
     return jsonFileDirectory;
   }
 
@@ -67,7 +67,7 @@ export class OsInfoService {
    * Create app data folder
    * @return { string }
    */
-  createMotionFactoryAppDataFolder(jsonFileDirectory): void {
+  createtextanimatorAppDataFolder(jsonFileDirectory): void {
     if (!fs.existsSync(jsonFileDirectory)) {
       fs.ensureDirSync(jsonFileDirectory);
     }
@@ -77,8 +77,8 @@ export class OsInfoService {
    * Return the path of database
    * @return { string }
    */
-  getMotionFactoryDatabasePath(): string {
-    return `${this.getMotionFactoryAppDataFolder()}/database.json`;
+  gettextanimatorDatabasePath(): string {
+    return `${this.gettextanimatorAppDataFolder()}/database.json`;
   }
 
   /**
@@ -88,11 +88,11 @@ export class OsInfoService {
   getFFMpegZipPath(): string {
     let ffmpegPath;
     if (this.currentPlatform === 'WIN') {
-      ffmpegPath = `${this.getMotionFactoryAppDataFolder()}/ffmpeg${
+      ffmpegPath = `${this.gettextanimatorAppDataFolder()}/ffmpeg${
         this._appGlobals.APPVersion
       }.exe`;
     } else {
-      ffmpegPath = `${this.getMotionFactoryAppDataFolder()}/ffmpeg${
+      ffmpegPath = `${this.gettextanimatorAppDataFolder()}/ffmpeg${
         this._appGlobals.APPVersion
       }`;
     }
@@ -107,11 +107,11 @@ export class OsInfoService {
   getDDHelperZipPath(): string {
     let ddHelperPath;
     if (this.currentPlatform === 'WIN') {
-      ddHelperPath = `${this.getMotionFactoryAppDataFolder()}/ddHelper${
+      ddHelperPath = `${this.gettextanimatorAppDataFolder()}/ddHelper${
         this._appGlobals.APPVersion
       }.exe`;
     } else {
-      ddHelperPath = `${this.getMotionFactoryAppDataFolder()}/ddHelper${
+      ddHelperPath = `${this.gettextanimatorAppDataFolder()}/ddHelper${
         this._appGlobals.APPVersion
       }`;
     }

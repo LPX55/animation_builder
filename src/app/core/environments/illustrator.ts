@@ -9,7 +9,7 @@ export default class Illustrator extends General implements HostImage {
     public hostName = 'illustrator';
     public scriptPath = 'hosts/ai/common.jsx';
     allowedExtensions = [];
-    public ipcPort = isDevMode ? 45032 : 45035;
+    public ipcPort = isDevMode ? 45012 : 45015;
 
     constructor(
         private _jsxInjectorService: JsxInjectorService,

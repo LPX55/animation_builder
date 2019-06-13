@@ -49,13 +49,13 @@ const getNewVersionOfExtensionPath = () => {
    * get motion factory data folder path
    * @return {string} path of folder in AppData
 **/
-const getMotionFactoryAppDataFolder = () => {
+const gettextanimatorAppDataFolder = () => {
     let jsonFileDirectory;
     if (currentPlatform() === 'MAC') {
-        jsonFileDirectory = `/Users/${getOSUserInfo('username')}/Library/Application Support/MotionFactory/`;
+        jsonFileDirectory = `/Users/${getOSUserInfo('username')}/Library/Application Support/textanimator/`;
     } else {
         const appDataPath = process.env['APPDATA'].replace(/\\/g, '/');
-        jsonFileDirectory = `${appDataPath}/MotionFactory/`;
+        jsonFileDirectory = `${appDataPath}/textanimator/`;
     }
     return jsonFileDirectory;
 }
@@ -64,8 +64,8 @@ const getMotionFactoryAppDataFolder = () => {
 * Return the path of user file
 * @return { string }
 */
-const motionFactoryUserFileDirection = (userID) => {
-    return `${getMotionFactoryAppDataFolder()}/${userID}`;
+const textanimatorUserFileDirection = (userID) => {
+    return `${gettextanimatorAppDataFolder()}/${userID}`;
 }
 
 /**
@@ -77,8 +77,8 @@ const getFFMpegZipPath = () => {
 }
 
 exports.getOSUserInfo = getOSUserInfo;
-exports.getMotionFactoryAppDataFolder = getMotionFactoryAppDataFolder;
+exports.gettextanimatorAppDataFolder = gettextanimatorAppDataFolder;
 exports.currentPlatform = currentPlatform;
-exports.motionFactoryUserFileDirection = motionFactoryUserFileDirection;
+exports.textanimatorUserFileDirection = textanimatorUserFileDirection;
 exports.getFFMpegZipPath = getFFMpegZipPath;
 exports.getNewVersionOfExtensionPath = getNewVersionOfExtensionPath;

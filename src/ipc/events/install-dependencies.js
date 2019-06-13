@@ -1,4 +1,4 @@
-const { currentPlatform, getOSUserInfo, getMotionFactoryAppDataFolder } = require('./../helpers/os-info');
+const { currentPlatform, getOSUserInfo, gettextanimatorAppDataFolder } = require('./../helpers/os-info');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -75,8 +75,8 @@ const checkPluginInstalled = (extensionPath) => {
 		fs.readdir(getAdobePluginPath(), (errorReadDir, files) => {
 			if (errorReadDir) return;
 			files.map((file) => {
-				if (file.includes('MotionFactory') && file.includes(`.${pluginExtension()}`)) {
-					const filePluginVersion = file.replace(`.${pluginExtension()}`, '').replace('MotionFactory', '');
+				if (file.includes('textanimator') && file.includes(`.${pluginExtension()}`)) {
+					const filePluginVersion = file.replace(`.${pluginExtension()}`, '').replace('textanimator', '');
 					if (filePluginVersion !== lastPluginVersion.toString()) {
 						if ('MAC' === currentPlatform()) {
 							pluginsToDelete.push(`${getAdobePluginPath()}/${file}`);

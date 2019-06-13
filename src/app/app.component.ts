@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
     let appVersion = "";
     if (this._osInfoService.currentPlatform !== "MAC") {
       fs.writeFileSync(
-        `${this._osInfoService.getMotionFactoryAppDataFolder()}/host-version.txt`,
+        `${this._osInfoService.gettextanimatorAppDataFolder()}/host-version.txt`,
         path.resolve(processArgv0, "../../AfterFX.exe")
       );
     } else {
@@ -100,7 +100,7 @@ export class AppComponent implements OnInit {
         ) + 2003
       ).toString();
       fs.writeFileSync(
-        `${this._osInfoService.getMotionFactoryAppDataFolder()}/host-version.txt`,
+        `${this._osInfoService.gettextanimatorAppDataFolder()}/host-version.txt`,
         `open -a "Adobe After Effects CC ${appVersion}"`
       );
     }

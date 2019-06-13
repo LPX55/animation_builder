@@ -70,7 +70,7 @@ export class VideoProcessorService {
    **/
   createSpreadSheetsFolder(): void {
     const folderPath =
-      this._userManagerService.motionFactoryUserFileDirection() +
+      this._userManagerService.textanimatorUserFileDirection() +
       "/spreedsheets";
     if (!fs.existsSync(folderPath)) {
       fs.ensureDirSync(folderPath, "0777", true);
@@ -149,7 +149,7 @@ export class VideoProcessorService {
         .value();
       if (searchResult) {
         resolve({
-          spreedSheetPath: `${this._userManagerService.motionFactoryUserFileDirection()}/spreedsheets/${
+          spreedSheetPath: `${this._userManagerService.textanimatorUserFileDirection()}/spreedsheets/${
             searchResult.id
           }.png`,
           tiles: searchResult.tiles,
