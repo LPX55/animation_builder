@@ -1,0 +1,112 @@
+@import '~app/variables';
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 36px - 61px); // 36 is the height of header, 61 is signin text height + margin bottom 
+    .login-form {
+        h3 {
+            color: #ffffff;
+            font-size: $font-size-giant;
+            text-align: center;
+            margin-bottom: 40px;
+            &.reduced-margin {
+                margin-bottom: 20px;
+            }
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .request-result,
+            .form-result {
+                color: #F94F7E;
+                font-size: $font-size-medium;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            .request-result {
+                max-width: 70%;
+            }
+            .form-results {
+                p:nth-child(2) {
+                    margin-top: 3px;
+                }
+            }
+            #login-form-password-input,
+            #login-form-email-input {
+                width: 256px;
+                font-family: $font-family-semibold;
+                height: 35px;
+                border: none;
+                font-size: $font-size-medium;
+                border-radius: 4px;
+                background-color: #1F1F1F;
+                outline: none;
+                color: #B9B9B9;
+                margin-bottom: 10px;
+                padding: 1px 5px;
+                text-align: center;
+                &:focus::placeholder {
+                    color: transparent;
+                }
+                &::placeholder {
+                    text-align: center;
+                    color: #b9b9b94f;
+                }
+                &.invalid-input {
+                    border: 1px solid #53212F;
+                    padding-top: 0;
+                    padding-bottom: 0;
+                    box-shadow: 0 0 4px 5px rgba(233, 23, 23, 0.19);
+                }
+            }
+            .forgot-password {
+                font-size: $font-size-small;
+                color: $forms-text-color;
+                margin-bottom: 40px;
+                text-decoration: none;
+            }
+            .button-container {
+                position: relative;
+                height: 30px;
+                button {
+                    background-color: #05A324;
+                    padding: 11px 15px;
+                    font-size: $font-size-medium;
+                    color: #fff;
+                    border: none;
+                    outline: 0;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    &:disabled,
+                    &[disabled] {
+                        background-color: #3e3e3e;
+                        color: #666666;
+                        cursor: not-allowed;
+                    }
+                }
+                .submit-loader {
+                    position: absolute;
+                    top: -6px;
+                    left: 50%;
+                    width: 40px;
+                    height: 30px;
+                    transform: translateX(-50%);
+                    background-image: url(../../../../assets/loading.svg);
+                    background-size: cover;
+                }
+            }
+        }
+    }
+}
+
+.switch-to-signup {
+    color: #fff;
+    font-size: $font-size-large;
+    margin: 0;
+    text-align: center;
+    a {
+        color: #7795FF;
+    }
+}

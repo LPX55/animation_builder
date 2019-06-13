@@ -1,15 +1,15 @@
 :host {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     width: 100vw;
     min-width: 399px;
     overflow-x: hidden;
 }
 
-.mf-body {
-    display: flex;
-    flex-direction: column;
-}
+// .mf-body {
+//   display: flex;
+//   flex-direction: column;
+// }
 
 #drag-drop-canvas {
     display: none;

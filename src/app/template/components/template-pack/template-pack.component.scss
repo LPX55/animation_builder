@@ -1,0 +1,205 @@
+@import "~app/variables";
+
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+:host {
+    @include size(170px, 140px);
+    display: flex;
+    text-align: center;
+    justify-content: flex-end;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #262626;
+    transition: border 0.1s, box-shadow 0.3s;
+    background-image: url(../../../../assets/default-pack-image.svg);
+    background-size: 69px 52px;
+    background-repeat: no-repeat;
+    background-position: center 40%;
+    background-color: #191919;
+
+    &:hover {
+        border: 1px solid #2d60eb;
+        box-shadow: 0px 2px 6px 0.3px rgba(45, 96, 235, 0.51);
+        transition: border 0.17s, box-shadow 0.3s;
+    }
+
+    &.missing {
+        .Warning-svg {
+            fill: #ffa700;
+            opacity: 0.276;
+        }
+
+        &:hover {
+            border: 1px solid rgba(255, 167, 0, 0.2);
+            box-shadow: 0px 0px 2px 0px rgb(196, 130, 6);
+            transition: border 0.17s, box-shadow 0.3s;
+        }
+
+        .item-title {
+            color: #c48206;
+        }
+    }
+
+    img.thumbnail {
+        object-fit: cover;
+        object-position: center;
+        opacity: 0.7;
+    }
+
+    .pack-background {
+        height: 100%;
+
+        .pack-folder {
+            background-image: url(../../../../assets/pack-folder-icon.svg);
+            width: 45px;
+            height: 45px;
+            background-position: -11px -2px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9;
+        }
+    }
+
+    .pack-display {
+        &.renaming {
+            border: 1px solid #2d60eb;
+            box-shadow: 0px 2px 6px 0.3px rgba(45, 96, 235, 0.51);
+            transition: border 0.17s, box-shadow 0.3s;
+        }
+
+        @include size(100%);
+
+        .single-background {
+            @include size(100%);
+            background-color: #191919;
+
+            img.thumbnail {
+                @include size(100%);
+            }
+        }
+
+        .multi-background {
+            background-color: $modern-view-folder-background;
+            display: flex;
+            justify-content: space-between;
+            height: 100%;
+            padding-left: 2px;
+
+            div:nth-child(1) {
+                flex: 1 0 50%;
+                flex-direction: column;
+                display: flex;
+                margin-left: -2px;
+
+                img.thumbnail:nth-child(1) {
+                    padding-bottom: 0;
+                    background-repeat: no-repeat;
+                }
+
+                img.thumbnail {
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            div:nth-child(2) {
+                flex: 1 0 50%;
+                padding-left: 2px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+
+                img.thumbnail:nth-child(1) {
+                    flex: 1;
+                    min-height: calc(50% - 1px);
+                    margin-bottom: 2px;
+                    background-repeat: no-repeat;
+                }
+
+                img.thumbnail:nth-child(2) {
+                    flex: 1 0 48%;
+                    background-repeat: no-repeat;
+                }
+
+                img.thumbnail {
+                    width: 100%;
+                    height: 48%;
+                }
+            }
+        }
+
+        .pack-number {
+            font-size: $font-size-tiny;
+            color: #fff;
+            position: absolute;
+            bottom: 8px;
+            right: 0;
+            left: 0;
+        }
+
+        .item-title {
+            font-size: $font-size-large;
+            position: absolute;
+            bottom: 23px;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        .renaming-input {
+            font-size: $font-size-large;
+            position: absolute;
+            bottom: 23px;
+            left: 0;
+            right: 0;
+            background-color: transparent;
+            border: 1px solid #1e5bff;
+            color: white;
+            outline: none;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            height: 18px;
+            width: 100px;
+            font-family: $font-family-regular;
+        }
+
+        &.no-thumbnail {
+            .pack-number {
+                opacity: 0.35;
+            }
+
+            .pack-folder {
+                display: none;
+            }
+        }
+    }
+
+    .pack-info {
+        @include size(10px);
+        position: absolute;
+        top: 0;
+        right: 6px;
+        cursor: pointer;
+        z-index: 4;
+
+        ::ng-deep {
+            .mf-tooltip {
+                color: #A8720A;
+            }
+        }
+    }
+
+    &.default-files {
+        background-image: url(../../../../assets/default-pr-cover.svg);
+    }
+}

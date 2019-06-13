@@ -5,7 +5,7 @@
     <div class="item-footer">
         <div class="row-1">
             <span class="name">{{item.name}}</span>
-            <span class="direction-selector" (click)="toggleDropDown($event)"> {{activeDirection?
+            <span *ngIf = "dropDownContent.length>1" class="direction-selector" (click)="toggleDropDown($event)"> {{activeDirection?
                 activeDirection.directionName: ''}}
                 <img src="assets/arrow-down.svg" [class.up]="showDropDown"/>
             </span>

@@ -1,0 +1,25 @@
+<div class="question">{{ question }}</div>
+<div class="select-input" #selectBox>
+  <div class="view-box" (click)="clickedOnSelect($event)" [class.error]="error">
+    <div
+      class="selected-answers"
+      [class.have-answer]="selectedAnswers && selectedAnswers.length"
+    >
+      {{ getSelectedAnswers() }}
+    </div>
+  </div>
+  <ul
+    class="select-answers-box"
+    [class.is-multi]="isMulti"
+    [class.hide]="!answersBoxShow"
+    #dropDown
+  >
+    <li
+      *ngFor="let answer of answers"
+      [class.selected]="selectedAnswers && selectedAnswers.includes(answer._id)"
+      (click)="selectAnswer($event, answer._id)"
+    >
+      {{ answer.text }}
+    </li>
+  </ul>
+</div>

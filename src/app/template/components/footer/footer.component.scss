@@ -1,0 +1,32 @@
+@import '~app/variables';
+:host {
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $header-background;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    .footer {
+        padding-right: 10px;
+        display: flex;
+        font-size: $font-size-medium;
+        align-items: center;
+        justify-content: center;
+    }
+    .resize {
+        margin-left: 17px;
+    
+    }
+    #file-selector,
+    #folder-selector,
+    #image-sequence-selector {
+        display: none;
+    }
+    .upload-drop-down {
+        width: 150px;
+        top: -128px;
+        right: 10px;
+    }
+}

@@ -1,0 +1,40 @@
+<div class="overlay" (click)="closePanel()">
+    <div class="container" (click)="onEvent($event)">
+        <div class="image">
+            <img [src]="popUpDetails.thumbnail" #imgThumbnail>
+        </div>
+        <div class="content">
+            <div class="info-title">
+                <span>Title</span>
+                <div class="title">{{popUpDetails.title}}</div>
+            </div>
+            <div class="info-duration" *ngIf="popUpDetails.duration">
+                <span>{{ durationTitle }}</span>
+                <div class="duration">{{popUpDetails.duration}}</div>
+            </div>
+            <div class="info-file-size">
+                <span>File Size</span>
+                <div class="file-size">{{popUpDetails.size}}</div>
+            </div>
+            <div class="info-font" *ngIf="usedFonts.length > 0">
+                <span>Fonts</span>
+                <div class="fonts">
+                    <div class="font" *ngFor="let font of usedFonts" [class.missed-font]="font.missing">
+                        <svg *ngIf="font.missing" xmlns="http://www.w3.org/2000/svg" viewBox="234 2420.08 10.188 9.35">
+                            <g transform="translate(234 2420.08)">
+                                <path class="font-missing-svg" d="M18.084,17.966,15,12.624a1.969,1.969,0,0,0-3.411,0L8.464,18.035a1.969,1.969,0,0,0,1.706,2.954h6.273a1.969,1.969,0,0,0,1.641-3.023Zm-1.662,2.17,0,.427v-.427H10.17A1.116,1.116,0,0,1,9.2,18.462l3.124-5.411a1.116,1.116,0,0,1,1.933,0L17.35,18.4l.01.017a1.117,1.117,0,0,1-.939,1.718ZM13.3,17.464a.354.354,0,0,0,.355-.355l.122-2.356a.477.477,0,0,0-.954,0l.122,2.356A.337.337,0,0,0,13.3,17.464Zm0,.4a.609.609,0,1,0,0,1.219.609.609,0,0,0,0-1.219Z"
+                                    transform="translate(-8.201 -11.639)" />
+                            </g>
+                        </svg>
+                        <div>{{font.fontName}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="done">
+                <mf-general-button [text]="'Done'" [type]="'fill'" [backgroundColor]="'#1F1F1F'" (clicked)="closePanel()"></mf-general-button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

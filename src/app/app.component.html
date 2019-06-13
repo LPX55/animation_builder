@@ -1,7 +1,21 @@
-<mf-header></mf-header>
-<div class="mf-body" [@routerAnimation]="getRouteAnimation(route)">
-  <router-outlet #route="outlet"></router-outlet>
-</div>
-<canvas id="drag-drop-canvas" width="170" height="144" #dragAndDropCanvas></canvas>
-<mf-message-box *ngIf="updatePluginMessageBoxShowing" [isShowing]="updatePluginMessageBoxShowing" [messageText]="'After Effects needs to be closed to install its plugin. Please click OK to do it.'"
-  [messageTitle]="'Restart AE...'" [isForce]="true" [messageType]="'warning'" [buttons]="buttons" (messageBoxClosed)="onPluginMessageBoxClosed()"></mf-message-box>
+<router-outlet></router-outlet>
+<canvas
+  id="drag-drop-canvas"
+  width="170"
+  height="144"
+  #dragAndDropCanvas
+></canvas>
+<mf-message-box
+  *ngIf="updatePluginMessageBoxShowing"
+  [isShowing]="updatePluginMessageBoxShowing"
+  [messageText]="
+    'After Effects needs to be closed to install its plugin. Please click OK to do it.'
+  "
+  [messageTitle]="'Restart AE...'"
+  [isForce]="true"
+  [messageType]="'warning'"
+  [buttons]="buttons"
+  (messageBoxClosed)="onPluginMessageBoxClosed()"
+></mf-message-box>
+
+<div class="loadLayer"></div>

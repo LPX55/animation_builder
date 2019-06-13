@@ -1,0 +1,28 @@
+<div class="market-pack" #marketPack>
+  <div class="cover">
+    <img [src]="thumbnailUrl">
+    <div class="overlay"></div>
+  </div>
+  <div class="market-item-hover">
+    <div class="title">{{title}}</div>
+    <div [ngSwitch]="type">
+      <div *ngSwitchCase="'premium'">
+        <div class="buy">{{price}}$</div>
+      </div>
+      <div *ngSwitchCase="'mixed'">
+        <div class="buy">{{price}}$</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="type">
+    <div [ngSwitch]="type">
+      <div *ngSwitchCase="'free'">
+        <div class="free">Free</div>
+      </div>
+      <div *ngSwitchCase="'mixed'">
+        <div class="free free-mixed">Free</div>
+      </div>
+
+    </div>
+  </div>

@@ -7,11 +7,17 @@
 const loadMotionFactory = require("./tasks/development");
 const preCommit = require("./tasks/pre-commit");
 const checkRepoStatus = require("./tasks/git");
+const buildIPC = require("./tasks/build-ipc");
 
 
 module.exports = function (grunt) {
   grunt.initConfig({
     task: {
+      buildIPC: {
+        options: {
+          mode: "release"
+        }
+      },
       development: {
         options: {
           mode: "hmr"
@@ -36,6 +42,9 @@ module.exports = function (grunt) {
     switch (this.target) {
       case "git":
         checkRepoStatus(this, done, grunt);
+        break;
+      case "buildIPC":
+        buildIPC(this, done, grunt);
         break;
       case "precommit":
         preCommit(this, done, grunt);

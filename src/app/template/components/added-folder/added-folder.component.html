@@ -1,0 +1,7 @@
+<div class="pack-display" (click)="editName()" >
+  <div class="pack-background">
+  </div>
+  <div class="item-title">
+    <input #newFolderName (blur)="onBlurInput()" type="text" name="added-folder" placeholder="New Folder" (keydown)="pressEnter($event)" [(ngModel)]="addPackName" autofocus >
+  </div>
+</div>

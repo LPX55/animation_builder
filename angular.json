@@ -19,11 +19,16 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
+              "src/ipc",
               "src/node.bin.js"
             ],
             "styles": [
               "src/styles.scss"
             ],
+            "scripts": [
+              "node_modules/shufflejs/dist/shuffle.js",
+              "src/assets/Vulcan.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -80,12 +85,17 @@
             "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
+            "scripts": [
+              "node_modules/shufflejs/dist/shuffle.js",
+              "src/assets/Vulcan.js"
+            ],
             "styles": [
               "src/styles.scss"
             ],
             "assets": [
               "src/assets",
               "src/favicon.ico",
+              "src/ipc",
               "src/node.bin.js"
             ]
           }

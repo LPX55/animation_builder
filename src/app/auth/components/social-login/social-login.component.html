@@ -1,0 +1,42 @@
+<div class="social-buttons">
+  <mf-auth-error [errors]="errors"></mf-auth-error>
+  <mf-auth-button
+    text="Sign up With Google"
+    icon="assets/google-icon.png"
+    [textColor]="['#fff', '#fff']"
+    [backgroundColor]="['#4249F0', '#6066EF']"
+    [borderColor]="['transparent', 'transparent']"
+    (clicked)="googleSignIn()"
+    [loading]="googleButtonLoading"
+  ></mf-auth-button>
+  <mf-auth-button
+    text="Sign up With Facebook"
+    icon="assets/facebook-icon.png"
+    [textColor]="['#414141', '#414141']"
+    [backgroundColor]="['transparent', '#F0F0F0']"
+    [borderColor]="['#D6D6D6', '#D6D6D6']"
+    (clicked)="facebookSignIn()"
+    [loading]="facebookButtonLoading"
+    loadingColor="#3C40FF"
+  ></mf-auth-button>
+  <mf-auth-button
+    text="Sign up With Twitter"
+    icon="assets/twitter-icon.png"
+    [textColor]="['#414141', '#414141']"
+    [backgroundColor]="['transparent', '#F0F0F0']"
+    [borderColor]="['#D6D6D6', '#D6D6D6']"
+    (clicked)="twitterSignIn()"
+    [loading]="twitterButtonLoading"
+    loadingColor="#3C40FF"
+  ></mf-auth-button>
+</div>
+<div class="email-sign-in" [routerLink]="['../register/']">
+  Or Sign up with Email
+</div>
+
+<div class="social-login-loader" #authLoaderContainer>
+  <div class="close" (click)="closeIframe()">
+    <img src="assets/x-icon.svg" />
+  </div>
+  <iframe #authLoader (load)="onLoadedIframe()"></iframe>
+</div>

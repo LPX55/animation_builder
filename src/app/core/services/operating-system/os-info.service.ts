@@ -1,3 +1,4 @@
+import { IpcHandlerService } from './../ipc-handler/ipc-handler.service';
 import { JsxInjectorService } from './../jsx-injector/jsx-injector.service';
 import { Injectable } from '@angular/core';
 import { AppGlobals } from '../../../../global';
@@ -52,8 +53,10 @@ export class OsInfoService {
         'username'
       )}/Library/Application Support/MotionFactory`;
     } else {
-      jsonFileDirectory = `${path.parse(this.getOSUserInfo('homedir'))['root']}/Users/${this.getOSUserInfo(
-        'username'
+      const homeDir = this.getOSUserInfo('homedir').toString();
+      jsonFileDirectory = `${homeDir.replace(
+        /\\/g,
+        '/'
       )}/AppData/Roaming/MotionFactory`;
     }
     this.createMotionFactoryAppDataFolder(jsonFileDirectory);
@@ -66,7 +69,7 @@ export class OsInfoService {
    */
   createMotionFactoryAppDataFolder(jsonFileDirectory): void {
     if (!fs.existsSync(jsonFileDirectory)) {
-      fs.mkdirSync(jsonFileDirectory);
+      fs.ensureDirSync(jsonFileDirectory);
     }
   }
 
@@ -87,16 +90,15 @@ export class OsInfoService {
     if (this.currentPlatform === 'WIN') {
       ffmpegPath = `${this.getMotionFactoryAppDataFolder()}/ffmpeg${
         this._appGlobals.APPVersion
-        }.exe`;
+      }.exe`;
     } else {
       ffmpegPath = `${this.getMotionFactoryAppDataFolder()}/ffmpeg${
         this._appGlobals.APPVersion
-        }`;
+      }`;
     }
 
     return ffmpegPath;
   }
-
 
   /**
    * Return the path of ddHelper ziped
@@ -107,11 +109,11 @@ export class OsInfoService {
     if (this.currentPlatform === 'WIN') {
       ddHelperPath = `${this.getMotionFactoryAppDataFolder()}/ddHelper${
         this._appGlobals.APPVersion
-        }.exe`;
+      }.exe`;
     } else {
       ddHelperPath = `${this.getMotionFactoryAppDataFolder()}/ddHelper${
         this._appGlobals.APPVersion
-        }`;
+      }`;
     }
 
     return ddHelperPath;
@@ -161,14 +163,14 @@ export class OsInfoService {
       return {
         zip: `${
           this._jsxInjectorService.defualtPath
-          }/dist/assets/ffmpeg/ffmpeg_win.zip`,
+        }/dist/assets/ffmpeg/ffmpeg_win.zip`,
         name: `ffmpeg.exe`
       };
     } else {
       return {
         zip: `${
           this._jsxInjectorService.defualtPath
-          }/dist/assets/ffmpeg/ffmpeg_mac.zip`,
+        }/dist/assets/ffmpeg/ffmpeg_mac.zip`,
         name: `ffmpeg`
       };
     }
@@ -183,14 +185,14 @@ export class OsInfoService {
       return {
         zip: `${
           this._jsxInjectorService.defualtPath
-          }/dist/assets/ddHelpers/ddHelper_win.zip`,
+        }/dist/assets/ddHelpers/ddHelper_win.zip`,
         name: `ddHelper.exe`
       };
     } else {
       return {
         zip: `${
           this._jsxInjectorService.defualtPath
-          }/dist/assets/ddHelpers/ddHelper_mac.zip`,
+        }/dist/assets/ddHelpers/ddHelper_mac.zip`,
         name: `ddHelper`
       };
     }

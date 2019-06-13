@@ -1,0 +1,57 @@
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="!loginForm.invalid && login($event)"
+  ngNativeValidate
+>
+  <div class="login-fields">
+    <mf-auth-error [errors]="errors"></mf-auth-error>
+    <mf-auth-text-input
+      type="email"
+      name="Email"
+      required
+      formControlName="email"
+      [formGroup]="loginForm"
+      [error]="
+        emailControl.invalid && emailControl.dirty && emailControl.touched
+      "
+    ></mf-auth-text-input>
+    <mf-auth-text-input
+      type="password"
+      name="Password"
+      required
+      formControlName="password"
+      [formGroup]="loginForm"
+      [error]="
+        passwordControl.invalid &&
+        passwordControl.dirty &&
+        passwordControl.touched
+      "
+    ></mf-auth-text-input>
+    <div class="forgot-password" [routerLink]="['forgot-password']">
+      Forgot password?
+    </div>
+    <mf-auth-button
+      *ngIf="!displayResendActivationEmail"
+      text="Continue"
+      [textColor]="['#fff', '#fff']"
+      [backgroundColor]="['#3C40FF', '#6A6DE6']"
+      [borderColor]="['transparent', 'transparent']"
+      [loading]="loginLoading"
+      [disabled]="loginForm.invalid"
+    ></mf-auth-button>
+    <mf-auth-button
+      *ngIf="displayResendActivationEmail"
+      text="Re-send Activation Email"
+      [textColor]="['#fff', '#fff']"
+      [backgroundColor]="['#3C40FF', '#6A6DE6']"
+      [borderColor]="['transparent', 'transparent']"
+      [loading]="resendLoading"
+      type="button"
+      class="login-button"
+      (clicked)="resendActivationEmail()"
+      [disabled]="
+        emailControl.invalid && emailControl.dirty && emailControl.touched
+      "
+    ></mf-auth-button>
+  </div>
+</form>

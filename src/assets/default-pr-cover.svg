@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69.369 52.82">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #404040;
+      }
+
+      .cls-2 {
+        fill: #191919;
+        font-size: 20px;
+        font-family: SegoeUI-Bold, Segoe UI;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <g id="Group_3760" data-name="Group 3760" transform="translate(-63 -168.492)">
+    <g id="noun_1594034_cc" transform="translate(63 168.492)">
+      <g id="Group_3018" data-name="Group 3018" transform="translate(0 0)">
+        <g id="Group_3017" data-name="Group 3017" transform="translate(0 0)">
+          <path id="Path_3731" data-name="Path 3731" class="cls-1" d="M17.854,19H34.233a3.854,3.854,0,0,1,3.083,1.542l3.468,4.625h0a3.854,3.854,0,0,0,3.083,1.542H79.516a3.854,3.854,0,0,1,3.854,3.854v37.4h0a3.854,3.854,0,0,1-3.854,3.854H17.854A3.854,3.854,0,0,1,14,67.966V22.854h0A3.854,3.854,0,0,1,17.854,19Z" transform="translate(-14 -19)"/>
+        </g>
+      </g>
+    </g>
+    <text id="Pr" class="cls-2" transform="translate(86 207)"><tspan x="0" y="0">Pr</tspan></text>
+  </g>
+</svg>

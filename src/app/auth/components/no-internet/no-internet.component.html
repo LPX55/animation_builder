@@ -1,0 +1,17 @@
+<div class="message-container">
+  <img src="assets/no-internet-image.png" draggable="false" />
+  <div class="message-text">
+    opps! There is no Internet connection try <br />again now
+  </div>
+  <mf-auth-button
+    text="Try Again"
+    [textColor]="['#fff', '#fff']"
+    [backgroundColor]="['#3C40FF', '#6A6DE6']"
+    [borderColor]="['transparent', 'transparent']"
+    (clicked)="tryAgain()"
+    class="button"
+  ></mf-auth-button>
+  <div class="skip" (click)="skipToTemplate()">
+    <span>I'll connect later</span> <img src="assets/prev-step-arrow.svg" />
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="missing-message-box-container" id="missing-message-box-container">
+<div class="missing-message-box" id="missing-message-box" [class.showMessage]="">
+  <div class="container">
+    <div class="header">
+      <div class="header-icon"></div>
+      <div class="header-title">{{missingMessageText}}</div>
+    </div>
+    <div class="content">
+        <div class="missing-list" *ngFor="let items of missingLists" (click)="selectMissingItem($event , items)" > 
+            <span class="missing-name" id="{{items[2].id}}">{{items[1]}}</span><span class="missing-path" id="missing-path">{{items[0]}}</span>
+        </div>
+
+    </div>
+    <div class="footer">
+      <div class="footer-description" >
+        <div class="footer-checkbox" *ngIf="missingFileInRoot()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.329 19.329" (click)="handleClick()">
+              <g id="Group_3911" data-name="Group 3911" transform="translate(-189.836 -447)">
+                <g id="Group_3910" data-name="Group 3910">
+                  <g id="Rectangle_5170" data-name="Rectangle 5170" class="cls-1" transform="matrix(1, -0.017, 0.017, 1, 189.836, 447.332)">
+                    <rect class="cls-3" width="19" height="19" rx="9.5" />
+                    <rect class="cls-4" x="0.5" y="0.5" width="18" height="18" rx="9" />
+                  </g>
+                </g>
+                <path id="Union_121" [style.display]="missingCheckBox? 'block':'none'" data-name="Union 121" class="cls-2" d="M3.012,6.626l-1.205-1.2h0L0,3.614l1.2-1.2L3.012,4.217,7.228,0l1.2,1.205L4.216,5.422Z"
+                  transform="translate(195.195 453)" />
+              </g>
+            </svg>
+        </div>
+        <div class="footer-text" *ngIf="missingFileInRoot()" (click)="handleClick()">Never show this massage</div>
+      </div>
+      <div class="footer-buttons">
+        <div class="browse">
+            <mf-general-button [text]="'Replace'" [type]="'fill'" [backgroundColor]="buttonColor" (click)="browseMissingItem()"></mf-general-button>
+        </div>
+        <div class="cancel">
+            <mf-general-button [text]="'Cancel'" [type]="'border'" [backgroundColor]="'inherit'" [borderColor]="'#575757'" (click)="closeMissingPanel()"></mf-general-button>
+        </div>
+      </div>
+    </div>
+    <input type="file" id="miss-file-selector" (change)="fileChoosed($event )" #fileSelector multiple hidden>
+    <input type="file" id="folder-selector" (change)="folderChoosed($event)" webkitdirectory directory multiple
+      #folderSelector hidden>
+  </div>
+</div>
+</div>

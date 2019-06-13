@@ -1,0 +1,90 @@
+@import '~app/variables';
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+:host {
+    z-index: 999;
+    .font-missing-svg {
+        fill: #ffa700;
+    }
+    ::ng-deep .general-button {
+        padding: 8px 23px !important;
+    }
+    .overlay {
+        @include size(100vw, 100vh);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-y: scroll;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 2;
+        .container {
+            width: 243px;
+            background-color: $background-color;
+            display: flex;
+            margin: 0 auto;
+            flex-direction: column;
+            .image {
+                @include size(100%, 150px);
+                img {
+                    @include size(100%);
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    object-fit: contain;
+                    border-bottom: 1px solid rgba(238, 238, 238, 0.08);
+                }
+            }
+            .content {
+                display: flex;
+                padding: 0 13px;
+                width: calc(100% - 26px);
+                flex-direction: column;
+                .title {
+                    max-width: 150px;
+                }
+                .font {
+                    max-width: 150px;
+                }
+                .fonts {
+                    display: flex;
+                    flex-direction: column;
+                    >div {
+                        padding-bottom: 3px;
+                    }
+                }
+                >div {
+                    display: flex;
+                    color: $forms-text-color;
+                    font-size: $font-size-medium;
+                    padding-top: 14px;
+                    span {
+                        width: 60px;
+                        padding-right: 20px;
+                    }
+                }
+                .done {
+                    padding: 25px 0;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                }
+                .missed-font {
+                    color: #ffa700;
+                    display: flex;
+                    svg {
+                        @include size(12px);
+                        padding-right: 4px;
+                        padding-top: 2px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+<div
+  [@LeftToRightSlideIn]="animationMode"
+  [@RightToLeftSlideOut]="animationMode"
+  (@RightToLeftSlideOut.done)="changeToMarketPack()"
+  class="market-list-container"
+  [hidden]="!(currentMarketPage === 'pack' && !showError)"
+>
+  <div class="market-banner" *ngIf="closeBanner === false">
+    <span class="market-banner-text" (click)="openBannerLink()"
+      >Wanna be promoted here? Join us!</span
+    >
+    <span class="market-banner-svg" (click)="closeBanner = true">
+      <svg
+        x="0px"
+        y="0px"
+        viewBox="0 0 212.982 212.982"
+        style="enable-background:new 0 0 212.982 212.982;"
+        xml:space="preserve"
+      >
+        <g>
+          <path
+            style="fill-rule:evenodd;clip-rule:evenodd;"
+            d="M131.804,106.491l75.936-75.936c6.99-6.99,6.99-18.323,0-25.312
+		c-6.99-6.99-18.322-6.99-25.312,0l-75.937,75.937L30.554,5.242c-6.99-6.99-18.322-6.99-25.312,0c-6.989,6.99-6.989,18.323,0,25.312
+		l75.937,75.936L5.242,182.427c-6.989,6.99-6.989,18.323,0,25.312c6.99,6.99,18.322,6.99,25.312,0l75.937-75.937l75.937,75.937
+		c6.989,6.99,18.322,6.99,25.312,0c6.99-6.99,6.99-18.322,0-25.312L131.804,106.491z"
+          />
+        </g>
+      </svg>
+    </span>
+  </div>
+  <mf-market-filter></mf-market-filter>
+  <div
+    class="market-category-container"
+    [@slideDownList]="slideMode"
+    [@slideUpList]="slideMode"
+    (@slideDownList.done)="filterPacks()"
+    #marketPackList
+  >
+    <mf-market-carousel
+      hidden
+      *ngIf="currentCategory === 'new'"
+      [items]="carouselItems"
+      (doOnitemClicked)="onTagClicked($event)"
+    ></mf-market-carousel>
+    <div *ngIf="!showError" class="motin-text">
+      2018’s Best Selling Apple Motion Templates
+    </div>
+    <div class="market-pack-list">
+      <mf-market-pack
+        [class.disable-shuffle]="disableShuffle"
+        *ngFor="let item of packs"
+        [style.pointer-events]="item.title !== '' ? 'auto' : 'none'"
+        [class.placeholder]="item.title === ''"
+        [attr.data-groups]="item.tags | json"
+        [id]="item.id"
+        [price]="item.price"
+        [title]="item.title"
+        [category]="item.category"
+        [thumbnailUrl]="item.thumbnailURL"
+        [type]="item.license"
+        (click)="goToPack(item.id, item)"
+      >
+      </mf-market-pack>
+    </div>
+  </div>
+</div>
+<mf-no-internet *ngIf="showError" (clicked)="refreshPage()"></mf-no-internet>
+<mf-market-pack-detail
+  (goBack)="onPackGoBack()"
+  *ngIf="currentMarketPage === 'detail'"
+></mf-market-pack-detail>

@@ -1,0 +1,228 @@
+.missing-message-box-container {
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(35, 34, 34, 0.8);;
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  margin-top: -100vh;
+
+  .missing-message-box {
+    width: 75%;
+    height: fit-content;
+    background-color: #3C3C3C;
+    border-radius: 5px;
+    min-width: 310px;
+    max-width: 630px;
+
+    .container {
+      .header {
+        display: flex;
+        margin: 18px 15px 15px 15px;
+
+        .header-icon {
+          background-image: url(../../../../assets/media/missing-box-icon.png);
+          width: 18px;
+          height: 16px;
+          background-repeat: no-repeat;
+
+        }
+
+        .header-title {
+          font-size: 12px;
+          color: white;
+          margin-left: 15px;
+        }
+      }
+
+      .content {
+        background-color: #313131;
+        width: calc(100% - 20px);
+        height: 140px;
+        border-radius: 5px;
+        margin: 0 auto;
+        overflow-y: auto;
+        .missing-list{
+          display: flex;
+          justify-content: space-between;
+          opacity: .5;
+          font-size: 12px;
+          height: 32px;
+          align-items: center;
+          padding: 0 15px;
+          cursor: pointer;
+          &.missedItemSelected{
+            background-color: #1d1a1a;
+          }
+          .missing-name{
+            width: 33%;
+            text-overflow: ellipsis;
+            padding-right: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+             cursor: pointer;
+          }
+          .missing-path{
+            width: 67%;
+            text-overflow: ellipsis;
+             white-space: nowrap;
+             overflow: hidden;
+              cursor: pointer;
+          }
+        }
+      }
+
+      .footer {
+        display: flex;
+        margin: 18px 12px 17px 13px;
+        align-items: center;
+        justify-content: space-between;
+
+        .footer-description {
+          align-items: center;
+          display: flex;
+
+          .footer-checkbox {
+            width: 14px;
+            height: 20px;
+            cursor: pointer;
+
+            svg {
+
+              .cls-1 {
+                fill: transparent;
+                stroke: rgba(255, 255, 255, 0.5);
+              }
+
+              .cls-2 {
+                stroke: rgba(255, 255, 255, 0.5);
+                fill: rgba(255, 255, 255, 0.5);
+              }
+
+              .cls-3 {
+                stroke: none;
+              }
+
+              .cls-4 {
+                fill: none;
+              }
+            }
+          }
+
+          .footer-text {
+            font-size: 11px;
+            opacity: .5;
+            line-height: 12px;
+            padding-left: 6px;
+            cursor: pointer;
+          }
+        }
+
+        .footer-buttons {
+          display: flex;
+          ::ng-deep{
+            .button-background {
+              border-radius: 4px;
+            }
+            .general-button{
+              border-radius: 4px;
+            }
+          }
+
+
+          .cancel {
+            margin-left: 8px;
+          }
+        }
+
+      }
+    }
+  }
+}
+
+  @-webkit-keyframes showMessageBoxMessage {
+    0% {
+      transform: scale(0.95);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes showMessageBoxMessage {
+    0% {
+      transform: scale(0.95);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @-webkit-keyframes hideMessageBoxMessage {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(0.95);
+    }
+  }
+
+  @keyframes hideMessageBoxMessage {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(0.95);
+    }
+  }
+
+
+  @-webkit-keyframes showMessageBoxModal {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes showMessageBoxModal {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes hideMessageBoxModal {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hideMessageBoxModal {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+

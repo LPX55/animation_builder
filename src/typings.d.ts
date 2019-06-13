@@ -14,8 +14,15 @@ declare var fileSync: any;
 declare var lodashId: any;
 declare var path: any;
 declare var AdmZip: any;
+declare var ipc: any;
 declare var child: any;
 declare var extensionPath: any;
 declare var getMac: any;
+declare var startIPC: any;
+declare var exitIPC: any;
+
+
+declare var VulcanInterface: any;
+declare var VulcanMessage: any;
 declare var processArgv0: any;
 

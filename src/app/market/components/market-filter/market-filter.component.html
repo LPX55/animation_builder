@@ -1,0 +1,13 @@
+<nav #packFilter>
+  <div>
+    <a [class.active]="currentFilterStatus == 'new' "  (click)="filterPacksByRoutes('new', $event)">New Items</a>
+  </div>
+
+  <div>
+    <a  [class.active]="currentFilterStatus == 'free'" (click)="filterPacksByRoutes('free', $event)">Free</a>
+  </div>
+
+  <div>
+    <a  [class.active]="currentFilterStatus == 'popular'" (click)="filterPacksByRoutes('popular', $event)">Popular</a>
+  </div>
+</nav>

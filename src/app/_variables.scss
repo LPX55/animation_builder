@@ -8,6 +8,8 @@ $font-family-regular: 'Open Sans-regular',
 sans-serif;
 $font-family-semibold: 'Open Sans-semibold',
 sans-serif;
+$font-family-bold: 'Open Sans-bold',
+sans-serif;
 // colors
 $background-color: #262626;
 $header-background: #202020;
@@ -44,6 +46,7 @@ $setting-controllers-border: 1px solid #393939;
         opacity: 0;
         transform: translate(100%, -50%);
     }
+
     100% {
         opacity: 1;
         transform: translate(-50%, -50%);
@@ -60,10 +63,12 @@ $setting-controllers-border: 1px solid #393939;
         opacity: 1;
         transform: translate(-50%, -50%);
     }
+
     50% {
         opacity: 0;
         transform: translate(-100%, -50%);
     }
+
     100% {
         opacity: 0;
         transform: translate(-1000%, -50%);

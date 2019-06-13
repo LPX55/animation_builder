@@ -112,9 +112,7 @@ export class SettingControllerService {
     return this.cepHostService.removeEffect(groupIndex);
   }
   changeRTLStatus(groupIndex: number): void {
-    return this.jsxInjectorService.evalScript(
-      `$._textAnimatorAfterEffects.changeRTLStatus(${groupIndex})`
-    );
+    return this.jsxInjectorService.evalScript(`$._MFAfterEffects.changeRTLStatus(${groupIndex})`);
   }
   locationBack(): void {
     this.location.back();

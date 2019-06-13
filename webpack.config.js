@@ -1,3 +1,15 @@
+const serverConfig = {
+  entry: './src/ipc/main.js',
+  target: 'node',
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
+  output: {
+    path: __dirname,
+    filename: './build/dist/server/main.js'
+  }
+};
 
 const clientConfig = {
   entry: './src/node.bin.js',

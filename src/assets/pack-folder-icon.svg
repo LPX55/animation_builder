@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="2903.3 -1686 48.889 45.814">
+  <style>
+    .folders-svg {
+        fill: #fff;
+    }
+    .folder-svg {
+        filter: url(#Path_3731);
+    }
+  </style>
+  <defs>
+    <filter id="Path_3731" x="2903.3" y="-1686" width="48.889" height="45.814" filterUnits="userSpaceOnUse">
+      <feOffset dy="8" input="SourceAlpha" />
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feFlood flood-opacity="0.161" />
+      <feComposite operator="in" in2="blur" />
+      <feComposite in="SourceGraphic" />
+    </filter>
+  </defs>
+  <g class="folder-svg" transform="matrix(1, 0, 0, 1, 0, 0)">
+    <path class="folders-svg" d="M14.716,19h3.043a.716.716,0,0,1,.573.286l.644.859h0a.716.716,0,0,0,.573.286h6.624a.716.716,0,0,1,.716.716V28.1h0a.716.716,0,0,1-.716.716H14.716A.716.716,0,0,1,14,28.1V19.716h0A.716.716,0,0,1,14.716,19Z"
+      transform="translate(2907.3 -1695)" />
+  </g>
+</svg>

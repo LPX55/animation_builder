@@ -1,0 +1,110 @@
+<button
+  [type]="type || 'submit'"
+  class="button"
+  (click)="buttonClicked()"
+  [style.color]="isHovered ? textColor[1] : textColor[0]"
+  [style.backgroundColor]="isHovered ? backgroundColor[1] : backgroundColor[0]"
+  [style.borderColor]="isHovered ? borderColor[1] : borderColor[0]"
+  (mouseover)="isHovered = true"
+  (mouseout)="isHovered = false"
+  #button
+  [class.loading]="loading"
+  [class.disabled]="disabled"
+>
+  <div class="icon"><img [src]="icon" *ngIf="icon" /></div>
+  <span class="text">{{ text }}</span>
+
+  <span class="loading" *ngIf="loading">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 100 65"
+      preserveAspectRatio="xMidYMid"
+    >
+      <g transform="translate(20 50)">
+        <circle
+          cx="0"
+          cy="0"
+          r="6"
+          [style.fill]="loadingColor"
+          transform="scale(0.623843 0.623843)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            begin="-0.375s"
+            calcMode="spline"
+            keySplines="0.3 0 0.7 1;0.3 0 0.7 1"
+            values="0;1;0"
+            keyTimes="0;0.5;1"
+            dur="1s"
+            repeatCount="indefinite"
+          ></animateTransform>
+        </circle>
+      </g>
+      <g transform="translate(40 50)">
+        <circle
+          cx="0"
+          cy="0"
+          r="6"
+          [style.fill]="loadingColor"
+          transform="scale(0.917903 0.917903)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            begin="-0.25s"
+            calcMode="spline"
+            keySplines="0.3 0 0.7 1;0.3 0 0.7 1"
+            values="0;1;0"
+            keyTimes="0;0.5;1"
+            dur="1s"
+            repeatCount="indefinite"
+          ></animateTransform>
+        </circle>
+      </g>
+      <g transform="translate(60 50)">
+        <circle
+          cx="0"
+          cy="0"
+          r="6"
+          [style.fill]="loadingColor"
+          transform="scale(0.977127 0.977127)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            begin="-0.125s"
+            calcMode="spline"
+            keySplines="0.3 0 0.7 1;0.3 0 0.7 1"
+            values="0;1;0"
+            keyTimes="0;0.5;1"
+            dur="1s"
+            repeatCount="indefinite"
+          ></animateTransform>
+        </circle>
+      </g>
+      <g transform="translate(80 50)">
+        <circle
+          cx="0"
+          cy="0"
+          r="6"
+          [style.fill]="loadingColor"
+          transform="scale(0.731132 0.731132)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            begin="0s"
+            calcMode="spline"
+            keySplines="0.3 0 0.7 1;0.3 0 0.7 1"
+            values="0;1;0"
+            keyTimes="0;0.5;1"
+            dur="1s"
+            repeatCount="indefinite"
+          ></animateTransform>
+        </circle>
+      </g>
+    </svg>
+  </span>
+</button>

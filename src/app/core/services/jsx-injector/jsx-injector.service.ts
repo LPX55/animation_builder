@@ -18,7 +18,8 @@ export class JsxInjectorService {
   private _vulcanEventListeners: any = {};
   // function that execute and modify setting when data come from host
   settingHandlerFunction: (executionResult: any[]) => any[];
-  settingPath = "";
+  settingPath = "/dashboard/setting";
+  backSetTimeout;
   constructor(
     private _zone: NgZone,
     private _router: Router,
@@ -33,6 +34,7 @@ export class JsxInjectorService {
       this._defualtPath = this._csi.getSystemPath(SystemPath.EXTENSION);
       this.listenForChanges();
       this.listenForErrors();
+      this.listenForVulcanEvents();
     }
   }
   /**
@@ -93,17 +95,25 @@ export class JsxInjectorService {
 
     this._csi.addEventListener("LayerChanged", (event: any) => {
       // recieved changed layer event and data
-      if (event.data.controllers instanceof Array) {
-        if (event.data && event.data.controllers.length) {
-          console.log(event.data);
-          this.settingData = this.settingHandlerFunction(event.data);
-          this._zone.run(() => this._router.navigate([this.settingPath]));
-        } else if (this._router.url.indexOf("/setting") > -1) {
-          this._location.back();
-          this.settingData = {};
+      if (
+        event.data.controllers instanceof Array &&
+        event.data.controllers.length > 0
+      ) {
+        if (1 === this._appGlobals.DBConnection.get("user.status").value()) {
+          if (event.data && event.data.controllers.length) {
+            console.log(event.data);
+            this.settingData = this.settingHandlerFunction(event.data);
+            this._zone.run(() => this._router.navigate([this.settingPath]));
+          } else if (this._router.url.indexOf("/dashboard/setting") > -1) {
+            this._location.back();
+            this.settingData = {};
+          }
         }
-      } else if (this._router.url.indexOf("/setting") > -1) {
-        this._location.back();
+      } else if (this._router.url.indexOf("/dashboard/setting") > -1) {
+        if (this.backSetTimeout) clearTimeout(this.backSetTimeout);
+        this.backSetTimeout = setTimeout(() => {
+          this._location.back();
+        }, 10);
         this.settingData = {};
       }
     });
@@ -176,5 +186,67 @@ export class JsxInjectorService {
    */
   get installedExtensionsList(): any[] {
     return this._csi.getExtensions([]);
+  }
+  /**
+   * dispatch a event to other hosts
+   * @param {string} eventName - name of event
+   * @param {object} message - the payload to send
+   * @return {void}
+   */
+  dispatchVulcanMessage(eventName, message): void {
+    const payload = new VulcanMessage(
+      VulcanMessage.TYPE_PREFIX + "com.pixflow.motionfactory.events"
+    );
+    payload.setPayload(
+      JSON.stringify({
+        eventName,
+        message,
+        app: `${this.hostEnvironment.appName}-${
+          this.hostEnvironment.appVersion
+        }`
+      })
+    );
+    VulcanInterface.dispatchMessage(payload);
+  }
+
+  /**
+   * listen for all events in vulcan event listener
+   * @return {void}
+   */
+  listenForVulcanEvents(): void {
+    VulcanInterface.addMessageListener(
+      VulcanMessage.TYPE_PREFIX + "com.pixflow.motionfactory.events",
+      payload => {
+        const eventPayload = JSON.parse(VulcanInterface.getPayload(payload));
+        const payloadEventName = eventPayload.eventName;
+        if (
+          Object.keys(this._vulcanEventListeners).includes(payloadEventName)
+        ) {
+          const payloadMessage = eventPayload.message;
+          if (
+            `${this.hostEnvironment.appName}-${
+              this.hostEnvironment.appVersion
+            }` !== eventPayload.app
+          ) {
+            this._vulcanEventListeners[payloadEventName].next(payloadMessage);
+          }
+        }
+      }
+    );
+  }
+
+  /**
+   * add listener and return watch subject
+   * @param {string} eventName - name of event
+   * @return {Subject}
+   */
+  listenForVulcanEvent(eventName): Subject<any> {
+    if (Object.keys(this._vulcanEventListeners).includes(eventName)) {
+      return this._vulcanEventListeners[eventName];
+    } else {
+      const listenerSubject = new Subject<any>();
+      this._vulcanEventListeners[eventName] = listenerSubject;
+      return listenerSubject;
+    }
   }
 }

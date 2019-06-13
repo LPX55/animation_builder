@@ -1,0 +1,24 @@
+@import "~app/variables";
+
+ul {
+  display: inline-block;
+
+  li {
+    display: inline-block;
+    color: black;
+    cursor: pointer;
+    color: #1f1f1f;
+    font-size: 14px;
+    font-family: $font-family-semibold;
+    padding: 6px 20px;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    transition: color 0.25s, border-color 0.25s;
+
+    &.active {
+      color: #4249f0;
+      border: 2px solid #4249f0;
+    }
+  }
+}

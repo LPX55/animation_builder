@@ -1,0 +1,23 @@
+@import "~app/variables";
+
+:host {
+  color: black;
+
+  .login-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .forgot-password {
+      font-size: $font-size-small;
+      color: $forms-text-color;
+      text-decoration: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    & > * {
+      margin-bottom: 13px;
+    }
+  }
+}

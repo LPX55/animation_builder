@@ -1,0 +1,448 @@
+@import '~app/variables';
+@import '~app/mixin';
+
+*::-webkit-media-controls-panel {
+  background-color: rgba(38, 38, 38, 0.5);
+  width: calc(100% + 55px);
+  overflow: hidden;
+  left: -24px;
+
+  input:nth-child(2) {
+    display: none
+  }
+
+  input:nth-child(3) {
+    display: none
+  }
+}
+
+video::-internal-media-controls-download-button {
+  display: none;
+}
+
+video::-webkit-media-controls-enclosure {
+  overflow: hidden;
+}
+
+*::-webkit-media-controls-play-button {
+  -webkit-appearance: none !important;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+*::-webkit-media-controls-current-time-display {
+  color: #DCD6D6;
+}
+
+*::-webkit-media-controls-mute-button {
+  -webkit-appearance: none !important;
+  background-image: url(../../../../assets/media/volume.svg);
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+video::-webkit-slider-runnable-track {
+  background-color: rgba(220, 214, 214, 0.5);
+}
+
+*::-webkit-media-controls-timeline {
+  background-color: rgba(220, 214, 214, 0.5) !important;
+}
+
+*::-webkit-media-controls-volume-slider {
+  background-color: rgba(220, 214, 214, 0.5);
+}
+
+*::-webkit-media-controls-time-remaining-display {
+  color: #DCD6D6;
+}
+
+*::-webkit-media-controls-fullscreen-button {
+  -webkit-appearance: none !important;
+  background-image: url(../../../../assets/media/full-screen.svg  );
+  height: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+*::-internal-media-controls-download-button {
+  -webkit-appearance: none !important;
+}
+
+:host {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .pause-svg {
+    fill: #dfdfdf;
+  }
+
+  .play-svg {
+    fill: #dfdfdf;
+  }
+
+  .movie-svg {
+    fill: #2d60eb;
+  }
+
+  .movie-svg-1 {
+    fill: #fff;
+  }
+
+  .movie-svg-2 {
+    filter: url(#Rectangle_4851);
+  }
+
+  .market-pack-detail {
+    width: 100%;
+  }
+
+  .back {
+    @include size(20px);
+    cursor: pointer;
+    padding-left: 5px;
+
+    svg {
+      @include size(20px, 12px);
+      padding-bottom: 6px;
+
+      .back-svg {
+        fill: #fff;
+      }
+    }
+  }
+
+  .header {
+    @include flexbox($align-item: center);
+    flex-direction: row;
+
+    .menu {
+      @include flexbox($align-item: center, $justify-content:center);
+      @include size(calc(100% - 50px), 66px);
+      flex-direction: row;
+
+      div {
+        font-size: $font-size-large;
+        padding: 5px 15px;
+        text-decoration: none;
+        border-radius: 14px;
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          background-color: #191919;
+          transition-duration: .3s;
+        }
+
+        &:nth-child(1) {
+          margin-right: 15px;
+        }
+
+        &:nth-child(2) {
+          &:hover {
+            background-color: #191919;
+            transition-duration: .3s;
+          }
+        }
+      }
+    }
+  }
+
+  .market-detail-container {
+    display: flex;
+    width: 200vw;
+
+  }
+
+  .market-author-content {
+    width: 100vw;
+    &.show{
+      animation: authorShow .3s cubic-bezier(.38,.67,.73,.79) ;
+      animation-fill-mode: forwards;
+   
+    }
+    &.hide{
+      animation: authorHide .3s cubic-bezier(.38,.67,.65,.67);
+      animation-fill-mode: forwards;
+     
+    }
+  }
+
+  .market-detail-content {
+    overflow-y: scroll;
+    height: calc(100vh - 110px);
+    width: 100vw;
+    &.show{
+      animation: detailShow .3s cubic-bezier(.5,.71,.55,.91);
+      animation-fill-mode: forwards;
+     
+    }
+    &.hide{
+      animation: DetailHide .3s cubic-bezier(.38,.67,.65,.67);
+      animation-fill-mode: forwards;
+    
+    }
+  }
+
+  .video {
+    width: 100%;
+    min-height: 45vw;
+    background-color: black;
+    position: relative;
+
+    &:hover {
+      .pause-button {
+        opacity: 1 !important;
+      }
+    }
+
+    video {
+      @include size(100%);
+      position: relative;
+      display: block;
+    }
+
+    .movie-button {
+      @include size(62px);
+      position: absolute;
+      margin: 0 auto;
+      top: calc(50% - 31px);
+      left: calc(50% - 31px);
+      transition-duration: .3s;
+      border-radius: 50%;
+      // full screen of video have 2147483647 z-index i should use this z-index to show button 
+      z-index: 2147483648;
+      ;
+
+      .play-button {
+        @include size(100%);
+        @include flexbox(center, center, center);
+        background-color: #2d60eb;
+        border-radius: 50%;
+
+        svg {
+          height: 30px;
+          margin-right: 6px;
+        }
+      }
+
+      .pause-button {
+        @include size(100%);
+        @include flexbox(center, center, center);
+        background-color: rgba(45, 96, 235, 0.5);
+        border-radius: 50%;
+        opacity: 0;
+        transition-duration: .4s;
+        transition-delay: .05s;
+
+        svg {
+          height: 35px;
+          padding-top: 7px;
+
+          * {
+            fill: white
+          }
+        }
+      }
+
+      &:hover {
+        backface-visibility: hidden;
+        transform: scale(1.2);
+        transition-duration: transform .3s;
+      }
+    }
+  }
+
+  .title {
+    padding: 22px 11px 0 25px;
+    font-size: 19px;
+  }
+
+  .author {
+    padding-left: 25px;
+    color: #3965FF;
+    font-size: 13px;
+  }
+
+  .description {
+    padding: 20px 9px 0 25px;
+    font-family: $font-family-semibold;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+  }
+
+  .inside-title {
+    padding: 30px 11px 0 23px;
+    font-size: 12px;
+  }
+
+  .packages {
+    padding: 4.5px 7.5px 0 23px;
+
+    img {
+      @include size(170px, 92px);
+      padding: 3.5px;
+    }
+  }
+
+  .buttons {
+    padding: 18px 11px 0 25px;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 40px;
+    align-items: center;
+
+    div:nth-child(2) {
+      padding-left: 10px;
+    }
+  }
+}
+@keyframes detailShow {
+  0% {
+    opacity: 0; 
+    transform: translateX(-100%);
+   
+  }
+  50% {
+    opacity: 0; 
+    transform: translateX(-15%);
+ 
+  }
+ 60% {
+    opacity: .1; 
+    transform: translateX(-12%);
+ 
+  }
+  70% {
+    opacity: .2; 
+    transform: translateX(-9%);
+
+  }
+  80% {
+    opacity: .4; 
+    transform: translateX(-6%);
+  
+  }
+  90% {
+    opacity: .8; 
+    transform: translateX(-3%);
+  
+  }
+
+  100% {
+    opacity: 1; 
+    transform: translateX(0%);
+  
+  }
+}
+
+@keyframes DetailHide {
+  0% {
+    opacity: 1; 
+    transform: translateX(0%);
+
+  }
+  10% {
+    opacity: .8; 
+    transform: translateX(-3%);
+
+  }
+  20% {
+    opacity: .6; 
+    transform: translateX(-6%);
+
+  }
+  30% {
+    opacity: 0.4; 
+    transform: translateX(-9%);
+
+  }
+
+  50% {
+    opacity: 0; 
+    transform: translateX(-13%);
+ 
+  }
+
+  100% {
+    opacity: 0; 
+    transform: translateX(-100%);
+  
+  }
+}
+
+@keyframes authorHide {
+  0% {
+    opacity: 1; 
+    transform: translateX(-100%);
+
+  }
+  10% {
+    opacity: 0.8; 
+    transform: translateX(-97%);
+
+  }
+  20% {
+    opacity: 0.6; 
+    transform: translateX(-94%);
+
+  }
+  30% {
+    opacity: 0.4; 
+    transform: translateX(-91%);
+
+  }
+
+  50% {
+    opacity: 0; 
+    transform: translateX(-87%);
+
+  }
+  100% {
+    opacity: 0; 
+    transform: translateX(0%);
+
+  }
+}
+
+@keyframes authorShow {
+  0% {
+    opacity: 0; 
+    transform: translateX(0%);
+
+  }
+
+  50% {
+    opacity: 0; 
+    transform: translateX(-85%);
+
+  }
+  60% {
+    opacity: .2; 
+    transform: translateX(-88%);
+
+  }
+  70% {
+    opacity: .4; 
+    transform: translateX(-91%);
+
+  }
+  80% {
+    opacity: .6; 
+    transform: translateX(-94%);
+
+  }
+  90% {
+    opacity: .8; 
+    transform: translateX(-97%);
+
+  }
+  100% {
+    opacity: 1; 
+    transform: translateX(-100%);
+
+  }
+}

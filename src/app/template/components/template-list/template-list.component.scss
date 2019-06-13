@@ -1,0 +1,197 @@
+@import '~app/variables';
+@import '~app/mixin';
+
+:host {
+    display: flex;
+    flex-direction: column;
+
+
+    .template-list-container {
+        height: calc(100vh - 44px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        .pack-detail-header {
+            @include flex-position('space-between', 'center');
+            text-align: center;
+            height: 60px;
+            padding: 0 12px;
+            flex-wrap: wrap;
+
+            .go-back {
+                @include flex-position('flex-start', 'center');
+                padding-bottom: 4px;
+                cursor: pointer;
+
+                img {
+                    @include size(9px);
+                }
+
+                span {
+                    font-size: $font-size-large;
+
+                }
+
+                .separator {
+                    color: rgb(172, 172, 172);
+                    padding-right: 5px;
+                    padding-left: 8px;
+                }
+
+                .home {
+                    padding-left: 10px;
+                }
+            }
+        }
+
+        .template-header {
+            height: 60px;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+
+            span {
+                margin-right: 25px;
+                margin-top: -11px;
+
+                a {
+                    text-decoration: none;
+                    font-size: $font-size-large;
+                    font-family: $font-family-semibold;
+                    color: rgba($color: #fff, $alpha: 0.5);
+
+                    &.active {
+                        color: rgba($color: #fff, $alpha: 1);
+                        position: relative;
+
+                        &:after {
+                            content: ' ';
+                            display: block;
+                            background: #0045ff;
+                            height: 4px;
+                            width: 12px;
+                            position: absolute;
+                            bottom: -7px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            border-radius: 7px;
+                        }
+                    }
+                }
+            }
+
+            .icon-container {
+                margin-left: auto;
+                display: flex;
+
+                >div {
+                    cursor: pointer;
+                }
+
+                .add-folder {
+                    margin-right: 13px;
+
+                    svg {
+                        width: 20px;
+                        height: 16px;
+                        vertical-align: middle;
+
+                        path {
+                            fill: #525252;
+                            transition: fill 200ms;
+                        }
+
+                        .path-3,
+                        .path-4 {
+                            stroke: none;
+                        }
+
+                        .path-4 {
+                            fill: #262626;
+                        }
+
+                        &:hover {
+                            path:not(.path-4) {
+                                fill: #fff;
+                            }
+                        }
+                    }
+                }
+
+                .search svg {
+                    width: 11.5px;
+                    height: 12px;
+
+                    g {
+                        opacity: 0.7;
+                    }
+
+                    path {
+                        fill: #a7a7a7;
+                        transition: fill 200ms;
+                    }
+
+                    &:hover {
+                        path {
+                            fill: #fff;
+                        }
+                    }
+                }
+            }
+        }
+
+        mf-template-item,
+        mf-template-pack {
+            margin: 0 0 3px 0;
+        }
+
+        mf-information {
+            z-index: 9999;
+        }
+
+        .item-list {
+            flex-grow: 1;
+            width: calc(100% - 8px);
+            height: calc(100vh - 150px);
+
+            .empty-label {
+                display: flex;
+                justify-content: center;
+                height: 82%;
+                cursor: default;
+
+                div {
+                    align-self: center;
+                    color: #7c7c7c;
+                    text-align: center;
+
+                    span {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            .items {
+                padding: 0 0 0 8px;
+                width: 100%;
+                max-height: calc(100% - 48px);
+                display: flex;
+                flex-wrap: wrap;
+                flex-grow: 2;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .folder-drop-down {
+            width: 197px;
+        }
+
+        .file-drop-down {
+            width: 197px;
+            overflow: hidden;
+        }
+    }
+}

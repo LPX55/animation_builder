@@ -1,0 +1,59 @@
+<div class="pack-detail-header">
+  <div class="go-back" (click)="goBackToPacks()">
+    <img src="./assets/back-icon.svg" />
+    <span>{{ packTitle }}</span>
+  </div>
+  <div class="action">
+    <div class="category-btn" (click)="toggleCategories($event)">
+      Categories
+      <mf-drop-down
+        class="categories-drop-down"
+        *ngIf="showCategoriesDropDown"
+        [menus]="categoriesContent"
+        (doOnClick)="onClickOnCategoriesDropDown($event)"
+        (doOnClose)="onCategoriesDropDownClosed()"
+        [animation]="'up'"
+      ></mf-drop-down>
+    </div>
+    <div class="box-mode active" (click)="changeViewMode('box')">
+      <img src="./assets/box-mode-icon.svg" />
+    </div>
+    <div class="list-mode">
+      <img src="./assets/list-mode-icon.svg" />
+    </div>
+  </div>
+</div>
+<div class="pack-detail-categories" #packDetail>
+  <div
+    class="category"
+    *ngFor="let category of categories; let i = index"
+    [id]="'category' + (i + 1)"
+  >
+    <div
+      class="title"
+      *ngIf="itemsHolder[category] && itemsHolder[category].length !== 0"
+    >
+      {{ category }}
+    </div>
+    <div
+      class="items"
+      *ngIf="itemsHolder[category] && itemsHolder[category].length !== 0"
+    >
+      <mf-template-item
+        *ngFor="let item of itemsHolder[category]"
+        [id]="item.itemPath"
+        [item]="item"
+        [categoryName]="category"
+        [previewHeight]="templateItemPreviewHeight"
+        [ngStyle]="{
+          'width.px': templateItemWidth,
+          'margin-right.px': templateItemMargin
+        }"
+        (buyClick)="buyClick()"
+        (isMissingIconClicked)="missingIconClicked()"
+        #templateItem
+      >
+      </mf-template-item>
+    </div>
+  </div>
+</div>

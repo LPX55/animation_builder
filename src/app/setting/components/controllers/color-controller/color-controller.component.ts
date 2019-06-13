@@ -1,14 +1,17 @@
-import { Subscription } from 'rxjs';
-import { CepHostService } from './../../../../core/services/cep-host/cep-host.service';
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { SettingControllerService } from '../../../services/setting-controller.service';
-
-
+import { Subscription } from "rxjs";
+import { CepHostService } from "./../../../../core/services/cep-host/cep-host.service";
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy
+} from "@angular/core";
+import { SettingControllerService } from "../../../services/setting-controller.service";
 
 @Component({
-  selector: 'mf-color-controller',
-  templateUrl: './color-controller.component.html',
-  styleUrls: ['./color-controller.component.scss'],
+  selector: "mf-color-controller",
+  templateUrl: "./color-controller.component.html",
+  styleUrls: ["./color-controller.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorControllerComponent implements OnInit {
@@ -20,10 +23,12 @@ export class ColorControllerComponent implements OnInit {
 
   public isHovered = false;
   private _colorPickerSubject: Subscription;
-  constructor(private settingControllerService: SettingControllerService, private _cepHostService: CepHostService) { }
+  constructor(
+    private settingControllerService: SettingControllerService,
+    private _cepHostService: CepHostService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   /**
    * Opens color picker and sets the color value in mogrt files after user chose a color
@@ -33,21 +38,38 @@ export class ColorControllerComponent implements OnInit {
    * @return {void}
    */
   openColorPicker(event, controllerIndex): void {
-    this._colorPickerSubject = this._cepHostService.getColorPickerSubject().subscribe((colorPickerValues) => {
-      event.srcElement.style.backgroundColor =
-        // tslint:disable-next-line:max-line-length
-        `rgb(${Math.floor(colorPickerValues.data.red)},${Math.floor(colorPickerValues.data.green)},${Math.floor(colorPickerValues.data.blue)})`;
-      this.settingControllerService.setColorParameter(controllerIndex,
-        { red: colorPickerValues.data.red, green: colorPickerValues.data.green, blue: colorPickerValues.data.blue });
-      this._colorPickerSubject.unsubscribe();
-    });
-    this.settingControllerService.openColorPicker(this.getRGBColor(event.srcElement.style.backgroundColor));
+    this._colorPickerSubject = this._cepHostService
+      .getColorPickerSubject()
+      .subscribe(colorPickerValues => {
+        event.srcElement.style.backgroundColor =
+          // tslint:disable-next-line:max-line-length
+          `rgb(${Math.floor(colorPickerValues.data.red)},${Math.floor(
+            colorPickerValues.data.green
+          )},${Math.floor(colorPickerValues.data.blue)})`;
+        this.settingControllerService.setColorParameter(controllerIndex, {
+          red: colorPickerValues.data.red,
+          green: colorPickerValues.data.green,
+          blue: colorPickerValues.data.blue
+        });
+        this._colorPickerSubject.unsubscribe();
+      });
+    this.settingControllerService.openColorPicker(
+      this.getRGBColor(event.srcElement.style.backgroundColor)
+    );
   }
 
   getBackgroundStyle(control): string {
-    return this.settingControllerService.hostId === 'PPRO' ?
-      this.initialSetColor(control.clipValue[1], control.clipValue[2], control.clipValue[3]) :
-      this.initialSetColor(control.value[0] * 255, control.value[1] * 255, control.value[2] * 255);
+    return this.settingControllerService.hostId === "PPRO"
+      ? this.initialSetColor(
+          control.clipValue[1],
+          control.clipValue[2],
+          control.clipValue[3]
+        )
+      : this.initialSetColor(
+          control.value[0] * 255,
+          control.value[1] * 255,
+          control.value[2] * 255
+        );
   }
 
   getRGBColor(backgroundColor): number[] {
@@ -58,14 +80,13 @@ export class ColorControllerComponent implements OnInit {
     return [r, g, b];
   }
 
-
   /* Calculate collor pallet cells width based on number of cells for responsive improvement */
   calculateMaxWidth(numberOfItems): string {
     if (numberOfItems > 3) {
       const percentage = 100 / numberOfItems;
-      return percentage + '%';
+      return percentage + "%";
     } else {
-      return '50px';
+      return "50px";
     }
   }
 
@@ -92,5 +113,4 @@ export class ColorControllerComponent implements OnInit {
   toggleHover(control): void {
     control.isHovered = !control.isHovered;
   }
-
 }

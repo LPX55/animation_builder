@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="413 -1892 10.731 10.731">
+    <style>
+        .svg-list{
+            fill: #fff;
+        }
+    </style>
+    <g id="Categories_Mode" transform="translate(413 -1892)">
+        <rect class="svg-list" width="10.731" height="2.476" rx="0.5" transform="translate(0 0)" />
+        <path class="svg-list" d="M.514,0h9.7a.514.514,0,0,1,.514.514V1.962a.514.514,0,0,1-.514.514H.514A.514.514,0,0,1,0,1.962V.514A.514.514,0,0,1,.514,0Z"
+        transform="translate(0 4.127)" />
+        <path class="svg-list" d="M.514,0h9.7a.514.514,0,0,1,.514.514V1.962a.514.514,0,0,1-.514.514H.514A.514.514,0,0,1,0,1.962V.514A.514.514,0,0,1,.514,0Z"
+        transform="translate(0 8.254)" />
+    </g>
+</svg>

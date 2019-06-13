@@ -1,0 +1,84 @@
+<div
+  class="pack-display"
+  [draggable]="false"
+  (click)="detectIsMissing()"
+  [class.no-thumbnail]="!packThumbnail || packTitle === 'Default Files'"
+  [class.renaming]="isRenaming"
+>
+  <div class="pack-background">
+    <div
+      class="single-background"
+      *ngIf="pack.packViewMode == 'single' && packThumbnail"
+    >
+      <img class="thumbnail" [src]="packThumbnail" [draggable]="false" />
+    </div>
+    <div
+      class="multi-background"
+      [style.display]="
+      pack.packViewMode === 'multi' || pack.packViewMode === '' ? 'flex' : 'none'
+      "
+    >
+      <div>
+        <img
+          class="thumbnail"
+          [draggable]="false"
+          src="./assets/transparent.png"
+          #modernViewImage1
+        />
+      </div>
+      <div>
+        <img
+          class="thumbnail"
+          [draggable]="false"
+          src="./assets/transparent.png"
+          #modernViewImage2
+        />
+        <img
+          class="thumbnail"
+          [draggable]="false"
+          src="./assets/transparent.png"
+          #modernViewImage3
+        />
+      </div>
+    </div>
+    <div class="pack-folder"></div>
+  </div>
+
+  <div class="pack-number">{{ filesCount }} Items</div>
+  <div class="item-title" *ngIf="!isRenaming">{{ packTitle }}</div>
+  <input
+    type="text"
+    class="renaming-input"
+    [style.display]="isRenaming ? 'block' : 'none'"
+    [(ngModel)]="renamedPackTitle"
+    (keyup)="detectEnter($event)"
+    (blur)="updateNameOfPack()"
+    #renamingInput
+  />
+
+  <div
+    class="pack-info"
+    *ngIf="isMissing"
+    (click)="openFolderMissingList()"
+    (mouseenter)="showMissFolderToolTip()"
+    (mouseleave)="hideMissFolderToolTip()"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.273 11.955">
+      <path
+        id="Path_3968"
+        data-name="Path 3968"
+        class="Warning-svg"
+        d="M19.664,20.294l-4.913-8.51a1.724,1.724,0,0,0-2.985,0l-4.913,8.51A1.724,1.724,0,0,0,8.346,22.88h9.826a1.723,1.723,0,0,0,1.493-2.585Zm-5.882.233a.5.5,0,0,1-.5.5h-.027a.5.5,0,0,1-.5-.5V20.5a.5.5,0,0,1,.5-.5h.027a.5.5,0,0,1,.5.5ZM13.755,19a.5.5,0,1,1-.993,0l-.322-4.509c0-.274.544-.6.819-.6s.819.33.819.6Z"
+        transform="translate(-6.622 -10.924)"
+      />
+    </svg>
+    <mf-tooltip
+      [show]="this.showMissTooltip"
+      [message]="'Folder Has Been Missed'"
+      [haveTopArrow]="true"
+      [fontSize]="10"
+      [maxWidth]="70"
+      [parentName]="'mf-template-pack'"
+    ></mf-tooltip>
+  </div>
+</div>

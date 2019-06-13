@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="tabs"><mf-auth-tabs [tabs]="tabsContent"></mf-auth-tabs></div>
+  <div class="content" [@fadeAnimation]="getRouterOutletState(o)">
+    <router-outlet #o="outlet"></router-outlet>
+  </div>
+  <mf-auth-footer></mf-auth-footer>
+</div>

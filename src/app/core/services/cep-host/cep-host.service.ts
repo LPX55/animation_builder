@@ -1,11 +1,12 @@
-import { Injectable, isDevMode } from '@angular/core';
-import { JsxInjectorService } from '../jsx-injector/jsx-injector.service';
-import Aftereffects from '../../environments/aftereffects';
-import Premiere from '../../environments/premiere';
-import General from '../../environments/general';
-import { Subject } from 'rxjs';
-import Photoshop from '../../environments/photoshop';
-import Illustrator from '../../environments/illustrator';
+import { IpcHandlerService } from "./../ipc-handler/ipc-handler.service";
+import { Injectable, isDevMode } from "@angular/core";
+import { JsxInjectorService } from "../jsx-injector/jsx-injector.service";
+import Aftereffects from "../../environments/aftereffects";
+import Premiere from "../../environments/premiere";
+import General from "../../environments/general";
+import { Subject } from "rxjs";
+import Photoshop from "../../environments/photoshop";
+import Illustrator from "../../environments/illustrator";
 
 @Injectable()
 export class CepHostService {
@@ -21,10 +22,14 @@ export class CepHostService {
   private interval;
   private _colorPickerEventSet = false;
   private _colorPickerSelectedSubject: Subject<any> = new Subject<any>();
-  constructor(private _jsxInjectorService: JsxInjectorService) {
+  constructor(
+    private _jsxInjectorService: JsxInjectorService,
+    private _ipcHandlerService: IpcHandlerService
+  ) {
     this.assignHost();
     // depends on host pass its settingHandlerFunction to jsxService to do some control on setting Data.
-    this._jsxInjectorService.settingHandlerFunction = (setting) => this.host.settingHandler(setting);
+    this._jsxInjectorService.settingHandlerFunction = setting =>
+      this.host.settingHandler(setting);
     this.interval = setInterval(() => {
       this.timer++;
     }, 1000);
@@ -33,14 +38,17 @@ export class CepHostService {
     return this._jsxInjectorService.settingData;
   }
   /**
- * check adobe host and assign it to host property
- *
- * @return  {void}
- **/
+   * check adobe host and assign it to host property
+   *
+   * @return  {void}
+   **/
   private assignHost(): void {
     switch (this._jsxInjectorService.hostEnvironment.appId) {
       case Aftereffects.hostId: {
-        this.host = new Aftereffects(this._jsxInjectorService);
+        this.host = new Aftereffects(
+          this._jsxInjectorService,
+          this._ipcHandlerService
+        );
         this.hostId = Aftereffects.hostId;
         this._jsxInjectorService.inject(this.host.scriptPath);
         this._jsxInjectorService.inject('hosts/ae/animation-builder.jsx');
@@ -53,31 +61,43 @@ export class CepHostService {
         break;
       }
       case Photoshop.hostId: {
-        this.host = new Photoshop(this._jsxInjectorService);
+        this.host = new Photoshop(
+          this._jsxInjectorService,
+          this._ipcHandlerService
+        );
         this.hostId = Photoshop.hostId;
         this._jsxInjectorService.inject(this.host.scriptPath);
         break;
       }
       case Illustrator.hostId: {
-        this.host = new Illustrator(this._jsxInjectorService);
+        this.host = new Illustrator(
+          this._jsxInjectorService,
+          this._ipcHandlerService
+        );
         this.hostId = Illustrator.hostId;
         this._jsxInjectorService.inject(this.host.scriptPath);
       }
-
     }
     // depends on current active host, pass its setting module address(route url) to be active when setting data came form host
-    this._jsxInjectorService.settingPath = `/setting/${this.hostId}`;
+    this._jsxInjectorService.settingPath = `/dashboard/setting/${this.hostId}`;
     // eval json library
     this._jsxInjectorService.inject(this.general.JSONLibraryPath);
     // eval the current host jsx scripts file
+    this._ipcHandlerService._serverAddress += this.host.ipcPort;
+    this._ipcHandlerService.ipcPort = this.host.ipcPort;
+    if (!isDevMode()) {
+      this._ipcHandlerService.unzipIPC().then(() => {
+        this._ipcHandlerService.startIPC();
+      });
+    }
   }
 
   /**
- * executes adobe host import function
- * @param {string} path  path of selected file
- * @param {string} data  optional data that pass to import function in host
- * @return  {void}
- */
+   * executes adobe host import function
+   * @param {string} path  path of selected file
+   * @param {string} data  optional data that pass to import function in host
+   * @return  {void}
+   */
   import(path: string, data: string, asSequence: boolean): void {
     this.host.import(path, this.general.escape(data), asSequence);
   }
@@ -87,16 +107,23 @@ export class CepHostService {
   }
 
   /**
- * executes adobe host setParameter function
- * @param {number} parameterIndex  index of parameter to be change
- * @param {any} parameterValue  new value of parameter
- * @param {any} controller object of controller that used in setting
- * @param {boolean} key value of stopwatch, true or false
- * @param {boolean} withDelay execute function with delay or not
- * @param {boolean} delayTime time between each execution
- * @return  {void}
- */
-  setParameter(parameterIndex, parameterValue, key, controller, withDelay = false, delayTime = 30): void {
+   * executes adobe host setParameter function
+   * @param {number} parameterIndex  index of parameter to be change
+   * @param {any} parameterValue  new value of parameter
+   * @param {any} controller object of controller that used in setting
+   * @param {boolean} key value of stopwatch, true or false
+   * @param {boolean} withDelay execute function with delay or not
+   * @param {boolean} delayTime time between each execution
+   * @return  {void}
+   */
+  setParameter(
+    parameterIndex,
+    parameterValue,
+    key,
+    controller,
+    withDelay = false,
+    delayTime = 30
+  ): void {
     if (withDelay) {
       this.executeWithDelay(() => {
         this.host.setParameter(parameterIndex, parameterValue, key, controller);
@@ -106,13 +133,13 @@ export class CepHostService {
     }
   }
   /**
- * executes host setColorParameter function
- * @param {number} controllerIndex  index of parameter to be change
- * @param {number} red  red color number
- * @param {number} green  green color number
- * @param {number} blue  blue color number
- * @return  {void}
- */
+   * executes host setColorParameter function
+   * @param {number} controllerIndex  index of parameter to be change
+   * @param {number} red  red color number
+   * @param {number} green  green color number
+   * @param {number} blue  blue color number
+   * @return  {void}
+   */
   setColorParameter(controllerIndex, { red, green, blue }): void {
     this.host.setColorParameter(controllerIndex, { red, green, blue });
   }
@@ -122,10 +149,10 @@ export class CepHostService {
   }
 
   /**
-  * remove remove a effect by index
-  * @param {string} groupIndex - index of group that is name of effect
-  * @return {void}
-  */
+   * remove remove a effect by index
+   * @param {string} groupIndex - index of group that is name of effect
+   * @return {void}
+   */
   removeEffect(groupIndex): void {
     this.host.removeEffect(groupIndex);
   }
@@ -139,7 +166,10 @@ export class CepHostService {
   openColorPicker(rgbColor): void {
     if (!this._colorPickerEventSet) {
       this._colorPickerEventSet = true;
-      this._jsxInjectorService._csi.addEventListener('colorPickerSelected', this.colorSelectedCallback.bind(this));
+      this._jsxInjectorService._csi.addEventListener(
+        "colorPickerSelected",
+        this.colorSelectedCallback.bind(this)
+      );
     }
     this.host.openColorPicker(rgbColor);
   }
@@ -162,11 +192,11 @@ export class CepHostService {
   }
 
   /**
- * executes host setColorParameter function
- * @param {function} functionToExecute  function to be execute with a delay time
- * @param {number} delayTime  a number in milliSecond for delay
- * @return  {void}
- */
+   * executes host setColorParameter function
+   * @param {function} functionToExecute  function to be execute with a delay time
+   * @param {number} delayTime  a number in milliSecond for delay
+   * @return  {void}
+   */
   executeWithDelay(functionToExecute: () => void, delayTime: number): void {
     if (this.timer > delayTime) {
       clearTimeout(this.timeout);
@@ -179,19 +209,18 @@ export class CepHostService {
   }
 
   /**
-  * returns allowed File formats in current adobe host app
-  * @return  {string[]}
-  */
+   * returns allowed File formats in current adobe host app
+   * @return  {string[]}
+   */
   get allowedExtensions(): string[] {
     return this.host.allowedExtensions;
   }
 
   /**
- * reads all installed extensions
- * @return {string} array of installed extensions
- */
+   * reads all installed extensions
+   * @return {string} array of installed extensions
+   */
   get installedExtensionsList(): any[] {
     return this._jsxInjectorService.installedExtensionsList;
   }
-
 }

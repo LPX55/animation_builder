@@ -1,0 +1,15 @@
+<svg id="volume" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 111 124">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #dfdfdf;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="Path_5" data-name="Path 5" class="cls-1" d="M3,33.042v31H21.5L44.625,89.875V7.208L21.5,33.042Zm62.438,15.5c0-9.145-4.717-17-11.562-20.822V69.312C60.72,65.54,65.438,57.687,65.438,48.542ZM53.875,3.23V13.873C67.241,18.317,77,32.163,77,48.542S67.241,78.767,53.875,83.21V93.853c18.546-4.7,32.375-23.2,32.375-45.312S72.421,7.932,53.875,3.23Z" transform="translate(10.875 13.458)"/>
+  <path id="Path_6" data-name="Path 6" class="cls-2" d="M0,0H111V124H0Z"/>
+</svg>

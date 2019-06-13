@@ -1,0 +1,38 @@
+@import '~app/variables';
+:host {
+    height: 66px;
+    background-color: #2C2C2C;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+
+    nav{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        div{
+            display: flex;
+            flex-wrap: wrap;
+            a{
+                padding: 5px 15px;
+                margin: 0 1.5vw;
+                font-size: 12px;
+                text-decoration: none;
+                border-radius: 14px;
+                transition-duration: .3s;
+                font-family: $font-family-semibold;
+                cursor: pointer;
+                &.active,
+                &:hover{
+                    background-color: #0045FF;
+                    transition-duration: .3s;
+                }
+            }
+        }
+
+    }
+}

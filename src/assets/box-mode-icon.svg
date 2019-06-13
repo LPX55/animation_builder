@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="808.852 -1889 10 10">
+    <style>
+        .svg-box{
+            fill: #fff;
+        }
+    </style>
+    <g transform="translate(808.852 -1889)">
+        <rect class="svg-box" width="4.167" height="4.167" rx="0.5" transform="translate(5.833 0)" />
+        <rect class="svg-box" width="4.167" height="4.167" rx="0.5" transform="translate(5.833 5.833)" />
+        <rect class="svg-box" width="4.167" height="4.167" rx="0.5" transform="translate(0 0)" />
+        <rect class="svg-box" width="4.167" height="4.167" rx="0.5" transform="translate(0 5.833)" />
+    </g>
+</svg>

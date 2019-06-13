@@ -1,0 +1,11 @@
+<div [formGroup]="formGroup">
+  <input
+    [type]="type"
+    [placeholder]="name"
+    [class.error]="error"
+    (blur)="onBlur()"
+    [formControlName]="formControlName"
+    (change)="inputChanged($event)"
+    [value]="value"
+  />
+</div>

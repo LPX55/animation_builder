@@ -1,0 +1,69 @@
+@import "~app/mixin";
+@import "~app/variables";
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  .market-pack-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .market-list-container {
+    height: inherit;
+
+    .market-banner {
+      @include flexbox(center, center, center);
+      // background: linear-gradient(to right, #8f0dd2 , #f24c18);
+      background-color: rgb(59, 58, 58);
+      height: 41px;
+      font-size: 14px;
+      font-family: $font-family-semibold;
+      color: white;
+      position: relative;
+
+      span.market-banner-svg {
+        @include size(11px, 18px);
+        position: absolute;
+        right: 13px;
+        top: 10px;
+        cursor: pointer;
+
+        svg {
+          * {
+            fill: rgba(255, 255, 255, 0.466);
+          }
+        }
+      }
+
+      .market-banner-text {
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 255, 255, 0.466);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .market-category-container {
+    overflow-y: scroll;
+    height: calc(100vh - 151px);
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  .motin-text {
+    @include size(100%, 47px);
+    @include flexbox(center, center, center);
+    color: #fff;
+    font-size: 15px;
+    background-color: $background-color;
+    z-index: 1;
+    display: none;
+  }
+
+  .disable-shuffle {
+    transition-property: none !important;
+  }
+}

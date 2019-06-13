@@ -1,0 +1,48 @@
+<div class="resize">
+  <mf-resize></mf-resize>
+</div>
+
+<div class="footer">
+  <mf-general-button
+    [style.visibility]="browsingPack ? 'hidden' : 'visible'"
+    [text]="'Import'"
+    [fontSize]="'11px'"
+    [padding]="'6px 20px'"
+    [type]="'fill'"
+    [backgroundColor]="'#1E5BFF'"
+    [disabled]="browsingPack"
+    (click)="openFileDialog($event)"
+    [style.cursor]="browsingPack ? 'not-allowed' : 'pointer'"
+  ></mf-general-button>
+  <mf-drop-down
+    class="upload-drop-down"
+    *ngIf="showUploadDropDown"
+    [menus]="dropDownContent"
+    (doOnClick)="onClickOnDropDown($event)"
+    (doOnClose)="onUploadDropDownClosed()"
+    [animation]="'up'"
+  ></mf-drop-down>
+  <input
+    type="file"
+    id="file-selector"
+    (change)="fileChoosed($event)"
+    #fileSelector
+    multiple
+  />
+  <input
+    type="file"
+    id="folder-selector"
+    (change)="folderChoosed($event)"
+    webkitdirectory
+    directory
+    multiple
+    #folderSelector
+  />
+  <input
+    type="file"
+    id="image-sequence-selector"
+    (change)="fileChoosed($event, true)"
+    #imageSequenceSelector
+    accept="image/*"
+  />
+</div>

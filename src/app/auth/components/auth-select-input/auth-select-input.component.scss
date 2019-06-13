@@ -1,0 +1,177 @@
+:host {
+  position: relative;
+
+  .select-input {
+    width: 315px;
+    height: 49px;
+    font-size: 13px;
+
+    .view-box {
+      width: 100%;
+      height: 100%;
+      color: rgba(#141417, 0.3);
+      border: 2px solid rgba(#000000, 0.16);
+      border-radius: 5px;
+      box-sizing: border-box;
+      text-indent: 14px;
+      -webkit-appearance: none;
+      background-image: url(../../../../assets/arrow-down-auth.svg);
+      background-repeat: no-repeat;
+      background-position-x: calc(100% - 14px);
+      background-position-y: 21px;
+      outline: none;
+      cursor: pointer;
+      background-color: #fff;
+
+      &.error {
+        border: 2px solid #be675b;
+        color: #be675b;
+      }
+
+      .selected-answers {
+        line-height: 46px;
+        height: 100%;
+        text-overflow: ellipsis;
+        max-width: calc(100% - 27px);
+        overflow: hidden;
+        white-space: nowrap;
+
+        &.have-answer {
+          color: #141417;
+        }
+      }
+    }
+
+    .select-answers-box {
+      position: absolute;
+      background-color: #fff;
+      width: 100%;
+      color: #141417;
+      list-style: none;
+      border-radius: 5px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.29);
+      max-height: 178px;
+      z-index: 1000;
+      overflow-y: auto;
+      padding-top: 9px;
+      padding-bottom: 9px;
+      margin-top: 8px;
+      opacity: 1;
+
+      transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 0ms,
+        opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, visibility 300ms;
+      transform: translate(0px, 0px);
+      opacity: 1;
+      bottom: 58px;
+
+      &.hide {
+        visibility: hidden;
+        opacity: 0;
+        transform: translate(0px, -16px);
+      }
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        border-radius: 10px;
+        padding-right: 3px;
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(#343a4d, 0.1);
+        border-radius: 10px;
+        padding-right: 3px;
+
+        &:hover {
+          background: #555;
+          cursor: pointer;
+        }
+      }
+
+      &.is-multi {
+        li::before {
+          content: " ";
+          width: 14px;
+          height: 14px;
+          border: 1px solid #707070;
+          border-radius: 100%;
+          position: absolute;
+          box-sizing: border-box;
+          margin-top: 11px;
+          left: 12px;
+        }
+
+        .selected::before {
+          content: " ";
+          width: 14px;
+          height: 14px;
+          border: 5px solid #4249f0;
+          border-radius: 100%;
+          position: absolute;
+          box-sizing: border-box;
+          margin-top: 11px;
+          left: 12px;
+        }
+
+        li {
+          padding-left: 38px;
+        }
+      }
+
+      li {
+        height: 37px;
+        line-height: 37px;
+        padding-left: 23px;
+        transition: background 0.25s;
+        font-size: 13px;
+        cursor: default;
+
+        &:hover {
+          background-color: #e7ebfc;
+        }
+
+        &.selected {
+          background-color: #e7ebfc;
+        }
+      }
+    }
+  }
+
+  .question {
+    font-size: 12px;
+    color: #141417;
+    line-height: 20px;
+    margin-bottom: 10px;
+    cursor: default;
+    max-width: 315px;
+    color: #141417;
+  }
+}
+
+@media screen and (max-width: 370px) and (min-width: 270px) {
+  :host {
+    .select-input {
+      width: 84vw;
+    }
+
+    .question {
+      width: 84vw;
+    }
+  }
+}
+
+@media screen and (max-width: 270px) {
+  :host {
+    .select-input {
+      width: 227px;
+    }
+
+    .question {
+      width: 227px;
+    }
+  }
+}

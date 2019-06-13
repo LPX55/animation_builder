@@ -1,0 +1,14 @@
+<div class="message-container">
+  <img src="assets/check-email.png" draggable="false" />
+  <div class="message-text">
+    Please check your email box and verify <br />your email address.
+  </div>
+  <mf-auth-button
+    text="Login Now"
+    [textColor]="['#fff', '#fff']"
+    [backgroundColor]="['#3C40FF', '#6A6DE6']"
+    [borderColor]="['transparent', 'transparent']"
+    (clicked)="goToLogin()"
+    class="button"
+  ></mf-auth-button>
+</div>

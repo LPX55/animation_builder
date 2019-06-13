@@ -1,0 +1,26 @@
+<div class="login-container">
+  <div class="login-form">
+    <h3 [class.reduced-margin]="(email.invalid && email.touched && email.dirty) || (password.invalid && password.touched && password.dirty) || loginMessage !== ''">Sign In</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="login($event)">
+      <p class="request-result" [hidden]="loginMessage === '' || sendingRequest">{{ loginMessage }}</p>
+      <div class="form-results">
+        <p class="form-result" *ngIf="(email.invalid && email.touched && email.dirty)">
+          Please enter a valid email address. </p>
+        <p class="form-result" *ngIf="(password.invalid && password.touched && password.dirty)">
+          Password should be at least 6 characters. </p>
+      </div>
+      <input id="login-form-email-input" (blur)="markAsUntouched()" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$" formControlName="email" name="email" placeholder="Email" [class.invalid-input]="(email.invalid && email.dirty && email.touched)">
+      <input type="password" name="password" (blur)="markAsUntouched()" formControlName="password" id="login-form-password-input"
+        placeholder="Password" [class.invalid-input]="(password.invalid && password.dirty && password.touched)">
+      <a class="forgot-password" href="#" (click)="goToForgotPassword($event)">Forgot password?</a>
+      <div class="button-container">
+        <button *ngIf="!sendingRequest && !displayResendActivationEmail" [disabled]="loginForm.invalid" type="submit" name="login">Sign In</button>
+        <button (click)="resendActivationEmail()" *ngIf="!sendingRequest && displayResendActivationEmail" >Re-send Activation Email</button>
+        <div *ngIf="sendingRequest" class="submit-loader"></div>
+      </div>
+    </form>
+  </div>
+</div>
+<p class="switch-to-signup">Don't have an account ?
+  <a href="#" (click)="goToSignup($event)"> Sign up </a>
+</p>

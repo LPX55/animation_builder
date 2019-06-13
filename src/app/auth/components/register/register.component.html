@@ -1,0 +1,56 @@
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="!registerForm.invalid && register($event)"
+  ngNativeValidate
+>
+  <div class="register-fields">
+    <mf-auth-error [errors]="errors"></mf-auth-error>
+    <mf-auth-text-input
+      type="text"
+      name="Full Name"
+      formControlName="full_name"
+      [formGroup]="registerForm"
+      required
+      [error]="
+        fullNameControl.invalid &&
+        fullNameControl.dirty &&
+        fullNameControl.touched
+      "
+    ></mf-auth-text-input>
+    <mf-auth-text-input
+      type="email"
+      name="Email"
+      required
+      formControlName="email"
+      [formGroup]="registerForm"
+      [error]="
+        emailControl.invalid && emailControl.dirty && emailControl.touched
+      "
+    ></mf-auth-text-input>
+    <mf-auth-text-input
+      type="password"
+      name="Password"
+      required
+      formControlName="password"
+      [formGroup]="registerForm"
+      [error]="
+        passwordControl.invalid &&
+        passwordControl.dirty &&
+        passwordControl.touched
+      "
+    ></mf-auth-text-input>
+    <mf-auth-button
+      text="Continue"
+      [textColor]="['#fff', '#fff']"
+      [backgroundColor]="['#3C40FF', '#6A6DE6']"
+      [borderColor]="['transparent', 'transparent']"
+      [loading]="registerLoading"
+      [disabled]="registerForm.invalid"
+      class="register-button"
+    ></mf-auth-button>
+    <div class="prev-step" (click)="backToSocialLogin()">
+      <img src="assets/prev-step-arrow.svg" />
+      <span>Back to previous step</span>
+    </div>
+  </div>
+</form>

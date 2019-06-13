@@ -1,0 +1,32 @@
+@import '~app/variables';
+@import '~app/mixin';
+:host {
+    @include flexbox(  $align-item:center, $justify-content:center );
+    @include size( 100%, 60vh );
+    .no-internet{
+        @include flexbox(  $align-item:center, $justify-content:center );
+        flex-direction: column;
+        min-height: 200px;
+
+        ::ng-deep .general-button {
+            padding: 8px 28px !important;
+            border: 2px solid #3b3b3b;
+            border-radius: 6px;
+          }
+
+        .shape{
+            @include size( 69px, 70px );
+            background-image: url('../../../../assets/media/svg/no-internet.svg');
+            background-repeat: no-repeat;
+
+        }
+        .description{
+            font-size: 12px;
+            padding: 30px 0;
+            text-align: center;
+            color: #757575;
+            max-width: 223px;
+        }
+    }
+}
+

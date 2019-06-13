@@ -1,0 +1,18 @@
+<div class="author-container" [style.backgroundImage]="'url('+ authorImage +')'">
+  <div class="author-content">
+    <div class="author-icon">
+      <div class="icon-opacity" [style.backgroundColor]="color">
+       
+      </div>
+      <div class="icon-back" [style.backgroundColor]="color">
+            <div class="icon">
+              <img [src]="authorIcon">
+            </div>
+          </div>
+    </div>
+    <div class="author-name">{{authorName}}</div>
+    <div class="author-description">{{authorDescription}}</div>
+    <mf-general-button [text]="authorBtnText" [padding]="'8px 12px'" [type]="'fill'" [backgroundColor]="color"
+      (clicked)="authorLink()"></mf-general-button>
+  </div>
+</div>

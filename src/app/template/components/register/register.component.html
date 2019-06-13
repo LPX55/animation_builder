@@ -1,0 +1,45 @@
+<div class="register-container slide-parent">
+  <div class="register-form slide-ready" [class.slide-out]="registeredSuccessfully">
+    <h3 [class.reduced-margin]="(email.invalid && email.touched && email.dirty) || (password.invalid && password.touched && password.dirty) || registerMessage !== ''">Sign Up</h3>
+    <form [formGroup]="registerForm" (ngSubmit)="register($event)">
+      <p class="request-result" [hidden]="registerMessage === '' || sendingRequest">{{ registerMessage }}</p>
+      <div class="form-results">
+        <p class="form-result" *ngIf="(email.invalid && email.touched && email.dirty)">
+          Please enter a valid email address. </p>
+        <p class="form-result" *ngIf="(password.invalid && password.touched && password.dirty)">
+          Password should be at least 6 characters. </p>
+      </div>
+      <input id="register-form-email-input" (blur)="markAsUntouched()" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$" formControlName="email" name="email" placeholder="Email"
+        [class.invalid-input]="(email.invalid && email.dirty && email.touched)">
+      <input type="password" name="password" (blur)="markAsUntouched()" formControlName="password" id="register-form-password-input"
+        placeholder="Password" [class.invalid-input]="(password.invalid && password.dirty && password.touched)">
+      <label class="subscribe">Subscribe to get the latest news & updates
+        <input name="subscribe" formControlName="subscribe" type="checkbox" checked="checked">
+        <span class="checkmark"></span>
+      </label>
+      <div class="button-container">
+        <button *ngIf="!sendingRequest; else showLoading" [disabled]="registerForm.invalid" type="submit" name="register">Sign Up</button>
+        <ng-template #showLoading>
+          <div class="submit-loader"></div>
+        </ng-template>
+      </div>
+      <span class="terms-of-use">By signing up you agree to the Motion Factory
+        <br>
+        <a>terms of use</a>
+      </span>
+    </form>
+  </div>
+  <div class="register-successfull slide-ready" [hidden]="!registeredSuccessfully" [class.slide-in]="registeredSuccessfully">
+    <div class="container">
+      <div class="email-verify-icon"></div>
+      <div class="description">
+        Almost Done!
+        <br>Check your email to activate your account.
+      </div>
+      <button type="button" (click)="goToSignin($event)">Sign In Now</button>
+    </div>
+  </div>
+</div>
+<p class="switch-to-signin" [hidden]="registeredSuccessfully">Already have an account ?
+  <a href="#" (click)="goToSignin($event)"> Sign in </a>
+</p>

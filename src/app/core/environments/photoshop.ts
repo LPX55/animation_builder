@@ -1,3 +1,4 @@
+import { IpcHandlerService } from '../services/ipc-handler/ipc-handler.service';
 import HostImage from '../interfaces/host/host.image';
 import General from './general';
 import { JsxInjectorService } from '../services/jsx-injector/jsx-injector.service';
@@ -8,9 +9,11 @@ export default class Photoshop extends General implements HostImage {
     public hostName = 'photoshop';
     public scriptPath = 'hosts/ps/common.jsx';
     allowedExtensions = [];
+    public ipcPort = isDevMode ? 45032 : 45034;
 
     constructor(
         private _jsxInjectorService: JsxInjectorService,
+        private _ipcHandlerService: IpcHandlerService
     ) {
         super();
         this._jsxInjectorService.inject(this.ddHelperPath);

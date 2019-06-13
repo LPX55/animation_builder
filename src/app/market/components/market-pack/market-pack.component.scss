@@ -1,0 +1,102 @@
+@import '~app/variables';
+@import '~app/mixin';
+:host {
+    display: inline-block;
+    width: 49%;
+    margin: 0.5%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.market-pack {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: $font-family-semibold;
+    background-color: #2C2C2C;
+    margin: 2px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    max-width: 590px;
+    &:hover {
+        .market-item-hover {
+            bottom: 0;
+            opacity: 1;
+            transition: bottom .4s, opacity .4s;
+        }
+        .cover {
+            div.overlay {
+                background-color: rgba(30, 90, 255, 0.38);
+                transition: background-color .4s;
+            }
+        }
+    }
+    .market-item-hover {
+        @include flexbox( $align-item: center, $justify-content:center);
+        @include size(100%, 23%);
+        background-color: #0045FF;
+        color: #fff;
+        position: absolute;
+        bottom: -50px;
+        opacity: 0;
+        transition: bottom .4s, opacity .4s;
+        .buy {
+            font-size: 12px;
+            padding-right: 10px;
+        }
+    }
+    .cover {
+        @include size(100%);
+        display: flex;
+        img {
+            @include size(100%);
+            background-position: center;
+            background-size: cover;
+        }
+        .overlay {
+            @include size(100%);
+            background-color: transparent;
+            position: absolute;
+            top: 0;
+            transition: background-color .4s;
+        }
+    }
+    .title {
+        width: 100%;
+        font-size: $font-size-medium;
+        padding-left: 12px;
+        line-height: 10px;
+    }
+    .category {
+        width: calc( 100% - 97px);
+        font-size: $font-size-tiny;
+        color: #717171;
+        padding-left: 12px;
+        line-height: 10px;
+        padding-top: 1px;
+    }
+    .type {
+        position: absolute;
+        right: 6px;
+        display: flex;
+        top: 6px;
+        text-align: right;
+        text-align: -webkit-right;
+        flex-direction: column;
+        width: 80px;
+        div {
+            font-size: $font-size-tiny;
+            width: fit-content;
+            line-height: 15px;
+            border-radius: 3px;
+        }
+        .free {
+            background-color: #0045FF;
+            padding: 1px 7px;
+        }
+        .free-mixed{
+            background-color: #f06f00;
+        }
+    }
+}

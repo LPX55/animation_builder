@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionList>
-    <Extension Id="com.pixflow.textanimator">
+    <Extension Id="com.pixflow.motionfactory">
         <HostList>
             <Host Name="PPRO" Port="9001" />
             <Host Name="AEFT" Port="9002" />

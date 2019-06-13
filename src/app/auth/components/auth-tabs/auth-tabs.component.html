@@ -1,0 +1,9 @@
+<ul>
+  <li
+    *ngFor="let tab of tabs; let index = index"
+    [routerLink]="[tab.route]"
+    routerLinkActive="active"
+  >
+    {{ tab.name }}
+  </li>
+</ul>

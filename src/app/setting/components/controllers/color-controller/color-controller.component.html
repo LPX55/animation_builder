@@ -1,21 +1,29 @@
 <div class="left-side">
   <div class="left-side-content" [style.paddingLeft]="padding">
-    <mf-clock-controller *ngIf="hasKey" [clockStatus]="key" (valueChange)="handleClockValueChange($event)"></mf-clock-controller>
-    <div class="name" [title]="name">{{name}}</div>
+    <mf-clock-controller
+      *ngIf="hasKey"
+      [clockStatus]="key"
+      (valueChange)="handleClockValueChange($event)"
+    ></mf-clock-controller>
+    <div class="name" [title]="name">{{ name }}</div>
   </div>
-
 </div>
 
-<div class="palette-container" >
+<div class="palette-container">
   <div
-  (click)="openColorPicker($event,control.index)"
-  (mouseenter)="toggleHover(control)"
-  (mouseleave)="toggleHover(control)"  
-  *ngFor="let control of controllers" 
-  class="color-preview" 
-  [style.backgroundColor]="getBackgroundStyle(control)" 
-  [style.width]="calculateMaxWidth(controllers.length)">
-    <mf-tooltip [show]="control.isHovered" [message]="control.name"></mf-tooltip>
-    
+    (click)="openColorPicker($event, control.index)"
+    (mouseenter)="toggleHover(control)"
+    (mouseleave)="toggleHover(control)"
+    *ngFor="let control of controllers"
+    class="color-preview"
+    [style.backgroundColor]="getBackgroundStyle(control)"
+    [style.width]="calculateMaxWidth(controllers.length)"
+  >
+    <mf-tooltip
+      [haveTopArrow]="true"
+      [fontSize]="10"
+      [show]="control.isHovered"
+      [message]="control.name"
+    ></mf-tooltip>
   </div>
 </div>

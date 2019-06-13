@@ -1,0 +1,72 @@
+.button {
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s, border 0.2s;
+  height: 51px;
+  width: 315px;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  border-width: 1px;
+  border-style: solid;
+  outline: none;
+
+  .icon {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 59px;
+    align-items: center;
+  }
+
+  .text {
+    vertical-align: middle;
+    line-height: 50px;
+    font-size: 13px;
+  }
+
+  .loading {
+    vertical-align: middle;
+    line-height: 50px;
+    font-size: 13px;
+    width: 30px;
+    position: absolute;
+    top: 0;
+    display: none;
+    margin-left: -15px;
+  }
+
+  &.loading {
+    opacity: 0.75;
+    pointer-events: none;
+
+    .loading {
+      display: inline-block;
+    }
+
+    .text {
+      display: none;
+    }
+  }
+
+  &.disabled {
+    background-color: #afafaf !important;
+    pointer-events: none;
+  }
+}
+
+@media screen and (max-width: 370px) and (min-width: 270px) {
+  .button {
+    width: 84vw;
+  }
+}
+
+@media screen and (max-width: 270px) {
+  .button {
+    width: 227px;
+  }
+}

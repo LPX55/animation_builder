@@ -1,0 +1,80 @@
+<div class="market-pack-detail" id="market-pack-detail" [@rightToLeftSlideIn]="animationMode" [@leftToRightSlideOut]="animationMode"
+  (@leftToRightSlideOut.done)="backToMarketPacks()">
+  <div class="header">
+    <div class="back" (click)="backTomarketAnimation()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 12">
+        <g transform="translate(496 311)">
+          <g transform="translate(-500 -313)">
+            <g>
+              <path class="back-svg" d="M10.707,3.707A1,1,0,0,0,9.293,2.293l-5,5a1,1,0,0,0,0,1.414l5,5a1,1,0,0,0,1.414-1.414L6.414,8Z" />
+            </g>
+          </g>
+        </g>
+      </svg>
+
+    </div>
+    <div class="menu">
+      <div (click)="marketPacksTab('detail', $event)" class="detail-btn market-tab active">item detail</div>
+      <div (click)="marketPacksTab('author', $event)" class="author-btn market-tab" *ngIf="marketObject.authorDetails.authorDescription">Author</div>
+    </div>
+  </div>
+  <div class="market-detail-container">
+
+    <div class="market-detail-content market-content" id="detail" #marketPackDetail>
+      <div class="video">
+        <video #movie id="market-pack-video" width="100%" loop poster="{{marketObject.thumbnailURL}}">
+          <source src="{{marketObject.details.videoUrl}}" type="video/mp4">
+        </video>
+        <div class="movie-button" (click)="playMovie()">
+          <div class="play-button" *ngIf="movieStatus === 'pause'">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 117.552 117.552">
+              <path class="play-svg " d="M4.856,10.047C7.157,9.662,67.5.8,73.723.107a7.114,7.114,0,0,1,8.259,8.286c-.683,3.836-9.235,66.5-9.907,70.527s-4.944,7.342-8.726,3.548S9.6,27.1,2.968,20.485,2.549,10.413,4.856,10.047Z"
+                transform="translate(59.495 0.007) rotate(45)" />
+            </svg>
+          </div>
+          <div *ngIf="movieStatus === 'play'" class="pause-button">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
+              viewBox="0 0 100 125" enable-background="new 0 0 100 100" xml:space="preserve">
+              <g>
+                <g>
+                  <path d="M29.719,5c-5.777,0-10.457,4.683-10.457,10.46v69.08c0,5.777,4.68,10.46,10.457,10.46s10.463-4.683,10.463-10.46V15.46    C40.182,9.683,35.495,5,29.719,5z" />
+                  <path d="M70.276,5c-5.777,0-10.457,4.683-10.457,10.46v69.08c0,5.777,4.68,10.46,10.457,10.46c5.777,0,10.463-4.683,10.463-10.46    V15.46C80.739,9.683,76.053,5,70.276,5z" />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="title">{{marketObject.title}}</div>
+      <div class="author">By {{marketObject.authorName}}</div>
+      <div class="description">{{marketObject.details.description}}</div>
+      <div class="buttons">
+        <div class="free-btn" *ngIf="marketObject.license === 'premium' || marketObject.license === 'mixed'">
+          <mf-general-button [text]="'Buy  ' + marketObject.price + ' $'" [padding]="'9px 25px'" [type]="'fill'"
+            [backgroundColor]="'#204BE6'" (clicked)="linkedBuy()"></mf-general-button>
+        </div>
+        <div class="buy-btn" *ngIf="marketObject.license === 'mixed'">
+          <mf-general-button [text]="'Free Version'" [type]="'border'" [padding]="'8px 25px'" [boxShadow]="'#1E5BFF'"
+            [borderColor]="'#1E5BFF'" (clicked)="linkedFree()"></mf-general-button>
+        </div>
+        <div class="free-btn" *ngIf="marketObject.license === 'free'">
+          <mf-general-button [text]="'Free Version'" [padding]="'9px 25px'" [type]="'fill'" [backgroundColor]="'#204BE6'"
+            (clicked)="linkedFree()"></mf-general-button>
+        </div>
+      </div>
+      <div class="inside-title" hidden>inside this package</div>
+      <div class="packages" hidden>
+        <img *ngFor="let imageUrl of marketObject.details.images" [src]="imageUrl">
+      </div>
+    </div>
+
+    <div class="market-author-content market-content" id="author" *ngIf="this.marketObject.authorDetails">
+      <mf-market-author [color]="marketObject.authorDetails.authorColor" [authorName]="marketObject.authorName" [authorDescription]="marketObject.authorDetails.authorDescription" [authorIcon]="marketObject.authorDetails.authorIcon"
+        [authorImage]="checkAuthorImage()" [authorLinks]="marketObject.authorDetails.authorButtonLink" [authorBtnText]="marketObject.authorDetails.authorButtonText"></mf-market-author>
+    </div>
+
+  </div>
+
+</div>

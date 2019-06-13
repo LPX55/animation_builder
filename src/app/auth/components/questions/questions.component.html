@@ -1,0 +1,26 @@
+<div class="title" *ngIf="steps.length">
+  {{ steps[currentStep].title }}
+</div>
+<div class="questions" *ngIf="steps.length">
+  <mf-auth-select-input
+    *ngFor="let question of steps[currentStep]['questions']; let index = index"
+    [question]="question.text"
+    [answers]="question.answers"
+    [selectedAnswers]="userAnswers[question._id]"
+    [error]="question.error"
+    (changed)="answerChanged(index, question._id, $event)"
+    [isMulti]="question.isMulti"
+  ></mf-auth-select-input>
+  <mf-auth-button
+    [text]="steps[currentStep].buttonText"
+    [textColor]="['#fff', '#fff']"
+    [backgroundColor]="['#3C40FF', '#6A6DE6']"
+    [borderColor]="['transparent', 'transparent']"
+    (clicked)="nextStep()"
+    [loading]="sendingDataLoading"
+    [disabled]="!canSendData"
+  ></mf-auth-button>
+  <div class="prev-step" *ngIf="currentStep > 0" (click)="prevStep()">
+    <img src="assets/prev-step-arrow.svg" /> <span>Back to previous step</span>
+  </div>
+</div>

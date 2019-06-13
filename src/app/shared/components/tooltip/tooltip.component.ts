@@ -1,13 +1,11 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from "@angular/core";
 
 @Component({
-  selector: 'mf-tooltip',
-  templateUrl: './tooltip.component.html',
-  styleUrls: ['./tooltip.component.scss']
+  selector: "mf-tooltip",
+  templateUrl: "./tooltip.component.html",
+  styleUrls: ["./tooltip.component.scss"]
 })
 export class TooltipComponent implements OnInit {
-
-
   public _show = false;
   private parentElement;
   private nativeElement;
@@ -37,7 +35,7 @@ export class TooltipComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.parentName !== '' && this.parentName !== 'NaN') {
+    if (this.parentName !== "" && this.parentName !== "NaN") {
       this.parentElement = this.nativeElement.closest(this.parentName);
     }
   }
@@ -54,7 +52,7 @@ export class TooltipComponent implements OnInit {
     } else {
       minWidth = messageLength * 6;
     }
-    return minWidth + 'px';
+    return minWidth + "px";
   }
 
   /**
@@ -64,23 +62,22 @@ export class TooltipComponent implements OnInit {
    */
   calculateArrowPosition(messageLength): string {
     if (messageLength < 12) {
-      return 'first';
+      return "first";
     }
 
     if (messageLength >= 12 && messageLength < 30) {
-      return 'middle';
+      return "middle";
     }
 
     if (messageLength >= 30) {
-      return 'last';
+      return "last";
     }
   }
-
 
   /* set tooltip parent zindex to solve the issue of item template issue on hover status*/
   setParentZindex(): void {
     if (this.parentElement) {
-      this.parentElement.classList.add('tooltip-showing');
+      this.parentElement.classList.add("tooltip-showing");
     }
   }
 
@@ -90,16 +87,15 @@ export class TooltipComponent implements OnInit {
     if (parentElement) {
       /* We used settimeout as the transition for tooltip is 300ms in css and removing class is instant which cause the overlapping issue */
       setTimeout(function(): void {
-        parentElement.classList.remove('tooltip-showing');
-      }, 200);
+        parentElement.classList.remove("tooltip-showing");
+      }, 0);
     }
   }
-
 
   /**
    * Check if the delay has been set by user or not so we can set a class for styling
    *  @return {boolean} return true if the user set the delay value manually
-  */
+   */
   isDelaySet(): boolean {
     if (this.delay > 0) {
       return true;
@@ -111,13 +107,12 @@ export class TooltipComponent implements OnInit {
   /**
    * Set transition delay style for the element
    * @return {string} style string which set the delay for the element
-  */
-  setTransitionDelay (): string {
+   */
+  setTransitionDelay(): string {
     if (this.delay === 0 || !this._show) {
-      return '';
+      return "";
     } else {
-      return this.delay + 's';
+      return this.delay + "s";
     }
   }
-
 }
