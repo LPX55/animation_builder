@@ -9,6 +9,7 @@
         margin-right:5px;
         span{
             margin-right:5px;
+            font-size: 12px;
         }
         img{
             height: 4px;
@@ -19,7 +20,7 @@
     }
     mf-drop-down{
         width: 55px;
-        right: 5px;
+        right: -9px;
         top: 15px;
         ::ng-deep ul{
             li{ padding: 0  !important;

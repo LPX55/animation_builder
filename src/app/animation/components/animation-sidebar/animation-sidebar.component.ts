@@ -11,7 +11,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core'
 export class AnimationSidebarComponent implements OnInit {
   public sidebarItems = [
     {
-      categoryName: 'Text Animation',
+      categoryName: 'Categories',
       categoryPath: this._animationCoreService.textBuilderSourceFolder,
       open: true
     }

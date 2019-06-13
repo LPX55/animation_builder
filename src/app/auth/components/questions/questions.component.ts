@@ -46,7 +46,7 @@ export class QuestionsComponent implements OnInit {
   }
 
   goToTemplate() {
-    this._router.navigate(["dashboard", "template"]);
+    this._router.navigate(["dashboard", "animation"]);
     setTimeout(() => {
       document.body.style.backgroundColor = "#262626";
       const layerLoadElement: any = document.getElementsByClassName(
@@ -86,7 +86,7 @@ export class QuestionsComponent implements OnInit {
       }));
       this._authService.answerSurvey(normAnswers).subscribe(isOK => {
         if (isOK) {
-          this._router.navigate(["dashboard", "template"]);
+          this._router.navigate(["dashboard", "animation"]);
         } else {
           this._router.navigate(["auth", "no-internet"]);
         }

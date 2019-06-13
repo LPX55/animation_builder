@@ -3,6 +3,7 @@
 :host {
     .animation-sidebar-wrap{
         float: left;
+        margin-top: -31px;
         width: 160px;
         height:calc( 100vh - 214px);
         transition:all 0.3s ease-in;

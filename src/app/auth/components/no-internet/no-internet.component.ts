@@ -14,6 +14,6 @@ export class NoInternetComponent implements OnInit {
     this._router.navigate(["auth", "questions"]);
   }
   skipToTemplate() {
-    this._router.navigate(["dashboard", "template"]);
+    this._router.navigate(["dashboard", "animation"]);
   }
 }
