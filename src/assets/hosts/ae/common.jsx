@@ -317,7 +317,7 @@ textAnimatorAfterEffects.prototype.readSettingControllers = function (properties
             else {
                 var isABProperty = this.isAnimationBuilderProperty(property);
                 var group = {
-                    name: isABProperty && property.propertyType == 6213 ? animationBuilderObject.getPropsFromString(property.name).typeName :
+                    name: isABProperty && property.propertyType == 6213 ? TextAnimatorObject.getPropsFromString(property.name).typeName :
                         properties.property(i).name,
                     index: resultArray.length,
                     type: property.propertyType == 6213 ? 200 : (property.name ? 201 : 202),
@@ -325,11 +325,11 @@ textAnimatorAfterEffects.prototype.readSettingControllers = function (properties
                     obj: property,
                     hasFx: !isABProperty && property.canSetEnabled,
                     fx: property.enabled,
-                    description: isABProperty ? animationBuilderObject.getPropsFromString(property.name).name : '',
+                    description: isABProperty ? TextAnimatorObject.getPropsFromString(property.name).name : '',
                     removeFunction: this.getRemoveFunction(property),
                     changeRTLFunction: this.getChangeRTLFunction(property),
                     isABProperty: isABProperty ? true : false,
-                    rtlStatus: isABProperty ? animationBuilderObject.getRTLStatus(property) : false
+                    rtlStatus: isABProperty ? TextAnimatorObject.getRTLStatus(property) : false
                 };
                 this.lastGroupIndex = group.type != 202 ? group.index : parentIndex;
                 resultArray.push(group);

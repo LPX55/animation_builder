@@ -232,28 +232,32 @@ TextAnimator.prototype.getRTLStatus = function (effectProp){
 
 var TextAnimatorObject = new TextAnimator();
 $._TextAnimator = {
-    applyIn: function (presetPath) {
-        var layer = app.project.activeItem.selectedLayers[0];
+    applyIn: function (presetPath, both) {
+        var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
+        if(!both) app.beginUndoGroup("Apply In");
         TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.In, layer.inPoint, 2.5, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
         layer.selected = true;
+        if(!both) app.endUndoGroup();
         }
         else {
             alert('please select a text layer');
         }
 
     },
-    applyOut: function (presetPath) {
-        var layer = app.project.activeItem.selectedLayers[0];
+    applyOut: function (presetPath, both) {
+        var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
+        if(!both) app.beginUndoGroup("Apply Out");
         TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
         layer.selected = true;
+        if(!both) app.endUndoGroup();
         }
         else {
             alert('please select a text layer');
@@ -261,12 +265,15 @@ $._TextAnimator = {
     },
     applyBoth: function (presetPath) {
         presetPath = JSON.parse(presetPath);
-        var layer = app.project.activeItem.selectedLayers[0];
+        var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
-        this.applyIn(presetPath[0]);
+        app.beginUndoGroup("Apply In and Out");
+        this.applyIn(presetPath[0], true);
         layer.selected = false;
         layer.selected = true;
-        this.applyOut(presetPath[1]);
+        this.applyOut(presetPath[1], true);
+        app.endUndoGroup();
+
         }
         else {
             alert('please select a text layer');
@@ -274,23 +281,30 @@ $._TextAnimator = {
 
     },
     applyEffect: function (presetPath) {
-        var layer = app.project.activeItem.selectedLayers[0];
+        var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
+        app.beginUndoGroup("Apply Effect");
         //TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
-        layer.selected = true;}
+        layer.selected = true;
+        app.endUndoGroup();
+        }
         else {
             alert('please select a text layer');
         }
 
     },
     removeEffect: function (prop) {
+        app.beginUndoGroup("Remove Effect");
         TextAnimatorObject.removeEffect(prop);
+        app.endUndoGroup();
     },
     changeRTLStatus: function (prop) {
+        app.beginUndoGroup("Change RTL Status");
         TextAnimatorObject.changeRTLStatus(prop);
+        app.endUndoGroup();
     },
     getRTLStatus: function (prop){
         return TextAnimatorObject.getRTLStatus(prop);

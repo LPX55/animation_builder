@@ -1,6 +1,6 @@
 {
   "name": "mf-premiere",
-  "version": "3.2.5",
+  "version": "4.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
