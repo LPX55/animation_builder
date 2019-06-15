@@ -234,36 +234,57 @@ var TextAnimatorObject = new TextAnimator();
 $._TextAnimator = {
     applyIn: function (presetPath) {
         var layer = app.project.activeItem.selectedLayers[0];
+        if(layer instanceof TextLayer) {
         TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.In, layer.inPoint, 2.5, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
         layer.selected = true;
+        }
+        else {
+            alert('please select a text layer');
+        }
 
     },
     applyOut: function (presetPath) {
         var layer = app.project.activeItem.selectedLayers[0];
+        if(layer instanceof TextLayer) {
         TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
         layer.selected = true;
+        }
+        else {
+            alert('please select a text layer');
+        }
     },
     applyBoth: function (presetPath) {
         presetPath = JSON.parse(presetPath);
         var layer = app.project.activeItem.selectedLayers[0];
+        if(layer instanceof TextLayer) {
         this.applyIn(presetPath[0]);
         layer.selected = false;
         layer.selected = true;
         this.applyOut(presetPath[1]);
+        }
+        else {
+            alert('please select a text layer');
+        }
+
     },
     applyEffect: function (presetPath) {
         var layer = app.project.activeItem.selectedLayers[0];
+        if(layer instanceof TextLayer) {
         //TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
-        layer.selected = true;
+        layer.selected = true;}
+        else {
+            alert('please select a text layer');
+        }
+
     },
     removeEffect: function (prop) {
         TextAnimatorObject.removeEffect(prop);
