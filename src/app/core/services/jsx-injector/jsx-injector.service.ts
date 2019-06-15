@@ -1,3 +1,4 @@
+import { ControllerType } from './../../../shared/models/controller-types';
 import { AppGlobals } from "../../../../global";
 import { Injectable, NgZone } from "@angular/core";
 import { CSInterface, SystemPath } from "csinterface-ts/dist/csinterface-ts";
@@ -100,7 +101,9 @@ export class JsxInjectorService {
         event.data.controllers.length > 0
       ) {
         if (1 === this._appGlobals.DBConnection.get("user.status").value()) {
-          if (event.data && event.data.controllers.length) {
+          if (event.data && event.data.controllers.length &&  event.data.controllers.filter(controller => {
+            return controller.type === ControllerType.mainGroup && controller.isABProperty;
+          }).length) {
             console.log(event.data);
             this.settingData = this.settingHandlerFunction(event.data);
             this._zone.run(() => this._router.navigate([this.settingPath]));
@@ -110,7 +113,8 @@ export class JsxInjectorService {
           }
         }
       } else if (this._router.url.indexOf("/dashboard/setting") > -1) {
-        if (this.backSetTimeout) clearTimeout(this.backSetTimeout);
+        if (this.backSetTimeout) {clearTimeout(this.backSetTimeout);
+        }
         this.backSetTimeout = setTimeout(() => {
           this._location.back();
         }, 10);

@@ -125,19 +125,19 @@ export class AnimationCoreService {
     let command = '';
     switch (presetType) {
       case AnimationBuilderItemType.types.In: {
-        command = `$._AnimationBuilder.applyIn("${presetPath[0]}")`;
+        command = `$._TextAnimator.applyIn("${presetPath[0]}")`;
         break;
       }
       case AnimationBuilderItemType.types.Out: {
-        command = `$._AnimationBuilder.applyOut("${presetPath[0]}")`;
+        command = `$._TextAnimator.applyOut("${presetPath[0]}")`;
         break;
       }
       case AnimationBuilderItemType.types.Both: {
-        command = `$._AnimationBuilder.applyBoth('${JSON.stringify(presetPath)}')`;
+        command = `$._TextAnimator.applyBoth('${JSON.stringify(presetPath)}')`;
         break;
       }
       case AnimationBuilderItemType.types.Effect: {
-        command = `$._AnimationBuilder.applyEffect('${presetPath[0]}')`;
+        command = `$._TextAnimator.applyEffect('${presetPath[0]}')`;
         break;
       }
       default: break;

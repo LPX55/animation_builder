@@ -1,11 +1,11 @@
 
-function AnimationBuilder() {
+function TextAnimator() {
     this.markersName = {
         "In": "Intro",
         "Out": "Outro"
     }
 }
-AnimationBuilder.prototype.getPropsFromString = function (name) {
+TextAnimator.prototype.getPropsFromString = function (name) {
     var regex = /^([A-Z0-9\s]+)_([a-zA-Z0-9\s]+)_([a-zA-Z0-9\s]+)_([A-Z])(-[\w\d]{1,3})?$/g;
     var props = regex.exec(name);
     return {
@@ -15,13 +15,13 @@ AnimationBuilder.prototype.getPropsFromString = function (name) {
         directionName: props[4]
     }
 }
-AnimationBuilder.prototype.addMarker = function (layer, markerComment, time, duration, createIfExist) {
+TextAnimator.prototype.addMarker = function (layer, markerComment, time, duration, createIfExist) {
     if (!createIfExist && this.checkMarkerExist(layer, markerComment)) return 0;
     var myMarkerVal = new MarkerValue(markerComment);
     myMarkerVal.duration = duration;
     layer.marker.setValueAtTime(time, myMarkerVal);
 }
-AnimationBuilder.prototype.removeMarker = function (layer, markerComment) {
+TextAnimator.prototype.removeMarker = function (layer, markerComment) {
     for (var i = layer.marker.numKeys; i >= 1; i--) {
         if (layer.marker.keyValue(i).comment == markerComment) {
             layer.marker.removeKey(i);
@@ -30,7 +30,7 @@ AnimationBuilder.prototype.removeMarker = function (layer, markerComment) {
     }
 }
 
-AnimationBuilder.prototype.checkMarkerExist = function (layer, markerComment) {
+TextAnimator.prototype.checkMarkerExist = function (layer, markerComment) {
     var markerIsExist = false;
     for (var i = 1; i <= layer.marker.numKeys; i++) {
         if (layer.marker.keyValue(i).comment == markerComment) {
@@ -41,7 +41,7 @@ AnimationBuilder.prototype.checkMarkerExist = function (layer, markerComment) {
     return markerIsExist;
 
 }
-AnimationBuilder.prototype.removeEffect = function (effect) {
+TextAnimator.prototype.removeEffect = function (effect) {
     var layer = effect.parentProperty.parentProperty;
     var effectProps = this.getPropsFromString(effect.name);
     if (layer) {
@@ -63,7 +63,7 @@ AnimationBuilder.prototype.removeEffect = function (effect) {
 
 
 
-AnimationBuilder.prototype.universalAppliedFxOfPreset = function (presetPath, layer) {
+TextAnimator.prototype.universalAppliedFxOfPreset = function (presetPath, layer) {
     var presetName = this.getFileName(presetPath);
     var fx = layer.property("ADBE Effect Parade").property(presetName);
     if (fx) {
@@ -80,7 +80,7 @@ AnimationBuilder.prototype.universalAppliedFxOfPreset = function (presetPath, la
         return fx;
     }
 }
-AnimationBuilder.prototype.checkChildrenPropertiesAndReplaceExpresseion = function (parentProperty, oldExp, newExp) {
+TextAnimator.prototype.checkChildrenPropertiesAndReplaceExpresseion = function (parentProperty, oldExp, newExp) {
     for (var i = 1; i <= parentProperty.numProperties; i++) {
         var property = parentProperty.property(i);
         try {
@@ -98,7 +98,7 @@ AnimationBuilder.prototype.checkChildrenPropertiesAndReplaceExpresseion = functi
         }
     }
 }
-AnimationBuilder.prototype.checkChildrenPropertiesAndReversRTLStatus = function (parentProperty) {
+TextAnimator.prototype.checkChildrenPropertiesAndReversRTLStatus = function (parentProperty) {
     for (var i = 1; i <= parentProperty.numProperties; i++) {
         var property = parentProperty.property(i);
         try {
@@ -141,7 +141,7 @@ AnimationBuilder.prototype.checkChildrenPropertiesAndReversRTLStatus = function 
         }
     }
 }
-AnimationBuilder.prototype.checkChildrenPropertiesAndGetRTLStatus = function (parentProperty) {
+TextAnimator.prototype.checkChildrenPropertiesAndGetRTLStatus = function (parentProperty) {
     for (var i = 1; i <= parentProperty.numProperties; i++) {
         var property = parentProperty.property(i);
         try {
@@ -172,7 +172,7 @@ AnimationBuilder.prototype.checkChildrenPropertiesAndGetRTLStatus = function (pa
         }
     }
 }
-AnimationBuilder.prototype.getRandomKey = function () {
+TextAnimator.prototype.getRandomKey = function () {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -181,17 +181,17 @@ AnimationBuilder.prototype.getRandomKey = function () {
 
     return text;
 }
-AnimationBuilder.prototype.getFileName = function (filePath) {
+TextAnimator.prototype.getFileName = function (filePath) {
     var fileName = filePath.split(/(\\|\/)/g).pop();
     return fileName.substr(0, fileName.lastIndexOf('.'));
 }
 
-AnimationBuilder.prototype.checkIfeffectWithTypeExistOnLayer = function (typeName, layer) {
+TextAnimator.prototype.checkIfeffectWithTypeExistOnLayer = function (typeName, layer) {
     var effects = layer.property("ADBE Effect Parade");
     var count = 0;
     for (var i = 1; i <= effects.numProperties; i++) {
         var eff = effects.property(i)
-        if (MFAfterEffectsObject.isAnimationBuilderProperty(eff)) {
+        if (textAnimatorAfterEffectsObject.isTextAnimatorProperty(eff)) {
             var effectProps = this.getPropsFromString(eff.name);
             if (effectProps.typeName === typeName) {
                 count++;
@@ -201,7 +201,7 @@ AnimationBuilder.prototype.checkIfeffectWithTypeExistOnLayer = function (typeNam
     return count;
 }
 
-AnimationBuilder.prototype.changeRTLStatus = function (effectProp) {
+TextAnimator.prototype.changeRTLStatus = function (effectProp) {
     var layer = effectProp.parentProperty.parentProperty;
     if (layer) {
         var textPeroperties = layer.property("ADBE Text Properties").property("ADBE Text Animators");
@@ -214,7 +214,7 @@ AnimationBuilder.prototype.changeRTLStatus = function (effectProp) {
         }
     }
 }
-AnimationBuilder.prototype.getRTLStatus = function (effectProp){
+TextAnimator.prototype.getRTLStatus = function (effectProp){
     var layer = effectProp.parentProperty.parentProperty;
     var RTL = false;
     if (layer) {
@@ -230,22 +230,22 @@ AnimationBuilder.prototype.getRTLStatus = function (effectProp){
     return RTL;
 }
 
-var animationBuilderObject = new AnimationBuilder();
-$._AnimationBuilder = {
+var TextAnimatorObject = new TextAnimator();
+$._TextAnimator = {
     applyIn: function (presetPath) {
         var layer = app.project.activeItem.selectedLayers[0];
-        animationBuilderObject.addMarker(layer, animationBuilderObject.markersName.In, layer.inPoint, 2.5, false);
-        MFAfterEffectsObject.applyPreset(presetPath);
-        animationBuilderObject.universalAppliedFxOfPreset(presetPath, layer);
+        TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.In, layer.inPoint, 2.5, false);
+        textAnimatorAfterEffectsObject.applyPreset(presetPath);
+        TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
         layer.selected = true;
 
     },
     applyOut: function (presetPath) {
         var layer = app.project.activeItem.selectedLayers[0];
-        animationBuilderObject.addMarker(layer, animationBuilderObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
-        MFAfterEffectsObject.applyPreset(presetPath);
-        animationBuilderObject.universalAppliedFxOfPreset(presetPath, layer);
+        TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
+        textAnimatorAfterEffectsObject.applyPreset(presetPath);
+        TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
         layer.selected = true;
     },
@@ -259,19 +259,19 @@ $._AnimationBuilder = {
     },
     applyEffect: function (presetPath) {
         var layer = app.project.activeItem.selectedLayers[0];
-        //animationBuilderObject.addMarker(layer, animationBuilderObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
-        MFAfterEffectsObject.applyPreset(presetPath);
-        animationBuilderObject.universalAppliedFxOfPreset(presetPath, layer);
+        //TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
+        textAnimatorAfterEffectsObject.applyPreset(presetPath);
+        TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
         layer.selected = true;
     },
     removeEffect: function (prop) {
-        animationBuilderObject.removeEffect(prop);
+        TextAnimatorObject.removeEffect(prop);
     },
     changeRTLStatus: function (prop) {
-        animationBuilderObject.changeRTLStatus(prop);
+        TextAnimatorObject.changeRTLStatus(prop);
     },
     getRTLStatus: function (prop){
-        return animationBuilderObject.getRTLStatus(prop);
+        return TextAnimatorObject.getRTLStatus(prop);
     }
 }

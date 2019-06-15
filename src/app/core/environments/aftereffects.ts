@@ -23,23 +23,23 @@ export default class Aftereffects extends General implements Host {
     import(itemPath, data, asSequence): void {
         const fileFormat = path.extname(itemPath);
         if (fileFormat === '.aep') {
-            this._jsxInjectorService.evalScript(`$._MFAfterEffects.importItem("${itemPath}", '${data}')`);
+            this._jsxInjectorService.evalScript(`$._textAnimatorAfterEffects.importItem("${itemPath}", '${data}')`);
         } else if (fileFormat === '.ffx') {
-            this._jsxInjectorService.evalScript(`$._MFAfterEffects.applyPreset("${itemPath}")`);
+            this._jsxInjectorService.evalScript(`$._textAnimatorAfterEffects.applyPreset("${itemPath}")`);
         } else if (fileFormat === '.mogrt') {
             this.extractMogrt(itemPath);
         } else {
-            this._jsxInjectorService.evalScript(`$._MFAfterEffects.importFootage("${itemPath}", ${asSequence})`);
+            this._jsxInjectorService.evalScript(`$._textAnimatorAfterEffects.importFootage("${itemPath}", ${asSequence})`);
         }
     }
 
     openProject(itemPath): void {
-        this._jsxInjectorService.evalScript(`$._MFAfterEffects.openAEPProject('${itemPath}')`);
+        this._jsxInjectorService.evalScript(`$._textAnimatorAfterEffects.openAEPProject('${itemPath}')`);
     }
     setParameter(parameterIndex, parameterValue, key?): void {
         parameterValue = (typeof parameterValue === 'string' && parameterValue === '') ? ' ' : parameterValue;
         parameterValue = JSON.stringify(parameterValue);
-        this._jsxInjectorService.evalScript(`$._MFAfterEffects.setLayerProperty(${parameterIndex}, ${parameterValue}, ${key})`);
+        this._jsxInjectorService.evalScript(`$._textAnimatorAfterEffects.setLayerProperty(${parameterIndex}, ${parameterValue}, ${key})`);
     }
     setColorParameter(controllerIndex, { red, green, blue }, key?): void {
         this.setParameter(controllerIndex, this.convertColorBase255RelativeValueToBase1([red, green, blue, 255]), key);
@@ -53,7 +53,7 @@ export default class Aftereffects extends General implements Host {
     }
 
     removeAllKeys(controllerIndex: number): void {
-        this._jsxInjectorService.evalScript(`$._MFAfterEffects.removeAllKeys(${controllerIndex})`);
+        this._jsxInjectorService.evalScript(`$._textAnimatorAfterEffects.removeAllKeys(${controllerIndex})`);
     }
     /**
      * remove effect by name
@@ -61,7 +61,7 @@ export default class Aftereffects extends General implements Host {
      * @return {void}
      */
     removeEffect(effectIndex: number): void {
-        this._jsxInjectorService.evalScript(`$._MFAfterEffects.removeEffect('${effectIndex}')`);
+        this._jsxInjectorService.evalScript(`$._textAnimatorAfterEffects.removeEffect('${effectIndex}')`);
     }
 
     extractMogrt(fileName: string): void {
@@ -75,6 +75,6 @@ export default class Aftereffects extends General implements Host {
             });
     }
     openColorPicker(rgbColor): void {
-        this._jsxInjectorService.evalScript(`$._MFAfterEffects.openColorPicker('${rgbColor[0]}','${rgbColor[1]}','${rgbColor[2]}',1)`);
+        this._jsxInjectorService.evalScript(`$._textAnimatorAfterEffects.openColorPicker('${rgbColor[0]}','${rgbColor[1]}','${rgbColor[2]}',1)`);
     }
 }

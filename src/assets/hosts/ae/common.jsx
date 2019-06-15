@@ -1,4 +1,4 @@
-function MFAfterEffects() {
+function textAnimatorAfterEffects() {
     this.appVersion = parseFloat(app.version.match(/\d+\.\d+|^([^\.])\d+/g));
     this.PropertyTypes = {
         color: 6418,
@@ -23,7 +23,7 @@ function MFAfterEffects() {
  * @param {filePath}    string  AEP project file path
  * @return {void}
  */
-MFAfterEffects.prototype.openAEPProject = function (filePath) {
+textAnimatorAfterEffects.prototype.openAEPProject = function (filePath) {
     var myFile = new File(filePath);
     app.open(myFile);
 }
@@ -35,7 +35,7 @@ MFAfterEffects.prototype.openAEPProject = function (filePath) {
      * @param data optional data
      * @return {item} imported item
 **/
-MFAfterEffects.prototype.importItem = function (path, data) {
+textAnimatorAfterEffects.prototype.importItem = function (path, data) {
     app.beginSuppressDialogs();
     var io = new ImportOptions(new File(path));
     io.importAs = ImportAsType.PROJECT;
@@ -54,7 +54,7 @@ MFAfterEffects.prototype.importItem = function (path, data) {
      * @param path absolute path to footage file
      * @return {item} imported footage item
 **/
-MFAfterEffects.prototype.importFootage = function (path, asSequence) {
+textAnimatorAfterEffects.prototype.importFootage = function (path, asSequence) {
     app.beginSuppressDialogs();
     var io = new ImportOptions(new File(path));
     io.importAs = ImportAsType.FOOTAGE;
@@ -72,7 +72,7 @@ MFAfterEffects.prototype.importFootage = function (path, asSequence) {
      * @param path absolute path to ffx file
      * @return {void}
 **/
-MFAfterEffects.prototype.applyPreset = function (path) {
+textAnimatorAfterEffects.prototype.applyPreset = function (path) {
     app.beginSuppressDialogs();
     var preset = File(path);
     if (app.project.activeItem && app.project.activeItem.selectedLayers.length) {
@@ -80,7 +80,7 @@ MFAfterEffects.prototype.applyPreset = function (path) {
             app.project.activeItem.selectedLayers[i].applyPreset(preset);
         }
         if (app.project.activeItem.selectedLayers.length == 1) {
-            $._MFAfterEffects.fireLiveSettingEvent();
+            $._textAnimatorAfterEffects.fireLiveSettingEvent();
         }
     }
     app.endSuppressDialogs(false);
@@ -95,7 +95,7 @@ MFAfterEffects.prototype.applyPreset = function (path) {
      * @param data specific data that should dispatch with the event.
      * 
 **/
-MFAfterEffects.prototype.fireEvent = function (type, data) {
+textAnimatorAfterEffects.prototype.fireEvent = function (type, data) {
 
     var externalObjectName;
     if (Folder.fs === 'Macintosh') {
@@ -118,7 +118,7 @@ MFAfterEffects.prototype.fireEvent = function (type, data) {
      * @return {any[]} some property of read layers
      * 
 **/
-MFAfterEffects.prototype.getLayerProperties = function (controllerLayers, textLayers) {
+textAnimatorAfterEffects.prototype.getLayerProperties = function (controllerLayers, textLayers) {
     var result = [];
     for (var layersIndex = 0; layersIndex < controllerLayers.length; layersIndex++) {
         var properties = controllerLayers[layersIndex].property("ADBE Effect Parade");
@@ -165,7 +165,7 @@ MFAfterEffects.prototype.getLayerProperties = function (controllerLayers, textLa
 }
 
 
-MFAfterEffects.prototype.generateTextGroup = function (result) {
+textAnimatorAfterEffects.prototype.generateTextGroup = function (result) {
     this.lastReadedProperties.push({ prop: null, removeFunction: null, changeRTLFunction: null });
     result.push({
         name: 'Text Inputs',
@@ -183,7 +183,7 @@ MFAfterEffects.prototype.generateTextGroup = function (result) {
      * @return {number} type of item
      * 
 **/
-MFAfterEffects.prototype.getPropertyType = function (property) {
+textAnimatorAfterEffects.prototype.getPropertyType = function (property) {
     var itemType;
     var type = property.propertyValueType;
     switch (type) {
@@ -237,7 +237,7 @@ MFAfterEffects.prototype.getPropertyType = function (property) {
      * @return {string} setting data
      * 
 **/
-MFAfterEffects.prototype.getCompSetting = function (comp) {
+textAnimatorAfterEffects.prototype.getCompSetting = function (comp) {
     try {
         if (comp) {
             this.lastReadedComp = comp;
@@ -295,7 +295,7 @@ MFAfterEffects.prototype.getCompSetting = function (comp) {
      * @return {any[]} readed controllers as an array
      * 
 **/
-MFAfterEffects.prototype.readSettingControllers = function (properties, parentIndex, resultArray) {
+textAnimatorAfterEffects.prototype.readSettingControllers = function (properties, parentIndex, resultArray) {
     for (var i = 1; i <= properties.numProperties; i++) {
         var property = properties.property(i);
         if (property.name != "Compositing Options" && property.propertyValueType != PropertyValueType.CUSTOM_VALUE) {
@@ -343,9 +343,9 @@ MFAfterEffects.prototype.readSettingControllers = function (properties, parentIn
     return resultArray;
 }
 
-MFAfterEffects.prototype.getRemoveFunction = function (property) {
+textAnimatorAfterEffects.prototype.getRemoveFunction = function (property) {
     if (this.isAnimationBuilderProperty(property)) {
-        return $._AnimationBuilder.removeEffect;
+        return $._TextAnimator.removeEffect;
     }
     else {
         return this.removeEffectOfSelectedLayer;
@@ -353,16 +353,16 @@ MFAfterEffects.prototype.getRemoveFunction = function (property) {
 }
 
 
-MFAfterEffects.prototype.getChangeRTLFunction = function (property) {
+textAnimatorAfterEffects.prototype.getChangeRTLFunction = function (property) {
     if (this.isAnimationBuilderProperty(property)) {
-        return $._AnimationBuilder.changeRTLStatus;
+        return $._TextAnimator.changeRTLStatus;
     }
     else {
         return function () { };
     }
 }
 
-MFAfterEffects.prototype.isAnimationBuilderProperty = function (property) {
+textAnimatorAfterEffects.prototype.isAnimationBuilderProperty = function (property) {
     return property.name && /^([A-Z0-9\s]+)_([a-zA-Z0-9\s]+)_([a-zA-Z0-9\s]+)_([A-Z])(-[\w\d]{1,3})?$/g.test(property.name);
 }
 /**
@@ -372,7 +372,7 @@ MFAfterEffects.prototype.isAnimationBuilderProperty = function (property) {
      * @param {boolean} key add value with key
      * @return {void}
 **/
-MFAfterEffects.prototype.setLayerProperty = function (index, value, key) {
+textAnimatorAfterEffects.prototype.setLayerProperty = function (index, value, key) {
     if (this.lastReadedProperties.length && this.lastReadedProperties[index].prop) {
         var property = this.lastReadedProperties[index].prop;
         (property instanceof PropertyGroup) && property.propertyType == 6213 ? property.enabled = value :
@@ -385,7 +385,7 @@ MFAfterEffects.prototype.setLayerProperty = function (index, value, key) {
      * @param {any} property object of property
      * @return {void}
 **/
-MFAfterEffects.prototype.removeAllKeys = function (property) {
+textAnimatorAfterEffects.prototype.removeAllKeys = function (property) {
     var numKeys = property.numKeys;
     if (numKeys) {
         for (var i = 1; i <= numKeys; i++) {
@@ -399,7 +399,7 @@ MFAfterEffects.prototype.removeAllKeys = function (property) {
      * @param {any} property
      * @return {void}
 **/
-MFAfterEffects.prototype.removeEffectOfSelectedLayer = function (property) {
+textAnimatorAfterEffects.prototype.removeEffectOfSelectedLayer = function (property) {
     if (property && property instanceof PropertyGroup && property.propertyType == 6213) {
         property.remove();
     }
@@ -410,7 +410,7 @@ MFAfterEffects.prototype.removeEffectOfSelectedLayer = function (property) {
      * @param {any} comp object of comp
      * @return {any[]} list of layers in comp
 **/
-MFAfterEffects.prototype.readCompLayers = function (comp) {
+textAnimatorAfterEffects.prototype.readCompLayers = function (comp) {
     var result = [];
     result.push({ index: 0, name: 'None' });
     if (comp) {
@@ -425,7 +425,7 @@ MFAfterEffects.prototype.readCompLayers = function (comp) {
      * @param {any} rootFolder object of imported project
      * @return {void}
 **/
-MFAfterEffects.prototype.addImportedCompsAsLayer = function (rootFolder) {
+textAnimatorAfterEffects.prototype.addImportedCompsAsLayer = function (rootFolder) {
     var activeComp = app.project.activeItem;
     if (activeComp && activeComp instanceof CompItem) {
         for (var i = 1; i <= rootFolder.items.length; i++) {
@@ -439,77 +439,77 @@ MFAfterEffects.prototype.addImportedCompsAsLayer = function (rootFolder) {
     }
 }
 
-var MFAfterEffectsObject = new MFAfterEffects();
-$._MFAfterEffects = {
+var textAnimatorAfterEffectsObject = new textAnimatorAfterEffects();
+$._textAnimatorAfterEffects = {
     importItem: function (path, data, asSequence) {
-        MFAfterEffectsObject.importItem(path, data);
+        textAnimatorAfterEffectsObject.importItem(path, data);
     },
     importFootage: function (path, asSequence) {
-        var importedItem = MFAfterEffectsObject.importFootage(path, asSequence);
+        var importedItem = textAnimatorAfterEffectsObject.importFootage(path, asSequence);
         if (app.project.activeItem && app.project.activeItem instanceof CompItem && importedItem) {
             app.project.activeItem.layers.add(importedItem);
         }
     },
 
     applyPreset: function (path) {
-        MFAfterEffectsObject.applyPreset(path);
+        textAnimatorAfterEffectsObject.applyPreset(path);
     },
 
     fireLiveSettingEvent: function () {
         var compName = '';
-        MFAfterEffectsObject.lastReadedProperties.length = 0;
-        var controllers = MFAfterEffectsObject.getCompSetting(app.project.activeItem);
-        if (MFAfterEffectsObject.lastReadedComp && controllers.length) {
-            compName = MFAfterEffectsObject.lastReadedComp.name;
+        textAnimatorAfterEffectsObject.lastReadedProperties.length = 0;
+        var controllers = textAnimatorAfterEffectsObject.getCompSetting(app.project.activeItem);
+        if (textAnimatorAfterEffectsObject.lastReadedComp && controllers.length) {
+            compName = textAnimatorAfterEffectsObject.lastReadedComp.name;
         }
-        if (MFAfterEffectsObject.lastReadedComp.selectedLayers && MFAfterEffectsObject.lastReadedComp.selectedLayers.length === 1) {
-            compName = MFAfterEffectsObject.lastReadedComp.selectedLayers[0].name;
+        if (textAnimatorAfterEffectsObject.lastReadedComp.selectedLayers && textAnimatorAfterEffectsObject.lastReadedComp.selectedLayers.length === 1) {
+            compName = textAnimatorAfterEffectsObject.lastReadedComp.selectedLayers[0].name;
         }
-        MFAfterEffectsObject.fireEvent('LayerChanged', JSON.stringify({ headerName: compName, controllers: controllers }));
+        textAnimatorAfterEffectsObject.fireEvent('LayerChanged', JSON.stringify({ headerName: compName, controllers: controllers }));
     },
     setLayerProperty: function (index, value, key) {
-        MFAfterEffectsObject.setLayerProperty(index, value, (key == undefined || key == false) ? false : true);
+        textAnimatorAfterEffectsObject.setLayerProperty(index, value, (key == undefined || key == false) ? false : true);
     },
     removeAllKeys: function (index) {
-        MFAfterEffectsObject.removeAllKeys(MFAfterEffectsObject.lastReadedProperties[index].prop);
+        textAnimatorAfterEffectsObject.removeAllKeys(textAnimatorAfterEffectsObject.lastReadedProperties[index].prop);
     },
     removeEffect: function (effectIndex) {
-        if (MFAfterEffectsObject.lastReadedProperties[parseInt(effectIndex)].prop == null) {
+        if (textAnimatorAfterEffectsObject.lastReadedProperties[parseInt(effectIndex)].prop == null) {
             return;
         }
-        var layer = MFAfterEffectsObject.lastReadedComp.selectedLayers[0];
-        var propObj = MFAfterEffectsObject.lastReadedProperties[parseInt(effectIndex)];
+        var layer = textAnimatorAfterEffectsObject.lastReadedComp.selectedLayers[0];
+        var propObj = textAnimatorAfterEffectsObject.lastReadedProperties[parseInt(effectIndex)];
         propObj.removeFunction(propObj.prop);
         if (layer) layer.selected = true;
         this.fireLiveSettingEvent();
     },
     changeRTLStatus: function (effectIndex) {
-        if (MFAfterEffectsObject.lastReadedProperties[parseInt(effectIndex)].prop == null) {
+        if (textAnimatorAfterEffectsObject.lastReadedProperties[parseInt(effectIndex)].prop == null) {
             return;
         }
-        var propObj = MFAfterEffectsObject.lastReadedProperties[parseInt(effectIndex)];
+        var propObj = textAnimatorAfterEffectsObject.lastReadedProperties[parseInt(effectIndex)];
         propObj.changeRTLFunction(propObj.prop);
     },
 
     openAEPProject: function (path) {
-        MFAfterEffectsObject.openAEPProject(path);
+        textAnimatorAfterEffectsObject.openAEPProject(path);
     },
     showPluginMessage: function () {
-        MFAfterEffectsObject.fireEvent('showPluginMessage', JSON.stringify({}));
+        textAnimatorAfterEffectsObject.fireEvent('showPluginMessage', JSON.stringify({}));
     },
     onMFColorPickerSelected: function (red, blue, green, alpha) {
         if (red >= 0 && green >= 0 && blue >= 0 && alpha >= 0) {
-            MFAfterEffectsObject.colorPickerValues = [red, green, blue, alpha];
-            MFAfterEffectsObject.fireEvent('colorPickerSelected', JSON.stringify({ red: red, green: green, blue: blue }));
+            textAnimatorAfterEffectsObject.colorPickerValues = [red, green, blue, alpha];
+            textAnimatorAfterEffectsObject.fireEvent('colorPickerSelected', JSON.stringify({ red: red, green: green, blue: blue }));
         } else {
             return false;
         }
     },
     getColorPickerValues: function () {
-        return MFAfterEffectsObject.colorPickerValues.join(' ');
+        return textAnimatorAfterEffectsObject.colorPickerValues.join(' ');
     },
     openColorPicker: function (red, green, blue, alpha) {
-        MFAfterEffectsObject.colorPickerValues = [red, blue, green, alpha];
-        app.executeCommand(app.findMenuCommandId("MFColorPicker"));
+        textAnimatorAfterEffectsObject.colorPickerValues = [red, blue, green, alpha];
+        app.executeCommand(app.findMenuCommandId("TAColorPicker"));
     }
 }

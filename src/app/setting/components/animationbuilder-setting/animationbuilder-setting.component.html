@@ -1,4 +1,4 @@
-<div class="header">
+<!-- <div class="header">
   <span (click)="showContent=!showContent">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 11">
       <g id="Group_4774" data-name="Group 4774" transform="translate(-48.5 -88)">
@@ -8,7 +8,7 @@
     </svg>
     <span>Typography Setting</span>
   </span>
-</div>
+</div> -->
 <div [hidden]="!showContent">
   <div *ngFor="let mainGroup of mainGroups">
     <mf-group-controller [name]="mainGroup.name" [description]="mainGroup.description" (valueChange)="handleChange($event)"
