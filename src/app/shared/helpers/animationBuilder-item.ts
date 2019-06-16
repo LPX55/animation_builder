@@ -7,6 +7,7 @@ enum allDirections {
     'None'
 }
 export class AnimationBuilderItem {
+
     public name = '';
     public folderPath = '';
     public category = '';
@@ -35,14 +36,14 @@ export class AnimationBuilderItemType {
     public direction = -1;
     public previewPath = '';
     public presetPath = '';
-    constructor(type: number, direction: number, previewPath: string) {
+    constructor(type: number, direction: number, previewPath: string, isPPRO: boolean) {
         this.type = type;
         this.direction = direction;
         // this.previewPath = this.presetPath.substr(0, this.presetPath.lastIndexOf('_')) + '.gif';
         this.previewPath = previewPath.replace(/\\/g, '//');
         // type Bouth doesnt have preset
-        if (type !== AnimationBuilderItemType.types.Both) {
-            this.presetPath = this.previewPath.substr(0, this.previewPath.lastIndexOf('.')) + '.ffx';
+        if (isPPRO || type !== AnimationBuilderItemType.types.Both) {
+            this.presetPath = this.previewPath.substr(0, this.previewPath.lastIndexOf('.')) + isPPRO ? '.mogrt' : '.ffx';
         }
     }
 }

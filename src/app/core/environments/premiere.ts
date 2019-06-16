@@ -17,11 +17,11 @@ export default class Premiere extends General implements Host {
         super();
     }
     import(itemPath, data, asSequence): void {
-        this._jsxInjectorService.evalScript(`$._MFPremiere.importItem("${itemPath}", '${data}', ${asSequence})`);
+        this._jsxInjectorService.evalScript(`$._TAPremiere.importItem("${itemPath}", '${data}', ${asSequence})`);
 
     }
     openProject(itemPath): void {
-        this._jsxInjectorService.evalScript(`$._MFPremiere.openProject('${itemPath}')`);
+        this._jsxInjectorService.evalScript(`$._TAPremiere.openProject('${itemPath}')`);
     }
     setParameter(parameterIndex, parameterValue, controller): void {
         if (controller.type === ControllerType.point || controller.type === ControllerType.pointPercent) {
@@ -33,10 +33,10 @@ export default class Premiere extends General implements Host {
         } else if (parameterValue instanceof Array || typeof parameterValue === 'object') {
             parameterValue = JSON.stringify(parameterValue);
         }
-        this._jsxInjectorService.evalScript(`$._MFPremiere.setClipProperty(${parameterIndex}, ${parameterValue})`);
+        this._jsxInjectorService.evalScript(`$._TAPremiere.setClipProperty(${parameterIndex}, ${parameterValue})`);
     }
     setColorParameter(controllerIndex, { red, green, blue }): void {
-        this._jsxInjectorService.evalScript(`$._MFPremiere.setColorValue(${controllerIndex}, ${red}, ${green}, ${blue})`);
+        this._jsxInjectorService.evalScript(`$._TAPremiere.setColorValue(${controllerIndex}, ${red}, ${green}, ${blue})`);
     }
     settingHandler(settingData: any): any {
         const data = cloneDeep(settingData.controllers);
@@ -54,7 +54,7 @@ export default class Premiere extends General implements Host {
     }
 
     openColorPicker(rgbColor): void {
-        this._jsxInjectorService.evalScript(`$._MFPremiere.openColorPicker('${rgbColor[0]}','${rgbColor[1]}','${rgbColor[2]}',1)`);
+        this._jsxInjectorService.evalScript(`$._TAPremiere.openColorPicker('${rgbColor[0]}','${rgbColor[1]}','${rgbColor[2]}',1)`);
     }
 
 }

@@ -35,7 +35,7 @@ export class JsxInjectorService {
       this._defualtPath = this._csi.getSystemPath(SystemPath.EXTENSION);
       this.listenForChanges();
       this.listenForErrors();
-      this.listenForVulcanEvents();
+     // this.listenForVulcanEvents();
     }
   }
   /**
@@ -95,18 +95,25 @@ export class JsxInjectorService {
     });
 
     this._csi.addEventListener("LayerChanged", (event: any) => {
+      console.log(event, 'a');
       // recieved changed layer event and data
       if (
         event.data.controllers instanceof Array &&
         event.data.controllers.length > 0
       ) {
         if (1 === this._appGlobals.DBConnection.get("user.status").value()) {
-          if (event.data && event.data.controllers.length &&  event.data.controllers.filter(controller => {
+          if (event.data && event.data.controllers.length && (this.hostEnvironment.appId == "PPRO"
+          || event.data.controllers.filter(controller => {
             return controller.type === ControllerType.mainGroup && controller.isABProperty;
-          }).length) {
-            console.log(event.data);
+          }).length)) {
             this.settingData = this.settingHandlerFunction(event.data);
             this._zone.run(() => this._router.navigate([this.settingPath]));
+            try{
+              const layerLoadElement: any = document.getElementsByClassName(
+                "loadLayer"
+              )[0];
+              layerLoadElement.style.display = "none";
+            } catch(err){}
           } else if (this._router.url.indexOf("/dashboard/setting") > -1) {
             this._location.back();
             this.settingData = {};

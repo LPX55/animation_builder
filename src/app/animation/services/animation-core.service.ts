@@ -115,7 +115,8 @@ export class AnimationCoreService {
             break;
         }
         if (type !== -1) {
-          item.addTypeToItem(new AnimationBuilderItemType(type, direction, path.join(item.folderPath, element)));
+          item.addTypeToItem(new AnimationBuilderItemType(type, direction, path.join(item.folderPath, element),
+          this._jsxInjectorService.hostEnvironment.appId === 'PPRO'));
         }
       }
     });
