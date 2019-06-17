@@ -29,7 +29,7 @@ class AutoUpdater {
     this.currentVersion = currentVersion;
     this.emitter = emitter;
     this.requestUpdateURL =
-      "http://pixflow.co/motion-factory/update/update.php";
+      "http://pixflow.co/text-animator/update/update.php";
     this.username = getOSUserInfo("username");
     this.newVersionPath = getNewVersionOfExtensionPath();
     this.rootUpdatePath = gettextanimatorAppDataFolder();

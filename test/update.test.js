@@ -150,7 +150,7 @@ describe("Auto Updater Tests", function () {
   it("Request option should be correct", done => {
     const Updater = new AutoUpdater("0.0.0");
     const options = {
-      url: "http://pixflow.co/motion-factory/update/update.php",
+      url: "http://pixflow.co/text-animator/update/update.php",
       method: "POST",
       headers: {
         "User-Agent": "Super Agent/0.0.1",
