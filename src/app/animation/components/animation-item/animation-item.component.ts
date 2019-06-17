@@ -97,5 +97,15 @@ export class AnimationItemComponent implements OnInit {
     this.direction = { directionName: AnimationBuilderItemType.directions[menuId], directionKey: menuId };
     this.showDropDown = false;
   }
+  ondblclick(): void {
+    if (this._animationCoreService.animationTypeFilter !== AnimationBuilderItemType.types.Both) {
+      console.log([this.currentType.presetPath], this._animationCoreService.animationTypeFilter)
+      this._animationCoreService.applyPreset([this.currentType.presetPath], this._animationCoreService.animationTypeFilter);
+    } else {
+      this._animationCoreService.applyPreset(this.item.types.filter(t =>
+        (t.type === AnimationBuilderItemType.types.In || t.type === AnimationBuilderItemType.types.Out)
+      && t.direction === this.currentType.direction ).map(t => t.presetPath), this._animationCoreService.animationTypeFilter );
+    }
+  }
 
 }

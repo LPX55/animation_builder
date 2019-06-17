@@ -315,7 +315,7 @@ textAnimatorAfterEffects.prototype.readSettingControllers = function (properties
                 })
             }
             else {
-                var isABProperty = this.isAnimationBuilderProperty(property);
+                var isABProperty = this.isTextAnimatorProperty(property);
                 var group = {
                     name: isABProperty && property.propertyType == 6213 ? TextAnimatorObject.getPropsFromString(property.name).typeName :
                         properties.property(i).name,
@@ -344,7 +344,7 @@ textAnimatorAfterEffects.prototype.readSettingControllers = function (properties
 }
 
 textAnimatorAfterEffects.prototype.getRemoveFunction = function (property) {
-    if (this.isAnimationBuilderProperty(property)) {
+    if (this.isTextAnimatorProperty(property)) {
         return $._TextAnimator.removeEffect;
     }
     else {
@@ -354,7 +354,7 @@ textAnimatorAfterEffects.prototype.getRemoveFunction = function (property) {
 
 
 textAnimatorAfterEffects.prototype.getChangeRTLFunction = function (property) {
-    if (this.isAnimationBuilderProperty(property)) {
+    if (this.isTextAnimatorProperty(property)) {
         return $._TextAnimator.changeRTLStatus;
     }
     else {
@@ -362,7 +362,7 @@ textAnimatorAfterEffects.prototype.getChangeRTLFunction = function (property) {
     }
 }
 
-textAnimatorAfterEffects.prototype.isAnimationBuilderProperty = function (property) {
+textAnimatorAfterEffects.prototype.isTextAnimatorProperty = function (property) {
     return property.name && /^([A-Z0-9\s]+)_([a-zA-Z0-9\s]+)_([a-zA-Z0-9\s]+)_([A-Z])(-[\w\d]{1,3})?$/g.test(property.name);
 }
 /**

@@ -43,7 +43,7 @@ export class AnimationBuilderItemType {
         this.previewPath = previewPath.replace(/\\/g, '//');
         // type Bouth doesnt have preset
         if (isPPRO || type !== AnimationBuilderItemType.types.Both) {
-            this.presetPath = this.previewPath.substr(0, this.previewPath.lastIndexOf('.')) + isPPRO ? '.mogrt' : '.ffx';
+            this.presetPath = this.previewPath.substr(0, this.previewPath.lastIndexOf('.')) + (isPPRO ? '.mogrt' : '.ffx');
         }
     }
 }

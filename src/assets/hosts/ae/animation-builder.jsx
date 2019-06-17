@@ -77,6 +77,8 @@ TextAnimator.prototype.universalAppliedFxOfPreset = function (presetPath, layer)
                 this.checkChildrenPropertiesAndReplaceExpresseion(anim, oldName, fx.name);
             }
         }
+        fx.enabled = false;
+        fx.enabled = true;
         return fx;
     }
 }
@@ -86,8 +88,8 @@ TextAnimator.prototype.checkChildrenPropertiesAndReplaceExpresseion = function (
         try {
             if (property.expressionEnabled && property.expression && property.expression != '') {
                 var re = new RegExp(oldExp, 'g');
-                property.expression = property.expression.replace(re, newExp);
                 property.expressionEnabled = false;
+                property.expression = property.expression.replace(re, newExp);
                 property.expressionEnabled = true;
             }
         }
