@@ -18,6 +18,7 @@ export class AnimationHomeComponent implements OnInit, OnDestroy {
   showDropArea = false;
   subscribeShowDropArea: Subscription;
   @ViewChild('packInstaller') fileSelector;
+  showMenu = false;
 
 
   constructor(private route: ActivatedRoute, private router: Router,
@@ -27,6 +28,9 @@ export class AnimationHomeComponent implements OnInit, OnDestroy {
       this.showDropArea = value;
       _changeDetectorRef.markForCheck();
     });
+    this._animationCoreService.isAnyPackInstalled.subscribe((value)=>{
+      this.showMenu = value;
+    })
   }
 
 
@@ -35,6 +39,7 @@ export class AnimationHomeComponent implements OnInit, OnDestroy {
    * @return {void}
   */
   ngOnInit(): void {
+    this._animationCoreService.checkAnyPackInstalled();
   }
   ngOnDestroy(): void {
     this.subscribeShowDropArea.unsubscribe();
@@ -53,8 +58,9 @@ export class AnimationHomeComponent implements OnInit, OnDestroy {
     this._ipcHandlerService
     .emitEvent("installPack", {packPath: files[0].path, outPutPath: this._animationCoreService.textBuilderPath })
     .subscribe(data => {
-console.log(data);
-this.ngProgress.ref().complete();
+      console.log(data);
+      this.ngProgress.ref().complete();
+      if(data.result) this._animationCoreService.checkAnyPackInstalled();
     });
     const fileSelector: any = document.getElementById('file-selector');
     fileSelector.value = '';

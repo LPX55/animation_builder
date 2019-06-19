@@ -23,6 +23,7 @@ export class AnimationItemLoaderComponent implements OnInit {
   indexTrackFn = (index: number, item: AnimationBuilderItem) => item.id;
   constructor(private _animationCoreService: AnimationCoreService, private _changeDetectorRef: ChangeDetectorRef) {
     this.itemsSubscibe = this._animationCoreService.showCategory.subscribe((category: AnimationBuilderCategory) => {
+      if(!category) return;
       this._items = this._animationCoreService.getCategoryItems(category.categoryPath, category.type);
       console.log('items', this._items);
       if (category.title === 'Text Effects') {

@@ -14,6 +14,7 @@ export class AnimationCoreService {
   public showDropArea = new BehaviorSubject(false);
   public dropAreaOptions = { activeType: null, allTypes: [] };
   public showCategory = new BehaviorSubject(this.getAllCategories(this.textBuilderSourceFolder)[0]);
+  public isAnyPackInstalled = new BehaviorSubject(false);
   constructor(
     private router: Router,
     private _osInfoService: OsInfoService,
@@ -41,6 +42,7 @@ export class AnimationCoreService {
     return this._osInfoService.gettextanimatorAppDataFolder() + '/packs';
   }
 
+
   getCategoryItems(categoryPath, categoryType = 0): AnimationBuilderItem[] {
     if (!categoryPath) { return []; }
     const items = this.getDirectories(categoryPath);
@@ -66,6 +68,7 @@ export class AnimationCoreService {
   }
 
   getDirectories(sourcePath): any[] {
+    if(!fs.existsSync(sourcePath)) return [];
     const isDirectory = source => fs.lstatSync(source).isDirectory();
     return fs.readdirSync(sourcePath).map(name => path.join(sourcePath, name)).filter(isDirectory);
   }
@@ -148,6 +151,15 @@ export class AnimationCoreService {
 
     }
     this._jsxInjectorService.evalScript(command);
+  }
+  checkAnyPackInstalled(){
+    if(fs.existsSync(this.textBuilderSourceFolder)){
+      this.isAnyPackInstalled.next(true);
+      this.showCategory.next(this.getAllCategories(this.textBuilderSourceFolder)[0]);
+    }
+    else{
+      this.isAnyPackInstalled.next(false);
+    }
   }
 
 }

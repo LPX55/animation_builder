@@ -1,6 +1,7 @@
 <mf-animation-header></mf-animation-header>
 <ng-progress></ng-progress>
-<div class="filter">
+<div class="main" *ngIf="showMenu">
+  <div class="filter">
   <mf-animation-filter [hidden]="animationFilter==3"></mf-animation-filter>
   <mf-general-button [text]="'Install Pack'" [padding]="'8px 12px'" [type]="'fill'" [backgroundColor]="'#444444'"
   (clicked)="installPack()"></mf-general-button>
@@ -10,6 +11,10 @@
   <mf-animation-item-loader [filter]="animationFilter"></mf-animation-item-loader>
   <mf-drop-area *ngIf="showDropArea"></mf-drop-area>
 
+</div>
+</div>
+<div *ngIf="!showMenu" class="no-pack" >
+ <span (click)="installPack()"> Pleae Install a Package to continue</span>
 </div>
 <input
     type="file"
