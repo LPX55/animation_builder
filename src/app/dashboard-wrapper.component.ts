@@ -15,6 +15,7 @@ import { Component, OnInit } from "@angular/core";
         display: flex;
         flex-direction: column;
         background-color: #262626;
+        height: 100%;
       }
     `
   ],

@@ -60,7 +60,8 @@ export class AnimationHomeComponent implements OnInit, OnDestroy {
     .subscribe(data => {
       console.log(data);
       this.ngProgress.ref().complete();
-      if(data.result) this._animationCoreService.checkAnyPackInstalled();
+      if(data.result) {this._animationCoreService.checkAnyPackInstalled();}
+      else {alert('installation failed');}
     });
     const fileSelector: any = document.getElementById('file-selector');
     fileSelector.value = '';
