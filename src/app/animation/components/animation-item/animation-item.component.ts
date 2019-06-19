@@ -44,8 +44,9 @@ export class AnimationItemComponent implements OnInit {
       };
     });
   }
-  @HostListener('cdkDragStarted', [])
-  handleDragStart(): void {
+  @HostListener('cdkDragStarted', ["$event"])
+  handleDragStart($event): void {
+    console.log($event)
     this._animationCoreService.dropAreaOptions = { activeType: this.currentType, allTypes: this.item.types };
     this._animationCoreService.showDropArea.next(true);
   }

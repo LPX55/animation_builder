@@ -20,6 +20,7 @@ const fetchVideoFrame = require('./events/fetch-video-frame').fetchVideoFrame;
 const fetchMogrtThumb = require('./events/fetch-mogrt-thumb').fetchMogrtThumb;
 const resizeImage = require('./events/resize-image').resizeImage;
 const processFile = require('./events/process-file').processFile;
+const installPack = require('./events/install-pack').installPack;
 const { initExtract } = require('./events/extract-mogrt');
 
 const ipc = new IpcHandler(config.serverIP, ('dev' !== envMode) ? parseInt(process.argv[3]) : 45012);
@@ -40,5 +41,18 @@ ipc.listenForEvent('exitIPC', (data, emitter) => {
     process.exit();
 });
 ipc.listenForEvent('initExtract', initExtract.bind(ipc));
+ipc.listenForEvent('installPack', (data, emitter)=> {
+    console.log(data);
+    data = JSON.parse(data);
+    installPack(data.packPath, data.outPutPath).then(value=>{
+        if(value===true){
+            emitter('installPack', {result: true})
+        } else{
+            emitter('installPack', {result: false})
+        }
+    }).catch((err)=>{
+        emitter('installPack', {result: false})
+    })
+})
 
 exports.ipc = ipc;

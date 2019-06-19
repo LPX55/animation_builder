@@ -14,12 +14,14 @@ import { DropAreaComponent } from './components/drop-area/drop-area.component';
 import { AnimationFilterComponent } from './components/animation-filter/animation-filter.component';
 import { AnimationItemPreviewComponent } from './components/animation-item-preview/animation-item-preview.component';
 import { AnimationCategoryComponent } from './components/animation-category/animation-category.component';
+import { NgProgressModule } from '@ngx-progressbar/core';
 
 @NgModule({
   imports: [
     CommonModule,
     AnimationRoutingModule,
-    SharedModule
+    SharedModule,
+    NgProgressModule
   ],
   declarations: [
     AnimationSidebarComponent,

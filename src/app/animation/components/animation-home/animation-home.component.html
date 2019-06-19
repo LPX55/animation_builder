@@ -1,6 +1,9 @@
 <mf-animation-header></mf-animation-header>
+<ng-progress></ng-progress>
 <div class="filter">
   <mf-animation-filter [hidden]="animationFilter==3"></mf-animation-filter>
+  <mf-general-button [text]="'Install Pack'" [padding]="'8px 12px'" [type]="'fill'" [backgroundColor]="'#444444'"
+  (clicked)="installPack()"></mf-general-button>
 </div>
 <div class="animation-home-wrap">
   <mf-animation-sidebar></mf-animation-sidebar>
@@ -8,3 +11,10 @@
   <mf-drop-area *ngIf="showDropArea"></mf-drop-area>
 
 </div>
+<input
+    type="file"
+    id="file-selector"
+    (change)="fileChoosed($event)"
+    #packInstaller
+    style="display: none"
+  />

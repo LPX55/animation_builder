@@ -35,7 +35,10 @@ export class AnimationCoreService {
   }
 
   get textBuilderSourceFolder(): string {
-    return this._osInfoService.gettextanimatorAppDataFolder() + '/Animation Builder/Text Builder';
+    return this._osInfoService.gettextanimatorAppDataFolder() + '/packs/premium';
+  }
+  get textBuilderPath(): string {
+    return this._osInfoService.gettextanimatorAppDataFolder() + '/packs';
   }
 
   getCategoryItems(categoryPath, categoryType = 0): AnimationBuilderItem[] {
