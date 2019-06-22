@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
     if (this._osInfoService.currentPlatform !== "MAC") {
       fs.writeFileSync(
         `${this._osInfoService.gettextanimatorAppDataFolder()}/host-version.txt`,
-        path.resolve(processArgv0, "../../AfterFX.exe")
+        '"'+path.resolve(processArgv0, "../../AfterFX.exe")+'"'
       );
     } else {
       appVersion = (
@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
       fs.writeFileSync(
         `${this._osInfoService.gettextanimatorAppDataFolder()}/host-version.txt`,
         `open -a "Adobe After Effects CC ${appVersion}"`
-      );
+      ); 
     }
     this._ipcHandlerService
       .emitEvent("installDependencies", {

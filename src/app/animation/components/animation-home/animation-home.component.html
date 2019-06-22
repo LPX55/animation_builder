@@ -14,7 +14,10 @@
 </div>
 </div>
 <div *ngIf="!showMenu" class="no-pack" >
- <span (click)="installPack()"> Pleae Install a Package to continue</span>
+  <img src="assets/emptypack.png" >
+ <span>Nothing is here! install the pack to continue</span>
+ <mf-general-button [text]="'Install Pack'" [padding]="'8px 12px'" [type]="'fill'" [backgroundColor]="'#444444'"
+  (clicked)="installPack()"></mf-general-button>
 </div>
 <input
     type="file"
@@ -22,4 +25,5 @@
     (change)="fileChoosed($event)"
     #packInstaller
     style="display: none"
+    accept=".pxp"
   />

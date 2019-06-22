@@ -153,6 +153,7 @@ export class AnimationCoreService {
     this._jsxInjectorService.evalScript(command);
   }
   checkAnyPackInstalled(){
+    !fs.existsSync(this.textBuilderPath) && fs.mkdirSync(this.textBuilderPath);
     if(fs.existsSync(this.textBuilderSourceFolder)){
       this.isAnyPackInstalled.next(true);
       this.showCategory.next(this.getAllCategories(this.textBuilderSourceFolder)[0]);

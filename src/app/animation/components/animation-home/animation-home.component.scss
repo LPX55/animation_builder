@@ -17,6 +17,11 @@
             margin-top:20px;
         }
     }
+    mf-general-button{
+        position: fixed;
+        left:15px;
+        bottom: 15px;
+    }
     .animation-home-wrap{
         width:100%;
         padding-top: 14px;
@@ -29,14 +34,20 @@
 }
     .no-pack{
         margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
         transform: translateY(-50%);
         position: relative;
-        top: 50%;
+        top: 44%;
         font-size: 15px;
         font-family: 'Open Sans-semibold',
         sans-serif;
         color: #999999;
         cursor: pointer;
+        >* {
+            margin-bottom: 20px;
+        }
     }
 }
