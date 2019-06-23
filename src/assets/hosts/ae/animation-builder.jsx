@@ -231,6 +231,12 @@ TextAnimator.prototype.getRTLStatus = function (effectProp){
     }
     return RTL;
 }
+TextAnimator.prototype.activeMotionBlur = function(comp, layer){
+    if(comp && layer){
+        comp.motionBlur = true;
+        layer.motionBlur = true;
+    }
+}
 
 var TextAnimatorObject = new TextAnimator();
 $._TextAnimator = {
@@ -238,7 +244,7 @@ $._TextAnimator = {
         var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
         if(!both) app.beginUndoGroup("Apply In");
-        TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.In, layer.inPoint, 2.5, false);
+        TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.In, layer.inPoint, 2, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;
@@ -254,7 +260,7 @@ $._TextAnimator = {
         var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
         if(!both) app.beginUndoGroup("Apply Out");
-        TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.Out, layer.outPoint - 2.5, 2.5, false);
+        TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.Out, layer.outPoint - 2.1, 2, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         layer.selected = false;

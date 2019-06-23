@@ -19,6 +19,8 @@
                 opacity: 0.6;
                 &.active{
                     opacity: 1 !important;
+                    color: #6595ef;
+                    font-family: $font-family-semibold;
                 }
                 cursor: pointer;
                 span{
@@ -39,6 +41,9 @@
                     margin-left:8px;
                     &.active{
                         opacity: 1 !important;
+                        color: #6595ef;
+                        font-family: $font-family-semibold;
+                        font-size: $font-size-large;
                     }
                 }
             }

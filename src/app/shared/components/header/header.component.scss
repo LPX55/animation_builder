@@ -46,9 +46,6 @@
         padding-left: 9px;
         font-size: $font-size-large;
         font-family: $font-family-semibold;
-        @media screen and (max-width: $min-screen-size) {
-            display: none;
-        }
     }
 }
 
