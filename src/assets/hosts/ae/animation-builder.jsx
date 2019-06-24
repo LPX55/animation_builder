@@ -312,10 +312,10 @@ $._TextAnimator = {
         TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.In, layer.inPoint, 2, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
+        TextAnimatorObject.activeMotionBlur(app.project.activeItem, layer);
         if (app.project.activeItem.selectedLayers.length == 1 && !both) {
             $._textAnimatorAfterEffects.fireLiveSettingEvent();
           }
-        TextAnimatorObject.activeMotionBlur(app.project.activeItem, layer);
         if(!both) app.endUndoGroup();
         }
         else {
@@ -330,10 +330,10 @@ $._TextAnimator = {
         TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.Out, layer.outPoint - 2.1, 2, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
+        TextAnimatorObject.activeMotionBlur(app.project.activeItem, layer);
         if (app.project.activeItem.selectedLayers.length == 1 && !both) {
             $._textAnimatorAfterEffects.fireLiveSettingEvent();
           }
-        TextAnimatorObject.activeMotionBlur(app.project.activeItem, layer);
         if(!both) app.endUndoGroup();
         }
         else {
@@ -346,11 +346,11 @@ $._TextAnimator = {
         if(layer instanceof TextLayer) {
         app.beginUndoGroup("Apply In and Out");
         this.applyIn(presetPath[0], true);
+        this.applyOut(presetPath[1], true);
+        TextAnimatorObject.activeMotionBlur(app.project.activeItem, layer);
         if (app.project.activeItem.selectedLayers.length == 1) {
             $._textAnimatorAfterEffects.fireLiveSettingEvent();
           }
-        this.applyOut(presetPath[1], true);
-        TextAnimatorObject.activeMotionBlur(app.project.activeItem, layer);
         app.endUndoGroup();
 
         }
@@ -370,14 +370,14 @@ $._TextAnimator = {
         var inMarkerName = "In-" + fxInfo.randomKey;
         var outMarkerName = "Out-"+ fxInfo.randomKey;
         var colorLabel = TextAnimatorObject.getMarkerUniqueLabel(layer);
-        TextAnimatorObject.addMarker(layer,inMarkerName , TextAnimatorObject.getBestMarkerTime(comp.time-2, layer, true), 1, false, colorLabel);
-        TextAnimatorObject.addMarker(layer,outMarkerName ,TextAnimatorObject.getBestMarkerTime(comp.time + 1, layer, false), 1, false, colorLabel);
+        TextAnimatorObject.addMarker(layer,inMarkerName , TextAnimatorObject.getBestMarkerTime(comp.time-3, layer, true), 2, false, colorLabel);
+        TextAnimatorObject.addMarker(layer,outMarkerName ,TextAnimatorObject.getBestMarkerTime(comp.time + 1, layer, false), 2, false, colorLabel);
         TextAnimatorObject.universalMarkerFxOfPreset(fx.name, "= '"+inMarkerName+"';","= 'In';", layer);
         TextAnimatorObject.universalMarkerFxOfPreset(fx.name, "= '"+outMarkerName+"';","= 'Out';", layer);
+        TextAnimatorObject.activeMotionBlur(app.project.activeItem, layer);
         if (app.project.activeItem.selectedLayers.length == 1) {
             $._textAnimatorAfterEffects.fireLiveSettingEvent();
           }
-        TextAnimatorObject.activeMotionBlur(app.project.activeItem, layer);
         app.endUndoGroup();
         }
         else {
