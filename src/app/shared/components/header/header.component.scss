@@ -2,10 +2,14 @@
 @import '~app/mixin';
 :host {
     height: 44px;
-    background-color: $header-background;
+    background-image: url(../../../../assets/animation-header.jpg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: repeat;
     width: 100%;
     @include flex-position('', 'center');
     padding: 0 10px;
+
     box-sizing: border-box;
     .cls-1 {
         fill: #333;
@@ -45,7 +49,10 @@
     .logo-text {
         padding-left: 9px;
         font-size: $font-size-large;
-        font-family: $font-family-semibold;
+        font-family:  "Oswald-regular";
+        font-weight: 500;
+        font-size: 16px;
+
     }
 }
 

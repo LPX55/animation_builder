@@ -80,7 +80,7 @@ textAnimatorAfterEffects.prototype.applyPreset = function (path) {
             app.project.activeItem.selectedLayers[i].applyPreset(preset);
         }
         if (app.project.activeItem.selectedLayers.length == 1) {
-            $._textAnimatorAfterEffects.fireLiveSettingEvent();
+          //  $._textAnimatorAfterEffects.fireLiveSettingEvent();
         }
     }
     app.endSuppressDialogs(false);
@@ -139,7 +139,7 @@ textAnimatorAfterEffects.prototype.getLayerProperties = function (controllerLaye
                 hasKey: controller.hasKey,
                 key: controller.key,
                 valueOptions: controller.valueOptions,
-                description: controller.description,
+                description: controller.randomKey !="" && controller.randomKey ? controller.description + "-"+ controller.randomKey :controller.description,
                 isABProperty: controller.isABProperty,
                 rtlStatus: controller.rtlStatus
             })
@@ -326,6 +326,7 @@ textAnimatorAfterEffects.prototype.readSettingControllers = function (properties
                     hasFx: !isABProperty && property.canSetEnabled,
                     fx: property.enabled,
                     description: isABProperty ? TextAnimatorObject.getPropsFromString(property.name).name : '',
+                    randomKey: isABProperty? TextAnimatorObject.getPropsFromString(property.name).randomKey: "",
                     removeFunction: this.getRemoveFunction(property),
                     changeRTLFunction: this.getChangeRTLFunction(property),
                     isABProperty: isABProperty ? true : false,
@@ -437,6 +438,10 @@ textAnimatorAfterEffects.prototype.addImportedCompsAsLayer = function (rootFolde
                 this.addImportedCompsAsLayer(item)
         }
     }
+}
+textAnimatorAfterEffects.prototype.random = function (min,max) // min and max included
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 var textAnimatorAfterEffectsObject = new textAnimatorAfterEffects();
