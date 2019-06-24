@@ -13,6 +13,7 @@
     "build:clear": "rimraf ./build",
     "archive": "cross-env NODE_ENV=production npm-run-all build:*",
     "dev": "ng build --output-path ./build/dist&&grunt task:development&&ng serve --hmr -e=hmr",
+    "update": "mocha --exit --no-deprecation&&grunt task:precommit&&grunt task:git",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
