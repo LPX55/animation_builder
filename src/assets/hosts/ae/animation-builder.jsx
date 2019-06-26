@@ -80,9 +80,10 @@ TextAnimator.prototype.universalAppliedFxOfPreset = function (presetPath, layer)
         var oldName = fx.name;
         fx.name = fx.name + '-' + this.getRandomKey();
         var animators = layer.property("ADBE Text Properties").property("ADBE Text Animators");
+        $.sleep(300);
         for (var i = 1; i <= animators.numProperties; i++) {
             var anim = animators.property(i);
-            if (anim.name.indexOf(presetName) > -1) {
+            if (anim.name.indexOf(presetName) > -1 && anim.name.match(/^.*-[a-zA-Z0-9 ]{3}/g)===null ) {
                 anim.name = anim.name.replace(oldName, fx.name);
                 this.checkChildrenPropertiesAndReplaceExpresseion(anim, oldName, fx.name);
             }
@@ -114,9 +115,16 @@ TextAnimator.prototype.checkChildrenPropertiesAndReplaceExpresseion = function (
         try {
             if (property.expressionEnabled && property.expression && property.expression != '') {
                 var re = new RegExp(oldExp, 'g');
-                property.expressionEnabled = false;
                 property.expression = property.expression.replace(re, newExp);
-                property.expressionEnabled = true;
+                for(var j = 0;j<2;j++){
+                        try{
+                            property.expressionEnabled = false;
+                            property.setValue(property.value);
+                            property.expressionEnabled = true;
+                            if(property.expression.indexOf(newExp)>-1) $.sleep(200);
+                        }
+                        catch(err){}
+                }
             }
         }
         catch (e) {
@@ -309,6 +317,8 @@ $._TextAnimator = {
         var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
         if(!both) app.beginUndoGroup("Apply In");
+        layer.selected = false;
+        layer.selected = true;
         TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.In, layer.inPoint, 2, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
@@ -316,7 +326,6 @@ $._TextAnimator = {
         if (app.project.activeItem.selectedLayers.length == 1 && !both) {
             $._textAnimatorAfterEffects.fireLiveSettingEvent();
           }
-          app.project.autoFixExpressions();
         if(!both) app.endUndoGroup();
         }
         else {
@@ -328,6 +337,8 @@ $._TextAnimator = {
         var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
         if(!both) app.beginUndoGroup("Apply Out");
+        layer.selected = false;
+        layer.selected = true;
         TextAnimatorObject.addMarker(layer, TextAnimatorObject.markersName.Out, layer.outPoint - 2.1, 2, false);
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
@@ -335,7 +346,6 @@ $._TextAnimator = {
         if (app.project.activeItem.selectedLayers.length == 1 && !both) {
             $._textAnimatorAfterEffects.fireLiveSettingEvent();
           }
-          app.project.autoFixExpressions();
         if(!both) app.endUndoGroup();
         }
         else {
@@ -347,13 +357,14 @@ $._TextAnimator = {
         var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
         app.beginUndoGroup("Apply In and Out");
+        layer.selected = false;
+        layer.selected = true;
         this.applyIn(presetPath[0], true);
         this.applyOut(presetPath[1], true);
         TextAnimatorObject.activeMotionBlur(app.project.activeItem, layer);
         if (app.project.activeItem.selectedLayers.length == 1) {
             $._textAnimatorAfterEffects.fireLiveSettingEvent();
           }
-          app.project.autoFixExpressions();
         app.endUndoGroup();
 
         }
@@ -367,6 +378,8 @@ $._TextAnimator = {
         var comp =  app.project.activeItem;
         if(layer instanceof TextLayer) {
         app.beginUndoGroup("Apply Effect");
+        layer.selected = false;
+        layer.selected = true;
         textAnimatorAfterEffectsObject.applyPreset(presetPath);
         var fx = TextAnimatorObject.universalAppliedFxOfPreset(presetPath, layer);
         var fxInfo = TextAnimatorObject.getPropsFromString(fx.name);
@@ -381,7 +394,6 @@ $._TextAnimator = {
         if (app.project.activeItem.selectedLayers.length == 1) {
             $._textAnimatorAfterEffects.fireLiveSettingEvent();
           }
-        app.project.autoFixExpressions();
         app.endUndoGroup();
         }
         else {
