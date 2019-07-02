@@ -1,6 +1,6 @@
 {
-  "name": "mf-premiere",
-  "version": "1.0.1",
+  "name": "text_animator",
+  "version": "1.0.3",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

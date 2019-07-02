@@ -108,5 +108,11 @@ export class AnimationItemComponent implements OnInit {
       && t.direction === this.currentType.direction ).map(t => t.presetPath), this._animationCoreService.animationTypeFilter );
     }
   }
-
+  getCategoryName(text): string {
+    if(text.indexOf("_")>-1){
+      return text.split("_").pop();
+    } else{
+      return text;
+    }
+  }
 }

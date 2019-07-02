@@ -51,7 +51,13 @@ export class AnimationCoreService {
         const animationItem = new AnimationBuilderItem(item);
         this.processItem(animationItem);
         return animationItem;
-      });
+      }).sort((a,b)=>{
+        const aname = a.name.split(" ");
+        const bname = b.name.split(" ");
+        const anumber = parseInt(aname.pop());
+        const bnumber = parseInt(bname.pop());
+        return anumber-bnumber;
+      })
     } else {
       const innerItems = [];
       const categoryItems = items.map(item => {
