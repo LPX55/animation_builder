@@ -150,7 +150,9 @@ export class AnimationCoreService {
       default: break;
 
     }
-    this._jsxInjectorService.evalScript(command);
+    this._jsxInjectorService.evalScript(command,()=>{
+      setTimeout(()=>this._jsxInjectorService.evalScript("TextAnimatorObject.fixExpressions()"),300);
+    });
   }
   checkAnyPackInstalled(){
     !fs.existsSync(this.textBuilderPath) && fs.mkdirSync(this.textBuilderPath);

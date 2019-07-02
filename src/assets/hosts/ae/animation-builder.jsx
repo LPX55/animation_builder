@@ -4,6 +4,7 @@ function TextAnimator() {
         "In": "Intro",
         "Out": "Outro"
     }
+    this.lastLayer = null;
 }
 TextAnimator.prototype.getPropsFromString = function (name) {
     var regex = /^([A-Z0-9\s]+)_([a-zA-Z0-9\s]+)_([a-zA-Z0-9\s]+)_([A-Z])[-]{0,1}([\w\d]{0,3})?$/g
@@ -80,7 +81,7 @@ TextAnimator.prototype.universalAppliedFxOfPreset = function (presetPath, layer)
         var oldName = fx.name;
         fx.name = fx.name + '-' + this.getRandomKey();
         var animators = layer.property("ADBE Text Properties").property("ADBE Text Animators");
-        $.sleep(300);
+        // $.sleep(300);
         for (var i = 1; i <= animators.numProperties; i++) {
             var anim = animators.property(i);
             if (anim.name.indexOf(presetName) > -1 && anim.name.match(/^.*-[a-zA-Z0-9 ]{3}/g)===null ) {
@@ -116,15 +117,15 @@ TextAnimator.prototype.checkChildrenPropertiesAndReplaceExpresseion = function (
             if (property.expressionEnabled && property.expression && property.expression != '') {
                 var re = new RegExp(oldExp, 'g');
                 property.expression = property.expression.replace(re, newExp);
-                for(var j = 0;j<2;j++){
-                        try{
-                            property.expressionEnabled = false;
-                            property.setValue(property.value);
-                            property.expressionEnabled = true;
-                            if(property.expression.indexOf(newExp)>-1) $.sleep(200);
-                        }
-                        catch(err){}
-                }
+                // for(var j = 0;j<2;j++){
+                //         try{
+                //             property.expressionEnabled = false;
+                //             property.setValue(property.value);
+                //             property.expressionEnabled = true;
+                //             //if(property.expression.indexOf(newExp)>-1) $.sleep(200);
+                //         }
+                //         catch(err){}
+                // }
             }
         }
         catch (e) {
@@ -310,12 +311,31 @@ TextAnimator.prototype.searchArrayAndReturnIndex = function(array, el){
     return index;
 }
 
+TextAnimator.prototype.fixExpressions = function (parentProperty) {
+    if(!parentProperty) parentProperty = this.lastLayer;
+    for (var i = 1; i <= parentProperty.numProperties; i++) {
+        var property = parentProperty.property(i);
+        try {
+            if (property.expressionEnabled && property.expression && property.expression != '') {
+               property.expressionEnabled = false;
+               property.expressionEnabled = true;
+            }
+        }
+        catch (e) {
+         }
+        if (property.numProperties) {
+            this.fixExpressions(property);
+        }
+    }
+}
+
 
 var TextAnimatorObject = new TextAnimator();
 $._TextAnimator = {
     applyIn: function (presetPath, both) {
         var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
+        TextAnimatorObject.lastLayer = layer;
         if(!both) app.beginUndoGroup("Apply In");
         layer.selected = false;
         layer.selected = true;
@@ -326,6 +346,7 @@ $._TextAnimator = {
         if (app.project.activeItem.selectedLayers.length == 1 && !both) {
             $._textAnimatorAfterEffects.fireLiveSettingEvent();
           }
+        
         if(!both) app.endUndoGroup();
         }
         else {
@@ -336,6 +357,7 @@ $._TextAnimator = {
     applyOut: function (presetPath, both) {
         var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
+        TextAnimatorObject.lastLayer = layer;
         if(!both) app.beginUndoGroup("Apply Out");
         layer.selected = false;
         layer.selected = true;
@@ -356,6 +378,7 @@ $._TextAnimator = {
         presetPath = JSON.parse(presetPath);
         var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         if(layer instanceof TextLayer) {
+        TextAnimatorObject.lastLayer = layer;
         app.beginUndoGroup("Apply In and Out");
         layer.selected = false;
         layer.selected = true;
@@ -377,6 +400,7 @@ $._TextAnimator = {
         var layer = app.project.activeItem && app.project.activeItem.selectedLayers[0];
         var comp =  app.project.activeItem;
         if(layer instanceof TextLayer) {
+        TextAnimatorObject.lastLayer = layer;
         app.beginUndoGroup("Apply Effect");
         layer.selected = false;
         layer.selected = true;
