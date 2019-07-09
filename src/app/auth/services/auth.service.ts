@@ -26,7 +26,7 @@ export class AuthService {
           url: "",
           survey_id: this._latestSurvey.survey._id,
           answers,
-          where: "motion factory 3"
+          where: "text animator"
         },
         { responseType: "text" }
       )
@@ -70,7 +70,7 @@ export class AuthService {
         .post(`${this._surveyAPI}/check-survey`, {
           full_name: full_name || "",
           email: name,
-          where: "motion factory 3"
+          where: "text animator"
         })
         .pipe(timeout(1850))
         .subscribe(
