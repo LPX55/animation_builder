@@ -27,7 +27,6 @@ module.exports = function ({
     </ExtensionList>
     <ExecutionEnvironment>
       <HostList>
-      <Host Name="PPRO" Version="[12.0,99.9]" />
 			<Host Name="AEFT" Version="[15.0,99.9]" />
       </HostList>
       <LocaleList>
